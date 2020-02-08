@@ -1,0 +1,33 @@
+@media screen and (min-device-width: 375px) {
+  .paddl-info {
+    padding-left: 15px !important;
+    margin-top: .5rem !important;
+}
+
+@media screen and (min-device-width: 700px) {
+  .paddl-info {
+    padding-left: .25rem !important;
+    margin-top: .0rem !important;
+}
+
+@media screen and (min-device-width: 375px) {
+  .paddr-map {
+    padding-right: 15px !important;
+}
+
+@media screen and (min-device-width: 700px) {
+  .paddr-map {
+    padding-right: .25rem !important;
+}
+
+.face.front {
+  transform: rotateX(0deg);
+}
+
+#title_hr_OSCR {
+color:#ff5722;
+background-color:#ff5722;
+height:2px;
+border:none;
+max-width:100%;
+}

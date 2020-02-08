@@ -1,0 +1,123 @@
+{% extends "layout.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% block otherStyles %}
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/home.css' %}">
+{% endblock otherStyles %}
+{% block content %}
+
+
+<!-- Grid row -->
+<div class="row d-flex justify-content-center mt-5">
+  <!-- Grid column -->
+  <div class="col-md-6 col-xl-5">
+
+    <!--Excerpt-->
+    <div class="card-body hoverable">
+     <div class="row">
+       <div class="col-lg-2 col-md-3 col-2 home-section">
+         <a href="" class="plan-text">
+           <h5 class="font-weight-bold">Plan</h5>
+         </a>
+       </div>
+
+       <div class="col-lg-10 col-md-9 col-10">
+        <h5 class="font-weight-bold mb-3">Activities, inspections and risks</h5>
+        <p>Last pre-trip created: {{trip_u.dest_name}}</p>
+        <p>Created on: {{trip_u.date_created}}</p>
+        <!-- <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit cupidatat
+          proident voluptatem quia numquam.</p> -->
+          <a class="btn-floating btn-action ml-auto mr-4 btn-plan float-left" href="{% url 'trip-create' %}"><i class="fas fa-chevron-right pl-1"></i></a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Grid column -->
+
+  <!-- Grid column -->
+  <div class="col-md-6 col-xl-5">
+
+    <!--Excerpt-->
+    <div class="card-body hoverable">
+      <div class="row">
+        <div class="col-lg-2 col-md-3 col-2 home-section">
+          <a href="" class="pink-text">
+            <h5 class="font-weight-bold">HOIR</h5>
+          </a>
+        </div>
+
+        <div class="col-lg-10 col-md-9 col-10">
+          <h5 class="font-weight-bold mb-3">Hazardous occurence</h5>
+          <p>Most recent HOIR: {{hoir_u.occurence_date_hazard}}</p>
+          <p>Created on: {{hoir_u.date_created}}</p>
+          <!-- <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit cupidatat
+            proident voluptatem quia numquam.</p> -->
+          <a class="btn-floating btn-action ml-auto mr-4 btn-pink float-left" href="{% url 'hoir-create' %}"><i class="fas fa-chevron-right pl-1"></i></a>
+         </div>
+       </div>
+    </div>
+  </div>
+  <!-- Grid column -->
+
+</div>
+<!-- Grid row -->
+
+<!-- Grid row -->
+<div class="row d-flex justify-content-center">
+
+  <!-- Grid column -->
+  <div class="col-md-6 col-xl-5">
+
+    <!--Excerpt-->
+    <div class="card-body hoverable">
+      <div class="row">
+        <div class="col-lg-2 col-md-3 col-2 home-section">
+          <a href="" class="deep-orange-text">
+            <h5 class="font-weight-bold">OSCR</h5>
+          </a>
+        </div>
+
+        <div class="col-lg-10 col-md-9 col-10">
+          <h5 class="font-weight-bold mb-3">Officer safety concern</h5>
+          <p class="text-white">Most recent OSCR was about: Álfheim</p>
+          <p>Created on: {{oscr_u.date_created}}</p>
+          <!-- <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit cupidatat
+            proident voluptatem quia numquam.</p> -->
+          <a class="btn-floating btn-action ml-auto mr-4 btn-deep-orange float-left" href="{% url 'oscr-create' %}"><i class="fas fa-chevron-right pl-1"></i></a>
+         </div>
+       </div>
+    </div>
+  </div>
+  <!-- Grid column -->
+
+  <!-- Grid column -->
+  <div class="col-md-6 col-xl-5">
+
+    <!--Excerpt-->
+    <div class="card-body hoverable">
+      <div class="row">
+        <div class="col-lg-2 col-md-3 col-2 home-section">
+          <a href="" class="post-text">
+            <h5 class="font-weight-bold">Post</h5>
+          </a>
+        </div>
+
+        <div class="col-lg-10 col-md-9 col-10">
+          <h5 class="font-weight-bold mb-3">Finalize activity</h5>
+          <p class="white-text">About activity: #</p>
+          <p>Remarks saved on: {{closeout_u.date_created}}</p>
+          <!-- <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit cupidatat
+            proident voluptatem quia numquam.</p> -->
+          <a class="btn-floating btn-action ml-auto mr-4 btn-post float-left" href="{% url 'closeout-create' %}"><i class="fas fa-chevron-right pl-1"></i></a>
+         </div>
+       </div>
+    </div>
+  </div>
+  <!-- Grid column -->
+
+</div>
+<!-- Grid row -->
+</div>
+
+{% endblock %}

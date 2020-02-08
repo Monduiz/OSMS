@@ -1,0 +1,51 @@
+.select-wrapper input.select-dropdown {
+    height: 40px;
+}
+
+.form-control:focus {
+  border-color: #2BBBAD !important;
+  color: #2BBBAD !important;
+}
+
+.btn-default {
+    color: #fff;
+    background-color: #2BBBAD !important;
+}
+
+.btn-trip {
+    color: #fff;
+    background-color: #2BBBAD !important;
+}
+
+.md-form textarea.md-textarea:focus:not([read_only]) {
+  border-bottom: 1px solid #2BBBAD;
+  box-shadow: 0 1px 0 0 #2BBBAD;
+}
+
+.md-form label.active {
+  color: #2BBBAD;
+}
+
+.md-form textarea.md-textarea:focus:not([readonly]) + label {
+color:#2BBBAD; }
+
+.dropdown-default .dropdown-content li.active, .dropdown-default .dropdown-content li a, .dropdown-default .dropdown-content li span:hover {
+    background-color:
+    #2BBBAD !important;
+}
+
+input:focus {
+  border-bottom: 1px solid #2BBBAD !important;
+  box-shadow: 0 1px 0 0 #2BBBAD !important;
+}
+
+input:focus + label {
+  color: #2BBBAD !important;
+}
+
+.md-form label:focus {
+    color: #2BBBAD!important;
+}
+.select-wrapper span.caret {
+  color: #2BBBAD!important;
+}

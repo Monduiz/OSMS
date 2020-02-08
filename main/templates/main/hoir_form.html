@@ -1,0 +1,594 @@
+{% extends "layout.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% block otherStyles %}
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/bs-stepper.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/datetimepicker_hoir.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/hoir.css' %}">
+{% endblock otherStyles %}
+{% block content %}
+      <div class="row">
+        <div class="col-10 mx-auto">
+          <legend class="mb-4 text-center">HOIR</legend>
+
+          <div id="stepper" class="bs-stepper">
+            <div class="bs-stepper-header">
+              <div class="step" data-target="#test-nl-1">
+                <button type="button" class="step-trigger">
+                  <span class="bs-stepper-circle">1</span>
+                  <span class="bs-stepper-label"></span>
+                </button>
+              </div>
+              <div class="line"></div>
+              <div class="step" data-target="#test-nl-2">
+                <div class="step-trigger">
+                  <span class="bs-stepper-circle">2</span>
+                  <span class="bs-stepper-label"></span>
+                </div>
+              </div>
+              <div class="line"></div>
+              <div class="step" data-target="#test-nl-3">
+                <button type="button" class="step-trigger">
+                  <span class="bs-stepper-circle">3</span>
+                  <span class="bs-stepper-label"></span>
+                </button>
+              </div>
+              <div class="line"></div>
+              <div class="step" data-target="#test-nl-4">
+                <button type="button" class="step-trigger">
+                  <span class="bs-stepper-circle">4</span>
+                  <span class="bs-stepper-label"></span>
+                </button>
+              </div>
+            </div>
+            <div class="bs-stepper-content">
+              <form action="#!" id="hoir" method="post">
+                {% csrf_token %}
+              <div id="test-nl-1" class="content">
+                <h3 class="text-center">Occurence and injury</h3>
+                <br>
+                <!-- Occurence / Injury type -->
+                <div class="form-row">
+                      <div class="col">
+                        <h4 class="text-center">1. Type of occurence</h4>
+                        <br>
+                          <!-- Injury -->
+                          <div class="form-check">
+                              <input type="checkbox" class="form-check-input" id="id_injury" name="injury">
+                              <label class="form-check-label" for="id_injury">Injury</label>
+                          </div>
+                          <!-- No injury -->
+                          <div class="form-check">
+                              <input type="checkbox" class="form-check-input" id="id_no_injury" name="no_injury">
+                              <label class="form-check-label" for="id_no_injury">No injury</label>
+                          </div>
+                          <!-- Incident -->
+                          <div class="form-check">
+                              <input type="checkbox" class="form-check-input" id="id_incident" name="incident">
+                              <label class="form-check-label" for="id_incident">Incident</label>
+                          </div>
+                          <small id="hoirIncidentHelpBlock" class="form-text text-muted mb-4 pink-text">
+                            Includes serious near misses
+                         </small>
+                          <!-- Motor vehicle -->
+                          <div class="form-check">
+                              <input type="checkbox" class="form-check-input" id="id_motor_vehicle" name="motor_vehicle">
+                              <label class="form-check-label" for="id_motor_vehicle">Motor vehicle accident</label>
+                          </div>
+                          <!-- Serious accident -->
+                          <div class="form-check">
+                              <input type="checkbox" class="form-check-input" id="id_serious_accident" name="serious_accident">
+                              <label class="form-check-label" for="id_serious_accident">Serious acciden, fatality</label>
+                          </div>
+                          <!-- Emergency procedure -->
+                          <div class="form-check">
+                              <input type="checkbox" class="form-check-input" id="id_emerg_procedure" name="emerg_procedure">
+                              <label class="form-check-label" for="id_emerg_procedure">Emergency procedure</label>
+                          </div>
+                          <!-- Explosion -->
+                          <div class="form-check">
+                              <input type="checkbox" class="form-check-input" id="id_explosion" name="explosion">
+                              <label class="form-check-label" for="id_explosion">Explosion</label>
+                          </div>
+                          <!-- Loss of consciousness -->
+                          <div class="form-check">
+                              <input type="checkbox" class="form-check-input" id="id_loss_consc" name="loss_consc">
+                              <label class="form-check-label" for="id_loss_consc">Loss of consciousness</label>
+                              <small id="hoirLossConscHelpBlock" class="form-text text-muted mb-4 pink-text">
+                                Due to electric shock or toxic or oxygen deficient atmosphere.
+                             </small>
+                          </div>
+
+                          <!-- Other injury specify  -->
+                          <div class="md-form">
+                            <label for="id_other_inj_specify">Other(specify)</label>
+                            {% render_field form.other_inj class="md-textarea form-control", rows="1" %}
+                          </div>
+                      </div>
+                      <div class="col">
+                        <h4 class="text-center">2. Type of injury</h4>
+                        <br>
+                          <!-- First aid -->
+                          <div class="form-check">
+                              <input type="checkbox" class="form-check-input" id="id_first_aid" name="first_aid">
+                              <label class="form-check-label" for="id_first_aid">First-aid</label>
+                          </div>
+                          <!-- Minor Injury -->
+                          <div class="form-check">
+                              <input type="checkbox" class="form-check-input" id="id_minor_injury" name="minor_injury">
+                              <label class="form-check-label" for="id_minor_injury">Minor injury*</label>
+                          </div>
+                          <!-- Disabling Injury -->
+                          <div class="form-check">
+                              <input type="checkbox" class="form-check-input" id="id_disabling_injury" name="disabling_injury">
+                              <label class="form-check-label" for="id_disabling_injury">Disabling injury*</label>
+                          </div>
+                          <small id="hoirTypeInjuryHelpBlock" class="form-text text-muted mb-4 pink-text">
+                            * For minor and disabling injuries, the provincial worker’s compensation form (Employer)
+                            must be completed and submitted to the OHS Division as soon as possible (within 72 hours)
+                          </small>
+                        </div>
+
+                  </div>
+                  {% for field in form %}
+                    {% for error in field.errors %}
+                      <p style="color: red">{{field.label}}: {{ error }}</p>
+                    {% endfor %}
+                  {% endfor %}
+                  {% if form.non_field_errors %}
+                    <div style="color: red">
+                      <p>{{form.non_field_errors}}</p>
+                    </div>
+                  {% endif %}
+
+                <div class="row">
+                  <div class="col-6 text-left">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-pink btn-rounded" data-toggle="modal" data-target="#fullHeightModalRight">
+                      Intructions
+                    </button>
+                  </div>
+                  <div class="col-6 text-right">
+                    <button type="button" class="btn btn-pink btn-rounded" onclick="stepper.next()">Next</button>
+                  </div>
+                </div>
+              </div>
+              <!-- Section 2 -->
+              <div id="test-nl-2" class="content">
+                <h3 class="text-center">Employee</h3>
+
+                <!-- First and Last name -->
+                <div class="form-row">
+                    <div class="col">
+                      <!-- First and Last name -->
+                      <!-- First name -->
+                      <div class="md-form">
+                        <label for="id_firstname">First name</label>
+                        {% render_field form.firstname class="form-control" %}
+                        {{ form.firstname.errors }}
+                      </div>
+                    </div>
+                    <div class="col">
+                      <!-- Last name -->
+                      <div class="md-form">
+                        <label for="id_lastname">Last name</label>
+                        {% render_field form.lastname class="form-control" %}
+                        {{ form.lastname.errors }}
+                      </div>
+                    </div>
+                    <div class="col">
+                      <!-- Age -->
+                      <div class="md-form">
+                        <label for="id_age">Age</label>
+                        {% render_field form.age class="form-control" %}
+                        {{ form.age.errors }}
+                      </div>
+                    </div>
+                    <div class="col">
+                      <!-- Occupation -->
+                      <div class="md-form">
+                        <label for="id_occupation">Occupation</label>
+                        {% render_field form.occupation class="form-control" %}
+                        {{ form.occupation.errors }}
+                      </div>
+                    </div>
+                    <div class="col">
+                      <!-- Experience -->
+                      <div class="md-form">
+                        <label for="id_years_experience">Experience (Years)</label>
+                        {% render_field form.years_experience class="form-control" %}
+                        {{ form.years_experience.errors }}
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Work address -->
+                  <div class="form-group">
+                    <label for="id_work_address">Work address</label>
+                    {% render_field form.work_address class="mdb-select md-form colorful-select dropdown-default" searchable=" Search here..", data-visible-options="5" %}
+                    {{ form.work_address.errors }}
+                  </div>
+
+                  <div class="form-row">
+                    <div class="col">
+                      <!-- Region  -->
+                      <div class="form-group">
+                        <label for="id_region">Region</label>
+                        {% render_field form.region class="mdb-select md-form colorful-select dropdown-default" %}
+                        {{ form.region.errors }}
+                      </div>
+                    </div>
+                    <div class="col">
+                      <!-- Branch   -->
+                      <div class="md-form">
+                        <label for="id_branch">Branch</label>
+                        {% render_field form.branch class="form-control" %}
+                        {{ form.branch.errors }}
+                      </div>
+                    </div>
+                    <div class="col">
+                      <!-- Status   -->
+                      <div class="md-form">
+                        <label for="id_status">Employee status</label>
+                        {% render_field form.status class="form-control" %}
+                        {{ form.status.errors }}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="col">
+                      <!-- Duties  -->
+                      <div class="md-form">
+                        <label for="id_duties">Regular duties</label>
+                        {% render_field form.duties class="form-control" %}
+                        {{ form.duties.errors }}
+                      </div>
+                    </div>
+                    <div class="col">
+                      <!-- Shift hours   -->
+                      <div class="md-form">
+                        <label for="id_shift_hours">Shift hours</label>
+                        {% render_field form.shift_hours class="form-control" %}
+                        {{ form.shift_hours.errors }}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="col">
+                      <!-- Date reported  -->
+                      <div class="md-form">
+                        <label for="id_date_reported">Date reported</label>
+                        {% render_field form.date_reported class="form-control datetimepicker" %}
+                        {{ form.date_reported.errors }}
+                      </div>
+                    </div>
+                    <div class="col">
+                      <!-- Days lost   -->
+                      <div class="md-form">
+                        <label for="id_days_lost">Days lost</label>
+                        {% render_field form.days_lost class="form-control" %}
+                        {{ form.days_lost.errors }}
+                      </div>
+                      <small id="DaysLostHelpBlock" class="form-text text-muted mb-4 pink-text">
+                        (not including day of injury/illness)
+                      </small>
+                    </div>
+                  </div>
+
+                    <!-- Training given  -->
+                    <div class="form-group">
+                      <label for="id_training_given">Training given*</label>
+                      {% render_field form.training_given class="mdb-select md-form colorful-select dropdown-default", data-visible-options="5" %}
+                      {{ form.training_given.errors }}
+                    </div>
+                    <small id="TrainingHelpBlock" class="form-text text-muted mb-4 pink-text">
+                      * Was training in accident prevention given to injured employee in relation
+                      to duties performed at the time of the hazardous occurrence?
+                    </small>
+
+                    <!-- Training given specify  -->
+                    <div class="md-form">
+                      <label for="id_training_given_specify">Specify: </label>
+                      {% render_field form.training_given_specify class="md-textarea form-control", rows="1" %}
+                    </div>
+
+                    <!-- THA / SWP  -->
+                    <div class="form-group">
+                      <label for="id_tha_swp">THA / SWP*</label>
+                      {% render_field form.tha_swp class="mdb-select md-form colorful-select dropdown-default", data-visible-options="5" %}
+                      {{ form.tha_swp.errors }}
+                    </div>
+                    <small id="THASWPHelpBlock" class="form-text text-muted mb-4 pink-text">
+                      * Have the relevant Task Hazard Analyses (THA) and/or Safe Work Procedures (SWP)
+                      been reviewed by the employee (if applicable)?
+                    </small>
+
+                    <!-- THA / SWP specify  -->
+                    <div class="md-form">
+                      <label for="id_tha_swp_specify">Specify: </label>
+                      {% render_field form.tha_swp_specify class="md-textarea form-control", rows="1" %}
+                    </div>
+
+                    <!-- Injury description -->
+                    <div class="form-row">
+                      <div class="col">
+                        <div class="md-form">
+                          <label for="id_injury_description">Injury description: </label>
+                          {% render_field form.injury_description class="md-textarea form-control", rows="1" %}
+                        </div>
+                        <small id="InuryDescriptionPHelpBlock" class="form-text text-muted mb-4 pink-text">
+                          (Part(s) of body injured and extent of injury/illness)
+                        </small>
+                      </div>
+                      <div class="col">
+                        <div class="md-form">
+                          <label for="id_injury_causes">Injury causes: </label>
+                          {% render_field form.injury_causes class="md-textarea form-control", rows="1" %}
+                        </div>
+                        <small id="InjuryCausesHelpBlock" class="form-text text-muted mb-4 pink-text">
+                          (ex. metal object embedded in eye)
+                        </small>
+                      </div>
+                    </div>
+
+
+                    <div class="row">
+                      <div class="col-6 text-left">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-pink btn-rounded" data-toggle="modal" data-target="#fullHeightModalRight">
+                          Intructions
+                        </button>
+                        <button type="button" class="btn btn-pink btn-rounded" onclick="stepper.previous()">Previous</button>
+                      </div>
+                      <div class="col-6 text-right">
+                        <button type="button" class="btn btn-pink btn-rounded" onclick="stepper.next()">Next</button>
+                      </div>
+                    </div>
+
+              </div>
+              <!-- Section 3 -->
+              <div id="test-nl-3" class="content">
+                <h3 class="text-center">Employer</h3>
+
+                <!-- Mail address  -->
+                <div class="form-group">
+                  <label for="id_mail_address">Mail address</label>
+                  {% render_field form.mail_address class="mdb-select md-form colorful-select dropdown-default" searchable=" Search here..", data-visible-options="5" %}
+                  {{ form.mail_address.errors }}
+                </div>
+                <small id="DaysLostHelpBlock" class="form-text text-muted mb-4 pink-text">
+                  * These addresses are not validated mailing addresses. This will have to be done.
+                </small>
+
+                <div class="form-row">
+                  <div class="col">
+                    <div class="md-form">
+                      <label for="id_supervisor">Supervisor</label>
+                      {% render_field form.supervisor class="form-control" %}
+                      {{ form.supervisor.errors }}
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="md-form">
+                      <label for="id_supervisor_phone">Supervisor phone</label>
+                      {% render_field form.supervisor_phone class="form-control" %}
+                      {{ form.supervisor_phone.errors }}
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Witnesses  -->
+                <div class="md-form">
+                  <label for="id_witnesses">Witnesses</label>
+                  {% render_field form.witnesses class="md-textarea form-control", rows="1" %}
+                </div>
+                <small id="WitnessHelpBlock" class="form-text text-muted mb-4 pink-text">
+                  (Name and Telephone Number)
+                </small>
+
+                <div class="row">
+                  <div class="col-6 text-left">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-pink btn-rounded" data-toggle="modal" data-target="#fullHeightModalRight">
+                      Intructions
+                    </button>
+                    <button type="button" class="btn btn-pink btn-rounded" onclick="stepper.previous()">Previous</button>
+                  </div>
+                  <div class="col-6 text-right">
+                    <button type="button" class="btn btn-pink btn-rounded" onclick="stepper.next()">Next</button>
+                  </div>
+                </div>
+
+              </div>
+              <!-- Section 4 -->
+              <div id="test-nl-4" class="content">
+                <!-- Start section 4 -->
+                <h3 class="text-center">Hazardous occurence and causes</h3>
+
+                <div class="form-row">
+                  <div class="col">
+                    <!-- Location  of occurence-->
+                    <div class="md-form">
+                      <label for="id_location">Exact location</label>
+                      {% render_field form.location class="form-control" %}
+                      {{ form.location.errors }}
+                    </div>
+                  </div>
+                  <div class="col">
+                    <!-- Weather conditions -->
+                    <div class="md-form">
+                      <label for="id_weather">Weather conditions</label>
+                      {% render_field form.weather class="form-control" %}
+                      {{ form.weather.errors }}
+                    </div>
+                    <small id="WeatherHelpBlock" class="form-text text-muted mb-4 pink-text">
+                      (If applicable)
+                    </small>
+                  </div>
+                </div>
+
+                <!-- Date and time of occurence  -->
+                <div class="md-form">
+                  <label for="id_occurence_date_hazard">Date and time of occurence (24h)</label>
+                  {% render_field form.occurence_date_hazard class="form-control datetimepicker_occurence" %}
+                  {{ form.occurence_date_hazard.errors }}
+                </div>
+
+                <!-- Occurence description  -->
+                <div class="md-form">
+                  <label for="id_occurence_description">Occurence description</label>
+                  {% render_field form.occurence_description class="md-textarea form-control", rows="10" %}
+                </div>
+                <small id="OccurenceDescriptionHelpBlock" class="form-text text-muted mb-4 pink-text">
+                  The description should be as precise as possible. It should answer the basic questions
+                  "who?, what?, when?, where? and why?" and give an accurate picture of the events leading
+                  up to the hazardous occurrence. Identify property, equipment, tools, material, environment
+                  that contributed to the occurrence.
+                </small>
+
+                <!-- Occurence causes  -->
+                <div class="md-form">
+                  <label for="id_occurence_causes">Occurence causes</label>
+                  {% render_field form.occurence_causes class="md-textarea form-control", rows="10" %}
+                </div>
+                <small id="OccurenceCausesHelpBlock" class="form-text text-muted mb-4 pink-text">
+                  (This section should list all factors identified in the investigation as being causes that contributed to the hazardous occurrence. )
+                </small>
+                <!-- Property damage  -->
+                <div class="md-form">
+                  <label for="id_property_damage">Property damage</label>
+                  {% render_field form.property_damage class="md-textarea form-control", rows="5" %}
+                </div>
+                <small id="OccurenceCausesHelpBlock" class="form-text text-muted mb-4 pink-text">
+                  Brief description and estimated cost of property damage (if applicable)
+                </small>
+
+                <!-- Trip / Activity  -->
+                <div class="form-group">
+                  <label for="id_trip_id"></label>
+                  {% render_field form.trip_id class="mdb-select md-form", searchable=" Search here.." %}
+                  {{ form.trip_id.errors }}
+                </div>
+                <small id="TripIdHelpBlock" class="form-text text-muted mb-4 pink-text">
+                  * You can link this report to an enforcement activity or trip if relevant (optional)
+                </small>
+
+                <div class="md-form">
+                  <div class="row">
+                    <div class="col-6 text-left">
+                      <!-- Button trigger modal -->
+                      <button type="button" class="btn btn-pink btn-rounded" data-toggle="modal" data-target="#fullHeightModalRight">
+                        Intructions
+                      </button>
+                      <button type="button" class="btn btn-pink btn-rounded" onclick="stepper.previous()">Previous</button>
+                    </div>
+                    <div class="col-6 text-right">
+                      <button class="btn btn-pink btn-rounded" type="submit">Submit</button>
+                    </div>
+                  </div>
+                </div>
+              <!-- End section 4 -->
+              </div>
+              </form>
+              </div>
+              </div>
+
+          </div>
+        </div>
+
+        <!-- Full Height Modal Right -->
+        <div class="modal fade right" id="fullHeightModalRight" tabindex="-1" role="dialog" aria-labelledby="HoirModal"
+          aria-hidden="true">
+
+          <!-- Add class .modal-full-height and then add class .modal-right (or other classes from list above) to set a position to the modal -->
+          <div class="modal-dialog modal-full-height modal-right modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title w-100" id="myModalLabel">Instructions</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <ol>
+                  <h5><li><h5>Type of occurence</li></h5>
+                    <p><strong>Incident</strong> - an occurrence which has the potential for causing an injury of occupational
+                      disease or property damage (includes serious near misses/close-calls).<br>
+
+                      <strong>Serious Accident, Fatality</strong> - includes: death of an employee; a disabling
+                      injury of two or more employees; the loss by an employee of a body member or part
+                      thereof, or in the complete loss of the usefulness of the body member or part thereof;
+                      the permanent impairment of a body function of an employee; an explosion; damage to a
+                      boiler or pressure vessel that results in fire or the rupture of the boiler or pressure
+                      vessel; or any damage to an elevating device that renders it unserviceable or a free fall of an elevating device.<br>
+
+                      <strong>Emergency Procedure</strong> - implementation of rescue, revival or other similar emergency procedure.<br>
+                      <strong>Note:</strong><br>
+                      Serious accidents/fatalities must be reported to Employment and Social Development Canada (ESDC)
+                      by telephone (1-800-641-4049)  as soon as possible, but not later than 24 hours of becoming aware
+                      of the occurrence.
+                      For disabling injuries, explosions, emergency procedures or loss of consciousness occurrences, this
+                      report must be submitted to the OHS Advisor within 10 days to meet ESDC reporting requirements.
+                    </p>
+
+                  <h5><li><h5>Type of injury</li></h5>
+                    <p><strong>First Aid</strong> – Employee receives first-aid treatment from a first-aid attendant either at the workplace
+                      or away from the workplace.<br>
+                      <strong>Minor</strong> – Medical treatment is provided in a medical facility, no time lost after day of injury. Provincial
+                      worker’s compensation forms are required (within 72 hours).<br>
+
+                      <strong>Disabling</strong> – The employee lost time from work the day after the occurrence. They may also lose time due to
+                      medical appointments and may require working on light duty for the period of recovery. Provincial worker’s
+                      compensation forms are required (within 72 hours). If an ambulance is called to attend to an employee at work,
+                      the employer shall pay for this service. It is recommended that employees obtain a physician’s note indicating
+                      whether the incident or accident is work related.
+                    </p>
+
+                  <h5><li><h5>Employee</li></h5>
+                    <p>Provide all information required and identify the employee’s status (e.g. indeterminate, student or term).
+                      What date did the employee report the incident to their supervisor and how many days of leave <u>after the day
+                      of injury</u> has the employee taken as of the completion of this report? Please indicate if leave is ongoing.
+                      It is important to determine whether the injured employee had received any training on performing his duties
+                      safely, and if not, why?<br>
+                      Describe what part of the body was injured and to what extent (e.g. right arm bruised, left foot sprained,
+                      lower back strained)
+                      State what caused the injury (e.g. arm pinched in door, tripped on slippery rocks, lifting boxes).
+                    </p>
+
+                  <h5><li><h5>Employer</li></h5>
+                    <p>Provide all information required. Enter the name and telephone number of any witnesses.</p>
+
+                  <h5><li><h5>Hazardous Occurrence</li></h5>
+                    <p>Enter the Exact Location of Occurrence, weather conditions (if applicable) and the date and time it occurred.<br>
+                      The description should be as precise as possible.  It should answer the basic questions "who?, what?, when?,
+                      where? and why?" and give an accurate picture of the events leading up to the hazardous occurrence. It should
+                      attempt to objectively determine, without trying to blame anyone, each of the factors involved in the hazardous
+                      occurrence. <br>
+                      If there was property or equipment damage, list the damaged property and estimate the cost to replacing or repairing it.
+                    </p>
+
+                  <h5><li><h5>Causes of the Hazardous Occurrence</li></h5>
+                    <p>The investigation should pinpoint the distinction between the direct cause of the injury and the causes of the hazardous
+                      occurrence. <br>
+                      Take, for example, the case of an eye injury caused by a flying piece of metal: The injury happened because the piece of
+                      metal flew into the employee's eye. However, the occurrence as such, that is, the fact that a piece of metal flew out,
+                      came about as a result of various other factors which together produced the hazardous occurrence. <br>
+                      The direct cause of the injury and the causes of the hazardous occurrence are not necessarily the same.
+                    </p>
+                </ol>
+              </div>
+              <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-pink btn-rounded" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Full Height Modal Right -->
+
+{% endblock content %}
+{% block otherScripts %}
+<script type="text/javascript" src="{% static 'main/js/bs-stepper.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'main/js/bootstrap-datetimepicker.js' %}"></script>
+<script type="text/javascript" src="{% static 'main/js/cleave.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'main/js/hoir.js' %}"></script>
+{% endblock otherScripts %}

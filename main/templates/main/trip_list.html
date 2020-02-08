@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block otherStyles %}
+{% endblock otherStyles %}
+
+{% block content %}
+  {% for trip in trips %}
+    <section class="my-1">
+      <!-- Section heading -->
+      <div class="row">
+        <div class="col-lg-8 col-xl-10">
+          <h3 class="font-weight-bold mb-3"><strong>{{ trip.dest_name }}</strong></h3>
+          <h2><a class="article-title">{{ trip.purpose }}</a></h2>
+          <p class="dark-grey-text"">{{ trip.dest_city }}, {{ trip.dest_province }}</p>
+          <p><a class="dark-grey-text">Risk score: <strong>{{ trip.risk_sum }}</strong></a></p>
+          <p>by <a class="font-weight-bold">{{ trip.officer.username }}</a>, {{ trip.date_created|date:'F d, Y' }}</p>
+          <a href="{% url 'trip-detail' trip.id %}" class="btn btn-default btn-rounded">Read</a>
+          <a href="{% url 'trip-update' trip.id %}" class="btn btn-default btn-rounded">Update</a>
+          <a href="#" class="btn btn-default btn-rounded">PDF</a>
+        </div>
+      </div>
+    </section>
+    <hr class="my-5">
+  {% endfor %}
+  {% if is_paginated %}
+    <nav>
+      <ul class="pagination pg-teal">
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+        {% endif %}
+        {% for num in page_obj.paginator.page_range %}
+          {% if page_obj.number == num %}
+            <li class="page-item active"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+          {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+            <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}"aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+              <span class="sr-only">Next</span>
+            </a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+  {% endif %}
+{% endblock content %}
+{% block otherScripts %}
+{% endblock otherScripts %}

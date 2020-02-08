@@ -1,0 +1,642 @@
+{% extends "layout.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% block otherStyles %}
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'main/css/bs-stepper.min.css' %}"> -->
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/datetimepicker_trip.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/hoir_print.css' %}">
+{% endblock otherStyles %}
+{% block content %}
+<div class="row print">
+  <div class="col-10 mx-auto">
+    <button type="button" onclick="window.print();" class="btn btn-pink btn-rounded mt-4">Print as PDF</button>
+    <div class="row mt-5">
+      <div class="col-8">
+        <img src="{% static 'main/img/ECCC.jpg' %}" class="rounded float-left w-75" alt="...">
+      </div>
+      <div class="col-4 border border-dark">
+        PROTECTED A WHEN COMPLETED <br>
+        PROTÉGÉ A LORSQUE COMPLÉTÉ
+      </div>
+    </div>
+    <div class="row print">
+      <form class="" action="index.html" method="post">
+        <h3 class="text-center mt-3">
+          Hazardous occurrence investigation report (HOIR) <br>
+          Rapport d'enquête de situation comportant des risques (RESCR)
+        </h3>
+        <div class="form-row">
+          <div class="col border border-bottom-0 border-dark col-shaded">
+            <div class="mt-1 mb-1">
+              ESDC - LABOUR PROGRAM USE <u>ONLY</u> / À L'USAGE <u>EXCLUSIF</u> DU PROGRAMME DU TRAVAIL D'EDSC
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col border border-dark col-shaded">
+            Department File No. / <br>
+            No. de dossier ministériel
+            <p><br></p>
+          </div>
+          <div class="col border border-dark border-left-0 col-shaded">
+            Regional Office / <br>
+            Bureau régional
+          </div>
+          <div class="col border border-left-0 border-dark col-shaded">
+            Employer ID No. <br>
+            No. d'identification de l'employeur
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col border border-top-0 border-bottom-0 border-dark">
+            <div class="mt-1 mb-1 text-center">
+              TO BE COMPLETED BY AN INVESTIGATOR / À REMPLIR PAR L'ENQUÊTEUR <br>
+              Refer to attached instructions for completion of this report /
+              Consulter les instructions ci-jointes pour remplir ce rapport <br>
+              <span class="red-text">Local health and safety committee / Representative must be notified within 24 hours
+              of the occurrence being reported / <br>
+              Le comité local / représentant de santé et sécurité doit être informé dans
+              dans les 24 heures suivant le moment où la situation a été signalée</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col border border-dark border-right-0">
+            <h5 class="mb-1">1. Type of occurence - Type de situation</h5>
+            <span>(Check all that apply - Cochez toutes les options qui s'appliquent)</span>
+          </div>
+          <div class="col border border-dark">
+            <h5 class="">2. Type of injury - Type de blessure</h5>
+            <span>(If applicable - S'il y a lieu)</span>
+          </div>
+        </div>
+        <div class="form-row border-top">
+          <div class="col border-right border-left border-bottom border-dark">
+            <br>
+            <!-- Injury -->
+            <div class="form-check">
+              {% render_field form.injury class="form-check-input" %}
+              <label class="form-check-label" for="id_injury">Injury / Blessure</label>
+            </div>
+            <!-- No injury -->
+            <div class="form-check">
+                {% render_field form.no_injury class="form-check-input" %}
+                <label class="form-check-label" for="id_no_injury">No injury / Aucune blessure</label>
+            </div>
+            <!-- Incident -->
+            <div class="form-check">
+                {% render_field form.incident class="form-check-input" %}
+                <label class="form-check-label" for="id_incident">Incident</label>
+            </div>
+            <small id="hoirIncidentHelpBlock" class="form-text text-muted mb-4">
+              (Includes serious near misses / y compris les accidents graves évités de justesse)
+           </small>
+            <!-- Motor vehicle -->
+            <div class="form-check">
+                {% render_field form.motor_vehicle class="form-check-input" %}
+                <label class="form-check-label" for="id_motor_vehicle">Motor vehicle accident / Accident de véhicule automobile</label>
+            </div>
+            <!-- Serious accident -->
+            <div class="form-check">
+                {% render_field form.serious_accident class="form-check-input" %}
+                <label class="form-check-label" for="id_serious_accident">Serious accident, fatality / Accident grave, décès</label>
+            </div>
+            <!-- Emergency procedure -->
+            <div class="form-check">
+                {% render_field form.emerg_procedure class="form-check-input" %}
+                <label class="form-check-label" for="id_emerg_procedure">Emergency procedure / Mesures d'urgence</label>
+            </div>
+            <!-- Explosion -->
+            <div class="form-check">
+                {% render_field form.explosion class="form-check-input" %}
+                <label class="form-check-label" for="id_explosion">Explosion</label>
+            </div>
+            <!-- Loss of consciousness -->
+            <div class="form-check">
+                {% render_field form.loss_consc class="form-check-input" %}
+                <label class="form-check-label" for="id_loss_consc">Loss of consciousness</label>
+                <small id="hoirLossConscHelpBlock" class="form-text text-muted mb-4">
+                  Due to electric shock or toxic or oxygen deficient atmosphere. / Évanouissement
+                  causé par une décharge électrique ou l'explosion à des gazes toxiques ou à de l'air
+                  à faible teneur en oxygène.
+               </small>
+            </div>
+            <!-- Other injury specify  -->
+            <div class="md-form">
+              <label for="id_other_inj_specify">Other(specify) / Autre (Spécifier)</label>
+              {% render_field form.other_inj class="md-textarea form-control", rows="1" %}
+            </div>
+          </div>
+          <div class="col border-bottom border-right border-dark">
+            <br>
+            <!-- First aid -->
+            <div class="form-check">
+                {% render_field form.first_aid class="form-check-input" %}
+                <label class="form-check-label" for="id_first_aid">First-aid / Premiers soins</label>
+                <small class="form-text text-muted mb-4">
+                  When treatment provided by First Aid Attendant. / Quand les premiers soins
+                  sont donnés par un secouriste.
+               </small>
+            </div>
+            <!-- Minor Injury -->
+            <div class="form-check">
+                {% render_field form.minor_injury class="form-check-input" %}
+                <label class="form-check-label" for="id_minor_injury">Minor injury *</label>
+                <small class="form-text text-muted mb-4">
+                  Medical treatment is provided in a medical facility, no time lost after day
+                  of injury. / Soins médicaux donnés à l’employé dans un établissement médical,
+                  aucun travail manqué après la journée de l’accident.
+               </small>
+            </div>
+            <!-- Disabling Injury -->
+            <div class="form-check">
+                {% render_field form.disabling_injury class="form-check-input" %}
+                <label class="form-check-label" for="id_disabling_injury">Disabling injury *</label>
+                <small class="form-text text-muted mb-4">
+                  When time is lost any day after day of accident; when employee works on
+                  light duty. / Quand il y a du temps perdu après la journée de l’accident;
+                  quand l’employé est affecté à du travail léger.
+               </small>
+            </div>
+            <small id="hoirTypeInjuryHelpBlock" class="form-text text-muted mb-4">
+              * For minor and disabling injuries, the provincial worker’s compensation form
+              (Employer) must be completed and submitted to the OHS Division as soon as possible
+              (within 72 hours) / Le formulaire (employeur) provincial d’indemnisation des
+              accidents de travail  doit être obligatoirement rempli pour les blessures légères
+              et invalidantes et soumis à la Division de la SST le plus tôt possible (dans
+              les 72 heures)
+            </small>
+          </div>
+        </div>
+        <!-- Page break -->
+        <div style='page-break-before: always;'></div>
+
+        <div class="form-row">
+          <div class="col border border-dark">
+            <h5 class="mb-1">3. Employee - Employé</h5>
+            <span>(The involved employee can complete tombstone data but must
+              not perform the investigation. – L’employé touché peut fournir les
+              données de base, mais ne doit pas effectuer l’enquête.)</span>
+          </div>
+        </div>
+        <div class="form-row border border-dark border-top-0">
+          <!-- First and Last name -->
+          <div class="col border-right border-dark">
+            <!-- First and Last name -->
+            <!-- First name -->
+            <span class="font-weight-bolder" style="font-size:small;">First Name – Prénom</span> <br>
+            {{object.firstname}}
+          </div>
+          <div class="col border-right border-dark">
+            <!-- Last name -->
+            <span class="font-weight-bolder" style="font-size:small;">Last Name - Nom </span> <br>
+            {{object.lastname}}
+          </div>
+          <div class="col border-right border-dark">
+          <!-- Age -->
+            <span class="font-weight-bolder" style="font-size:small;">Age - Âge</span> <br>
+            {{object.age}}
+          </div>
+          <div class="col border-right border-dark">
+            <!-- Occupation -->
+              <span class="font-weight-bolder" style="font-size:small;">Occupation - Profession</span> <br>
+              {{object.occupation}}
+          </div>
+          <!-- Experience -->
+          <div class="col border-right border-dark">
+              <span class="font-weight-bolder" style="font-size:small;">Years of experience in occupation – Nombre d’années d’expérience dans la profession</span> <br>
+              {{object.years_experience}}
+          </div>
+        </div>
+        <div class="form-row border border-dark border-top-0">
+          <div class="col">
+            <span class="font-weight-bolder" style="font-size:small;">Work address - Adresse du lieu de travail (Street, City, Province,
+              Postal Code - Numéro, Rue, Ville, Province, Code Postal)</span> <br>
+            {{ object.work_address }}
+          </div>
+        </div>
+        <div class="form-row border border-top-0 border-dark">
+          <div class="col border-right border-dark">
+            <!-- Region  -->
+              <span class="font-weight-bolder" style="font-size:small;">Region - Région</span> <br>
+              {{object.region}}
+          </div>
+          <div class="col border-right border-dark">
+            <!-- Branch  -->
+              <span class="font-weight-bolder" style="font-size:small;">Branch, Division, Section, Direction Générale</span> <br>
+              {{object.branch}}
+          </div>
+          <div class="col">
+            <!-- Status  -->
+              <span class="font-weight-bolder" style="font-size:small;">Employee Status – Status d’emploi</span> <br>
+              {{object.status}}
+          </div>
+        </div>
+        <div class="form-row border border-top-0 border-dark">
+          <div class="col border-right border-dark">
+            <!-- Regular duties  -->
+              <span class="font-weight-bolder" style="font-size:small;">Regular Duties – Fonctions habituelles</span> <br>
+              {{object.duties}}
+          </div>
+          <div class="col">
+            <!-- Shift hours  -->
+              <span class="font-weight-bolder" style="font-size:small;">Length of regular shift (Hours): <br>
+                Durée du quart de travail normal (Heures):  </span>
+              {{object.shift_hours}}
+          </div>
+        </div>
+        <div class="form-row border border-dark border-top-0">
+          <div class="col border-right border-dark">
+            <span class="font-weight-bolder" style="font-size:small;">Date reported to supervisor – Date du signalement au superviseur</span> <br>
+            {{object.date_reported}}
+          </div>
+          <div class="col">
+            <span class="font-weight-bolder" style="font-size:small;">Number of days lost (not including day of injury/illness) –
+              Nombre de jours d’absence (au-delà de la journée durant laquelle
+              s’est produit l’accident ou s’est manifesté la maladie) : </span>
+              {{object.days_lost}}
+          </div>
+        </div>
+        <div class="form-row border border-dark border-top-0">
+          <div class="col">
+            <span class="font-weight-bolder" style="font-size:small;">Was training in accident prevention given to injured employee
+              in relation to duties performed at the time of the hazardous occurrence? <br>
+              L’employé blessé a-t-il reçu une formation en prévention des accidents relativement
+              aux fonctions qu’il exerçait au moment de la situation comportant des risques? </span> <br>
+              {{object.training_given}} <span style="padding-left: 85px;">Specify / Spécifier : </span> {{object.training_given_specify}}
+          </div>
+        </div>
+        <div class="form-row border border-dark border-top-0">
+          <div class="col">
+            <span class="font-weight-bolder" style="font-size:small;">Have the relevant Task Hazard Analyses (THA) and/or Safe Work
+              Procedures (SWP) been reviewed by the employee (if applicable)? <br>
+              L’employé a-t-il revu les analyses des risques liés à la tâche (ART) et/ou
+              les méthodes sécuritaires de travail (MST) pertinentes (s’il y a lieu)? </span> <br>
+              {{object.tha_swp}} <span style="padding-left: 85px;">Specify / Spécifier : </span> {{object.tha_swp_specify}}
+          </div>
+        </div>
+        <div class="form-row border border-dark border-top-0">
+          <div class="col border-right border-dark">
+            <span class="font-weight-bolder" style="font-size:small;">Description of Injury (Part(s) of body injured and
+              extent of injury/illness) – Description de la blessure (partie(s) du corps blessée(s)
+              et gravité de la blessure/maladie)</span> <br>
+            {{object.injury_description}}
+          </div>
+          <div class="col">
+            <span class="font-weight-bolder" style="font-size:small;">Cause(s) of Injury/Illness (ex. metal object
+              embedded in eye)<br>
+              Cause(s) de la blessure/maladie (ex. morceau de métal
+              dans l’œil) </span> <br>
+              {{object.injury_causes}}
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col border border-top-0 border-dark">
+            <h5 class="mb-1">4. Employer - Employeur</h5>
+          </div>
+        </div>
+        <div class="form-row border border-dark border-top-0">
+          <div class="col">
+            <span class="font-weight-bolder" style="font-size:small;" style="font-size:small;">Mailing address - Adresse postale (Street, City, Province,
+              Postal Code - Numéro, Rue, Ville, Province, Code Postal)</span> <br>
+            {{ object.mail_address }}
+          </div>
+        </div>
+        <div class="form-row border border-dark border-top-0">
+          <div class="col border-right border-dark">
+            <span class="font-weight-bolder" style="font-size:small;" style="font-size:small;">Supervisor’s Name (and address if different from above)
+              – Nom du surveillant (et adresse si différente de ci-dessus)</span> <br>
+            {{object.supervisor}}
+          </div>
+          <div class="col">
+            <span class="font-weight-bolder" style="font-size:small;" style="font-size:small;">Telephone number – Numéro de téléphone </span> <br>
+              {{object.supervisor_phone}}
+          </div>
+        </div>
+        <div class="form-row border border-dark border-top-0">
+          <div class="col">
+            <span class="font-weight-bolder" style="font-size:small;">Witnesses – Témoins (Name and Telephone Number –
+              Nom et numéro de téléphone)</span> <br>
+            {{ object.witnesses }}
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col border border-top-0 border-dark">
+            <h5 class="mb-1">5. Hazardous occurrence – Situation comportant des risques</h5>
+          </div>
+        </div>
+        <div class="form-row border border-dark border-top-0">
+          <div class="col border-right border-dark">
+            <span class="font-weight-bolder" style="font-size:small;" style="font-size:small;">
+              Exact Location of Occurrence – Lieu exact de la situation</span> <br>
+            {{object.location}}
+          </div>
+          <div class="col">
+            <span class="font-weight-bolder" style="font-size:small;" style="font-size:small;">
+              Weather Conditions (if applicable) – Conditions météorologiques
+              (s’il y a lieu)</span> <br>
+              {{object.weather}}
+          </div>
+        </div>
+        <div class="form-row border border-dark border-top-0">
+          <div class="col">
+            <span class="font-weight-bolder" style="font-size:small;">
+              Date and time of hazardous occurrence / Date et heure de la situation
+              comportant des risques</span> <br>
+            {{ object.occurence_date_hazard }}
+          </div>
+        </div>
+
+        <!-- Page break -->
+        <div style='page-break-before: always;'></div>
+
+        <div class="form-row border border-dark">
+          <div class="col" style="height: 500px;">
+            <span class="font-weight-bolder" style="font-size:small;">
+            <strong>Description of Occurrence – Description des circonstances</strong> <br>
+              The description should be as precise as possible. It should answer
+              the basic questions "who?, what?, when?, where? and why?" and give
+              an accurate picture of the events leading up to the hazardous occurrence.
+              Identify property, equipment, tools, material, environment that contributed
+              to the occurrence. / Cette description sera la plus exacte possible.
+              Elle permettra de répondre aux questions de base «qui?, quoi?, quand?,
+              où? et comment?» et donnera un portrait fidèle des évènements qui ont
+              conduit à la situation. Spécifiez la propriété, l’équipement, les outils,
+              le matériel, l’environnement qui ont pu contribuer à la situation.</span> <br><br>
+            {{ object.occurence_description }}
+          </div>
+        </div>
+        <div class="form-row border border-dark border-top-0">
+          <div class="col" style="height: 200px;">
+            <span class="font-weight-bolder" style="font-size:small;">
+            Brief description and estimated cost of property damage (if applicable) –
+            Description sommaire et coût estimatif des dommages matériels
+            (s’il y a lieu)</span><br><br>
+            {{ object.property_damage }}
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col border border-top-0 border-dark">
+            <h5 class="mb-1">6. Causes of the hazardous occurrence – Causes de la situation comportant des risques</h5>
+          </div>
+        </div>
+        <div class="form-row border border-dark border-top-0">
+          <div class="col" style="height: 500px;">
+            <span class="font-weight-bolder" style="font-size:small;">
+            <strong>List all factors identified in the investigation (This section should list all
+              factors identified in the investigation as being causes that contributed to the
+              hazardous occurrence. )</strong> <br>
+            <strong>Facteurs identifiés lors de l’enquête</strong>
+              (on retrouve ici tous les facteurs que l’enquête a identifiée comme
+              des causes de la situation comportant des risques.)</span><br><br>
+            {{ object.property_damage }}
+          </div>
+        </div>
+
+        <!-- Page break -->
+        <div style='page-break-before: always;'></div>
+
+        <div class="form-row">
+          <div class="col border border-dark">
+            <h5 class="mb-1">7.  Investigator’s recommended corrective action and comments – Mesures correctives recommandés et commentaires de l’enquêteur</h5>
+          </div>
+        </div>
+        <div class="form-row border border-dark border-top-0">
+          <div class="col" style="height: 200px;">
+            <span class="font-weight-bolder" style="font-size:small;">
+            <strong>Investigator’s Recommended Corrective Action and Comments.
+              Mesures correctives recommandées et commentaires de l’enquêteur </strong> <br>
+              (Corrective action should address each factor identified as causes of
+              the occurrence. This should include the review and/or update of the relevant
+              THA and/or SWP (if applicable). <br>
+              Les mesures correctives devraient aborder chaque facteur indiqué comme
+              étant une cause de l’accident. Cela devrait inclure
+              l'examen et/ou la mise à jour des analyses des risques liés à la tâche (ART) et/ou
+              les méthodes sécuritaires de travail (MST) pertinentes (s’il y a lieu)).</span><br><br>
+          </div>
+        </div>
+        <div class="form-row border border-top-0 border-dark" style="height: 100px;">
+          <div class="col border-right border-dark">
+            <!-- Name  -->
+              <span class="font-weight-bolder" style="font-size:small;">
+                Name - Nom</span> <br>
+          </div>
+          <div class="col border-right border-dark">
+            <!-- Signature  -->
+              <span class="font-weight-bolder" style="font-size:small;">
+                Signature</span> <br>
+          </div>
+          <div class="col">
+            <!-- Date of investigation  -->
+              <span class="font-weight-bolder" style="font-size:small;">
+                Date of the investigation – Date de l’enquête</span> <br>
+          </div>
+        </div>
+        <div class="form-row border border-top-0 border-dark" style="height: 100px;">
+          <div class="col border-right border-dark">
+            <!-- Title  -->
+              <span class="font-weight-bolder" style="font-size:small;">
+                Title - Titre</span> <br>
+          </div>
+          <div class="col border-right border-dark">
+            <!-- Email  -->
+              <span class="font-weight-bolder" style="font-size:small;">
+                E-Mail – Courrier électronique</span> <br>
+          </div>
+          <div class="col">
+            <!-- Phone  -->
+              <span class="font-weight-bolder" style="font-size:small;">
+                Telephone number - Numéro de téléphone</span> <br>
+          </div>
+        </div>
+        <div class="form-row border border-dark border-top-0">
+          <div class="col" style="height: 150px;">
+            <span class="font-weight-bolder" style="font-size:small;">
+            Employee’s Comments (if applicable) / Commentaires de l’employé
+            (s’il y a lieu)</span><br><br><br><br><br>
+            <span class="font-weight-bolder" style="font-size:small;">
+            Signature________________________________________________  Date: </span>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col border border-top-0 border-dark">
+            <h5 class="mb-1">8.  Management review and action – Revue et actions de la gestion</h5>
+          </div>
+        </div>
+        <div class="form-row border border-dark border-top-0">
+          <div class="col border-right border-dark">
+            <span class="font-weight-bolder" style="font-size:small;" style="font-size:small;">
+              Corrective actions taken or to be taken and date employer will implement
+              Mesures correctives prises ou prévues par l’employeur et la date de leur mise en œuvre
+              <br>
+              <br>
+              Responsible Manager’s Comments - Commentaires du gestionnaire responsable
+              <br>
+              <br>
+              Reason corrective action not identified or taken –
+              Raison pour laquelle mesure corrective n’a pas été identifiée ou prise</span>
+              <br>
+              <br>
+              <br>
+          </div>
+          <div class="col">
+            <span class="font-weight-bolder" style="font-size:small;" style="font-size:small;">
+              Date of Planned Completion / Date prévue de l’achèvement:
+              <br>
+              <br>
+              <br>
+              Completion Date / Date d’achèvement:
+              <br>
+              <br>
+              <br>
+              Assigned to / Assigné à:</span>
+              <br>
+              <br>
+              <br>
+          </div>
+        </div>
+        <div class="form-row border border-dark border-top-0">
+          <div class="col" style="height: 60px;">
+            <span class="font-weight-bolder" style="font-size:small;">
+            Supplementary preventive measures – Autres mesures de prévention</span><br><br>
+          </div>
+        </div>
+        <div class="form-row border border-top-0 border-dark" style="height: 100px;">
+          <div class="col border-right border-dark">
+            <!-- Name  -->
+              <span class="font-weight-bolder" style="font-size:small;">
+                Name - Nom</span> <br>
+          </div>
+          <div class="col border-right border-dark">
+            <!-- Signature  -->
+              <span class="font-weight-bolder" style="font-size:small;">
+                Signature</span> <br>
+          </div>
+          <div class="col">
+            <!-- Date of investigation  -->
+              <span class="font-weight-bolder" style="font-size:small;">
+                Date of the investigation – Date de l’enquête</span> <br>
+          </div>
+        </div>
+        <div class="form-row border border-top-0 border-dark" style="height: 100px;">
+          <div class="col">
+            <!-- Title  -->
+              <span class="font-weight-bolder" style="font-size:small;">
+                Title - Titre</span> <br>
+          </div>
+          <div class="col border-right border-dark">
+
+          </div>
+          <div class="col">
+            <!-- Phone  -->
+              <span class="font-weight-bolder" style="font-size:small;">
+                Telephone number - Numéro de téléphone</span> <br>
+          </div>
+        </div>
+
+        <!-- Page break -->
+        <div style='page-break-before: always;'></div>
+
+        <div class="form-row">
+          <div class="col border border-dark">
+            <h5 class="mb-1">9. Health and safety committee or representative – Comité ou représentant de santé et sécurité</h5>
+          </div>
+        </div>
+        <div class="form-row border border-top-0 border-dark" style="height: 100px;">
+          <div class="col">
+              <span class="font-weight-bolder" style="font-size:small;">
+                Comments – Observations</span> <br>
+          </div>
+        </div>
+        <div class="form-row border border-top-0 border-dark" style="height: 100px;">
+          <div class="col border-right border-dark">
+            <!-- Committee representative  -->
+              <span class="font-weight-bolder" style="font-size:small;">
+                Committee Member or Representative Name - Nom du membre du comité
+                ou du représentant</span> <br>
+          </div>
+          <div class="col border-right border-dark">
+            <!-- Signature  -->
+              <span class="font-weight-bolder" style="font-size:small;">
+                Signature</span> <br>
+          </div>
+          <div class="col">
+            <!-- Date  -->
+              <span class="font-weight-bolder" style="font-size:small;">
+                Date</span> <br>
+          </div>
+        </div>
+        <div class="form-row border border-top-0 border-dark" style="height: 75px;">
+          <div class="col border-right border-dark">
+            <!-- Title  -->
+              <span class="font-weight-bolder" style="font-size:small;">
+                Title - Titre</span> <br>
+          </div>
+          <div class="col border-right border-dark">
+            <!-- Email  -->
+              <span class="font-weight-bolder" style="font-size:small;">
+                E-Mail – Courrier électronique</span> <br>
+          </div>
+          <div class="col">
+            <!-- Phone  -->
+              <span class="font-weight-bolder" style="font-size:small;">
+                Telephone number - Numéro de téléphone</span> <br>
+          </div>
+        </div>
+        <div class="form-row border border-top-0 border-dark">
+          <div class="col-shaded">
+              <span style="font-size:small;">
+              <strong>Return completed HOIR form</strong> to respective OHS division staff for timely processing
+                and record keeping / <br>
+                <strong>Faire parvenir le formulaire RESCR</strong> complété au personnel
+                respectif de la division de la SST pour un traitement rapide et la tenue des
+                dossiers</span> <br>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col border border-top-0 border-dark">
+            <h5 class="mb-1">10. OHS advisor’s comments – commentaires du conseiller en SST</h5>
+          </div>
+        </div>
+        <div class="form-row border border-top-0 border-dark" style="height: 100px;">
+          <div class="col">
+              <span class="font-weight-bolder" style="font-size:small;">
+                Comments – Observations</span> <br>
+          </div>
+        </div>
+        <div class="form-row border border-top-0 border-dark" style="height: 100px;">
+          <div class="col border-right border-dark">
+            <!-- Title  -->
+              <span class="font-weight-bolder" style="font-size:small;">
+                OHS Advisor’s Name - Nom du conseiller en SST </span> <br>
+          </div>
+          <div class="col border-right border-dark">
+            <!-- Email  -->
+              <span class="font-weight-bolder" style="font-size:small;">
+                Telephone number - Numéro de téléphone</span> <br>
+          </div>
+          <div class="col border-right border-dark">
+            <!-- Phone  -->
+              <span class="font-weight-bolder" style="font-size:small;">
+                Signature</span> <br>
+          </div>
+          <div class="col">
+            <!-- Phone  -->
+              <span class="font-weight-bolder" style="font-size:small;">
+                Date</span> <br>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<br>
+<br>
+
+{% endblock content %}
+{% block otherScripts %}
+<script type="text/javascript" src="{% static 'main/js/places/dist/cdn/places.js' %}"></script>
+<!-- <script type="text/javascript" src="{% static 'main/js/bs-stepper.min.js' %}"></script> -->
+<script type="text/javascript" src="{% static 'main/js/bootstrap-datetimepicker.js' %}"></script>
+<!-- <script type="text/javascript" src="{% static 'main/js/hoir.js' %}"></script> -->
+{% endblock otherScripts %}

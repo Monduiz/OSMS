@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block otherStyles %}
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/pretrip.css' %}">
+{% endblock otherStyles %}
+{% block content %}
+{{trip_u}}
+
+<br>
+<br>
+{{df}}
+<br>
+<br>
+{{df_all}}
+
+<br>
+<br>
+
+{{df2}}
+
+<br>
+<br>
+
+<div class="chart-container" style="width: 500px;">
+  <canvas id="myChart"></canvas>
+</div>
+
+
+
+
+
+{% endblock %}
+{% block otherScripts %}
+<script type="text/javascript">
+  var data = {{df2|safe}};
+</script>
+<script type="text/javascript" src="{% static 'main/js/test.js' %}"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+{% endblock otherScripts %}

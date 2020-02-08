@@ -1,0 +1,114 @@
+{% extends "layout.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block otherStyles %}
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/trip_detail.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/pretrip.css' %}">
+{% endblock otherStyles %}
+{% block content %}
+
+  <div class="row row-eq-height">
+    <div class="col paddr-map">
+      <!-- Card -->
+      <div class="card map-card h-100">
+
+        <!--Map-->
+        <div id="map-container" class="map-container" style="height: 400px">
+          <div id='map' class="h-100"></div>
+        </div>
+
+        <!-- Card content -->
+        <div class="card-body closed px-0">
+          <div class="white px-4 pb-4 pt-3-5">
+
+            <!-- Title -->
+            <div class="d-flex justify-content-between">
+              <h4 class="card-title h5" style="color:#0A84FF;">{{ object.dest_name }}</h4>
+              <h5 class="font-weight-light">Risk: <strong>{{ object.risk_score_label }}</strong></h5>
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <h6 class="card-subtitle font-weight-light"><p class="dark-grey-text"">{{ object.dest_city }}, {{ object.dest_province }}</p></h6>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Card -->
+    </div>
+
+    <div class="col paddl-info">
+      <div class="card-wrapper h-100">
+        <div id= "card-1" class="card card-rotating h-100">
+          <!-- Front Side -->
+          <div class="face front">
+            <div class="card-body">
+              <h2>{{ object.purpose }}</h2>
+              <p class="dark-grey-text"">{{ object.start_date_planned|date:'F d, Y'}} to {{ object.end_date_planned|date:'F d, Y' }}</p>
+              <hr id="title_hr_trip">
+              <p>by <a class="font-weight-bold">{{ object.officer.username }}</a>, {{ object.date_created|date:'F d, Y' }}</p>
+              <p><a class="dark-grey-text">Legislation: <strong>{{ object.legislation }}</strong>; Regulations: <strong>{{ object.reg1 }} {{ object.reg2 }} {{ object.reg3 }}</strong></a></p>
+              <div class="row">
+                <div class="col">
+                  <h5 class="font-weight-bold mb-3">Potential tasks:</h5>
+                  <ul>
+                    <li>Task 1</li>
+                    <li>Task 2</li>
+                    <li>Task 3</li>
+                    <li>Task 4</li>
+                    <li>Task 5</li>
+                  </ul>
+                </div>
+                <div class="col">
+                  <h5 class="font-weight-bold mb-3">Recommended training:</h5>
+                  <ul>
+                    <li>Training 1</li>
+                    <li>Training 2</li>
+                    <li>Training 3</li>
+                    <li>Training 4</li>
+                    <li>Training 5</li>
+                  </ul>
+                </div>
+              </div>
+              {% if object.officer == user %}
+                <a href="{% url 'trip-update' object.id %}" class="btn btn-trip btn-sm btn-rounded">Update</a>
+                <a href="#" class="btn btn-trip btn-rounded btn-sm float-right">PDF</a>
+              {% endif %}
+              <br>
+              <hr style="width=50%;">
+              <div class="text-center mt-4">
+                <!-- Triggering button -->
+                <a class="rotate-btn" data-card="card-1"><i class="fas fa-redo-alt"></i> Click here to rotate</a>
+              </div>
+
+            </div>
+          </div>
+          <!-- Front Side -->
+          <!-- Back Side -->
+          <div class="face back">
+            <div class="card-body">
+              <div class="alert alert-warning mt-4" role="alert">
+                No proximity matches found
+              </div>
+
+              <div class="text-center">
+                <!-- Triggering button -->
+                <a class="rotate-btn mt-5" data-card="card-1"><i class="fas fa-redo-alt"></i> Click here to rotate</a>
+              </div>
+            </div>
+          </div>
+          <!-- Back Side -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+{% block otherScripts %}
+<script type="text/javascript">
+  var lat = {{object.dest_lat|safe}};
+  var long = {{object.dest_lng|safe}};
+</script>
+<script src='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js'></script>
+<script src="https://npmcdn.com/csv2geojson@latest/csv2geojson.js"></script>
+<script type="text/javascript" src="{% static 'main/js/trip_detail.js' %}"></script>
+{% endblock otherScripts %}

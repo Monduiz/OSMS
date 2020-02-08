@@ -1,0 +1,29 @@
+.form-control:focus {
+  border-color: #2BBBAD !important;
+  color: #2BBBAD !important;
+}
+
+.nav-pills .pill-1 .nav-link.active {
+    background-color: #2BBBAD;
+}
+
+.nav-pills .pill-2 .nav-link.active {
+    background-color: #2BBBAD;
+}
+
+.nav-pills .pill-3 .nav-link.active {
+    background-color: #e91e63;
+}
+
+.nav-pills .pill-4 .nav-link.active {
+    background-color: #ff5722;
+}
+
+input:focus {
+  border-bottom: 1px solid #2BBBAD !important;
+  box-shadow: 0 1px 0 0 #2BBBAD !important;
+}
+
+input:focus + label {
+  color: #2BBBAD !important;
+}

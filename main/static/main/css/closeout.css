@@ -1,0 +1,91 @@
+media (min-height: 945px) {
+  .form-check-label {
+      margin-bottom: 1rem;
+  }
+}
+
+@media (max-height: 728px) {
+  .form-check-label {
+    /*  margin-bottom: 0.3rem; */
+  }
+}
+
+
+.md-form textarea.md-textarea:focus:not([read_only]) {
+  border-bottom: 1px solid #30d158;
+  box-shadow: 0 1px 0 0 #30d158;
+}
+
+.md-form label.active {
+  color: #30d158;
+}
+
+.md-form textarea.md-textarea:focus:not([readonly]) + label {
+color:#30d158; }
+
+.dropdown-default .dropdown-content li.active, .dropdown-default .dropdown-content li a, .dropdown-default .dropdown-content li span:hover {
+    background-color:
+    #30d158 !important;
+}
+
+.form-control:focus {
+  border-color: #30d158 !important;
+  color: #30d158 !important;
+}
+
+input:focus {
+  border-bottom: 1px solid #30d158 !important;
+  box-shadow: 0 1px 0 0 #30d158 !important;
+}
+
+input:focus + label {
+  color: #30d158 !important;
+}
+
+.md-form label:focus {
+    color: #30d158 !important;
+}
+.select-wrapper span.caret {
+  color: #30d158 !important;
+}
+
+.modal-body .p {
+  font-size:100%
+}
+
+
+/* Stepper */
+.active .bs-stepper-circle {
+background-color: #30d158
+}
+
+/* Add space for labels and select fields*/
+.select-wrapper input.select-dropdown {
+    height: 40px;
+}
+
+/* Scroll bar style for select field in Firefox only*/
+
+.select-wrapper .select-dropdown {
+  scrollbar-color: #30d158 #DADADA;
+  scrollbar-width: thin;
+}
+
+.modal-body {
+  scrollbar-color: #30d158 #DADADA;
+  scrollbar-width: thin;
+}
+
+html {
+  scrollbar-color: #30d158 #DADADA;
+  scrollbar-width: thin;
+}
+
+.closeout-text {
+  color: #30d158 !important;
+}
+
+.btn-cyan {
+color: #fff;
+background-color: #30d158!important;
+}

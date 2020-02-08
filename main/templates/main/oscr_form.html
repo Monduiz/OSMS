@@ -1,0 +1,371 @@
+{% extends "layout.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% block otherStyles %}
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/bs-stepper.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/datetimepicker_oscr.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/oscr.css' %}">{% endblock otherStyles %}
+{% block content %}
+<div class="row">
+  <div class="col-10 mx-auto">
+    <legend class="mb-4 text-center">OSCR</legend>
+
+    <div id="stepper" class="bs-stepper">
+      <div class="bs-stepper-header">
+        <div class="step" data-target="#test-nl-1">
+          <button type="button" class="step-trigger">
+            <span class="bs-stepper-circle">1</span>
+            <span class="bs-stepper-label"></span>
+          </button>
+        </div>
+        <div class="line"></div>
+        <div class="step" data-target="#test-nl-2">
+          <div class="step-trigger">
+            <span class="bs-stepper-circle">2</span>
+            <span class="bs-stepper-label"></span>
+          </div>
+        </div>
+        <div class="line"></div>
+        <div class="step" data-target="#test-nl-3">
+          <button type="button" class="step-trigger">
+            <span class="bs-stepper-circle">3</span>
+            <span class="bs-stepper-label"></span>
+          </button>
+        </div>
+        <div class="line"></div>
+        <div class="step" data-target="#test-nl-4">
+          <button type="button" class="step-trigger">
+            <span class="bs-stepper-circle">4</span>
+            <span class="bs-stepper-label"></span>
+          </button>
+        </div>
+      </div>
+      <div class="bs-stepper-content">
+        <form action="#!" id="hoir" method="post">
+          {% csrf_token %}
+        <div id="test-nl-1" class="content">
+          <h3 class="text-center">Risk concerns and location</h3>
+          <br>
+
+          <!-- Risks concern type and location -->
+          <div class="form-row">
+                <div class="col">
+                  <h4 class="text-center">1. Type of risks encountered</h4>
+                  <br>
+                    <!-- Verbal threat -->
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="id_verbal_threat" name="verbal_threat">
+                        <label class="form-check-label" for="id_verbal_threat">Verbal threat</label>
+                    </div>
+                    <!-- Weapons nearby -->
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="id_weapons_nearby" name="weapons_nearby">
+                        <label class="form-check-label" for="id_weapons_nearby">Weapons nearby</label>
+                    </div>
+                    <!-- Physical contact -->
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="id_physical_contact" name="physical_contact">
+                        <label class="form-check-label" for="id_physical_contact">Physical contact</label>
+                    </div>
+                    <!-- Assault -->
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="id_assault" name="assault">
+                        <label class="form-check-label" for="id_assault">Assault</label>
+                    </div>
+                    <!-- Damage to equipment -->
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="id_damage_equipment" name="damage_equipment">
+                        <label class="form-check-label" for="id_damage_equipment">Damage to equipment</label>
+                    </div>
+                    <!-- Other risk specify  -->
+                    <div class="md-form">
+                      <label for="id_other_risk_specify">Other (Specify)</label>
+                      {% render_field form.other_risk_specify class="md-textarea form-control", rows="1" %}
+                    </div>
+                </div>
+                <div class="col">
+                  <h4 class="text-center">2. Location when risks encountered</h4>
+                  <br>
+                    <!-- Industrial facility -->
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="id_industrial_facility" name="industrial_facility">
+                        <label class="form-check-label" for="id_industrial_facility">Industrial facility</label>
+                    </div>
+                    <!-- Commercial facility -->
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="id_commercial_facility" name="commercial_facility">
+                        <label class="form-check-label" for="id_commercial_facility">Commercial facility</label>
+                    </div>
+                    <!-- Remote location -->
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="id_remote_location" name="remote_location">
+                        <label class="form-check-label" for="id_remote_location">Remote location</label>
+                    </div>
+                    <!-- Agriculture -->
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="id_agriculture" name="agriculture">
+                        <label class="form-check-label" for="id_agriculture">Agriculture</label>
+                    </div>
+                    <!-- Marine -->
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="id_marine" name="marine">
+                        <label class="form-check-label" for="id_marine">Marine</label>
+                    </div>
+                    <!-- First nations -->
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="id_first_nations" name="first_nations">
+                        <label class="form-check-label" for="id_first_nations">First nations</label>
+                    </div>
+                    <!-- Isolated -->
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="id_isolated" name="isolated">
+                        <label class="form-check-label" for="id_isolated">Isolated (woods, etc.)</label>
+                    </div>
+                    <!-- Other risk location specify  -->
+                    <div class="md-form">
+                      <label for="id_other_riskloc_specify">Other (specify)</label>
+                      {% render_field form.other_riskloc_specify class="md-textarea form-control", rows="1" %}
+                    </div>
+                  </div>
+            </div>
+
+            {% for field in form %}
+              {% for error in field.errors %}
+                <p style="color: red">{{field.label}}: {{ error }}</p>
+              {% endfor %}
+            {% endfor %}
+            {% if form.non_field_errors %}
+              <div style="color: red">
+                <p>{{form.non_field_errors}}</p>
+              </div>
+            {% endif %}
+
+          <div class="row">
+            <div class="col-6 text-left">
+            </div>
+            <div class="col-6 text-right">
+              <button type="button" class="btn btn-deep-orange btn-rounded" onclick="stepper.next()">Next</button>
+            </div>
+          </div>
+        </div>
+        <!-- Section 2 -->
+        <div id="test-nl-2" class="content">
+          <h3 class="text-center">Duties and regulations</h3>
+          <br>
+          <!-- Type of duties and regulation -->
+          <div class="form-row">
+            <div class="col">
+              <h4 class="text-center">3. Type of duties being performed</h4>
+              <br>
+                <!-- Inspections -->
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="id_inspection" name="inspection">
+                    <label class="form-check-label" for="id_inspection">Inspections</label>
+                </div>
+                <!-- Witness statements -->
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="id_witness_statements" name="witness_statements">
+                    <label class="form-check-label" for="id_witness_statements">Witness statements</label>
+                </div>
+                <!-- Court documents -->
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="id_court_docs" name="court_docs">
+                    <label class="form-check-label" for="id_court_docs">Court document served</label>
+                </div>
+                <!-- Warrant -->
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="id_warrant" name="warrant">
+                    <label class="form-check-label" for="id_warrant">Warrant</label>
+                </div>
+                <!-- Surveillance -->
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="id_surveillance" name="surveillance">
+                    <label class="form-check-label" for="id_surveillance">Surveillance</label>
+                </div>
+                <!-- Other duty specify  -->
+                <div class="md-form">
+                  <label for="id_other_duty">Other (Specify)</label>
+                  {% render_field form.other_duty_specify class="md-textarea form-control", rows="1" %}
+                </div>
+            </div>
+            <div class="col">
+              <h4 class="text-center">4. Regulations</h4>
+              <br>
+                <!-- Fisheries Act -->
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="id_fisheries_act" name="fisheries_act">
+                    <label class="form-check-label" for="id_fisheries_act">Fisheries Act</label>
+                </div>
+                <!-- Name regulation 1 -->
+                <div class="md-form">
+                  <label for="id_name_reg1">Name regulation</label>
+                  {% render_field form.name_reg1 class="md-textarea form-control", rows="1" %}
+                </div>
+                <!-- CEPA 1999 -->
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="id_cepa_1999" name="cepa_1999">
+                    <label class="form-check-label" for="id_cepa_1999">CEPA 1999</label>
+                </div>
+                <!-- Name regulation 2  -->
+                <div class="md-form">
+                  <label for="id_name_reg2">Name regulation</label>
+                  {% render_field form.name_reg2 class="md-textarea form-control", rows="1" %}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6 text-left">
+                <button type="button" class="btn btn-deep-orange btn-rounded" onclick="stepper.previous()">Previous</button>
+              </div>
+              <div class="col-6 text-right">
+                <button type="button" class="btn btn-deep-orange btn-rounded" onclick="stepper.next()">Next</button>
+              </div>
+            </div>
+        </div>
+        <!-- Section 3 -->
+        <div id="test-nl-3" class="content">
+          <h3 class="text-center">Employee and mitigation</h3>
+          <br>
+          <!-- First and Last name -->
+          <div class="form-row">
+              <div class="col">
+                <!-- First and Last name -->
+                <!-- First name -->
+                <div class="md-form">
+                  <label for="id_firstname">First name</label>
+                  {% render_field form.firstname class="form-control" %}
+                  {{ form.firstname.errors }}
+                </div>
+              </div>
+              <div class="col">
+                <!-- Last name -->
+                <div class="md-form">
+                  <label for="id_lastname">Last name</label>
+                  {% render_field form.lastname class="form-control" %}
+                  {{ form.lastname.errors }}
+                </div>
+              </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <!-- Age -->
+              <div class="md-form">
+                <label for="id_age">Age</label>
+                {% render_field form.age class="form-control" %}
+                {{ form.age.errors }}
+              </div>
+            </div>
+          </div>
+            <div class="form-row">
+              <div class="col">
+                <!-- Experience -->
+                <div class="md-form">
+                  <label for="id_years_experience">Experience (Years)</label>
+                  {% render_field form.years_experience class="form-control" %}
+                  {{ form.years_experience.errors }}
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col">
+                <!-- Region  -->
+                <div class="form-group">
+                  <label for="id_region">Region</label>
+                  {% render_field form.region class="mdb-select md-form colorful-select dropdown-default" %}
+                  {{ form.region.errors }}
+                </div>
+              </div>
+              <div class="col">
+                <!-- Branch   -->
+                <div class="md-form">
+                  <label for="id_branch">Branch</label>
+                  {% render_field form.branch class="form-control" %}
+                  {{ form.branch.errors }}
+                </div>
+              </div>
+              <div class="col">
+                <!-- Gavia   -->
+                <div class="md-form">
+                  <label for="id_gavia_num">Gavia number</label>
+                  {% render_field form.gavia_num class="form-control" %}
+                  {{ form.gavia_num.errors }}
+                </div>
+              </div>
+            </div>
+          <div class="row">
+            <div class="col-6 text-left">
+              <button type="button" class="btn btn-deep-orange btn-rounded" onclick="stepper.previous()">Previous</button>
+            </div>
+            <div class="col-6 text-right">
+              <button type="button" class="btn btn-deep-orange btn-rounded" onclick="stepper.next()">Next</button>
+            </div>
+          </div>
+
+        </div>
+        <!-- Section 4 -->
+        <div id="test-nl-4" class="content">
+          <!-- Start section 4 -->
+          <h3 class="text-center">Risk concerns occurence</h3>
+          <br>
+          <div class="form-row">
+            <div class="col">
+              <!-- Location  of occurence-->
+              <div class="md-form">
+                {% render_field form.location class="form-control" %}
+                <label for="id_location">Exact location</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Date and time of occurence  -->
+          <div class="md-form">
+            {% render_field form.occurence_date_hazard class="form-control datetimepicker_occurence" %}
+            <label for="id_occurence_date_hazard">Date and time of occurence (24h)</label>
+          </div>
+
+          <!-- Occurence description  -->
+          <div class="md-form">
+            <label for="id_occurence_description">Description of occurence</label>
+            {% render_field form.occurence_description class="md-textarea form-control", rows="10" %}
+          </div>
+          <small id="OccurenceDescriptionHelpBlock" class="form-text text-muted mb-4 deep-orange-text">
+            The description should be as precise as possible. It should answer the basic questions
+            "who?, what?, when?, where? and why?" and give an accurate picture of the events leading
+            up to the hazardous occurrence. Identify property, equipment, tools, material, environment
+            that contributed to the occurrence.
+          </small>
+
+          <!-- Trip / Activity  -->
+          <div class="form-group">
+            {% render_field form.trip_id class="mdb-select md-form", searchable=" Search here.." %}
+            <label for="id_trip_id"></label>
+          </div>
+          <small id="TripIdHelpBlock" class="form-text text-muted mb-4 deep-orange-text">
+            * You can link this report to an enforcement activity or trip if relevant (optional)
+          </small>
+
+          <div class="md-form">
+            <div class="row">
+              <div class="col-6 text-left">
+                <button type="button" class="btn btn-deep-orange btn-rounded" onclick="stepper.previous()">Previous</button>
+              </div>
+              <div class="col-6 text-right">
+                <button class="btn btn-deep-orange btn-rounded" type="submit">Submit</button>
+              </div>
+            </div>
+          </div>
+        <!-- End section 4 -->
+        </div>
+        </form>
+        </div>
+        </div>
+
+    </div>
+  </div>
+{% endblock content %}
+{% block otherScripts %}
+<script type="text/javascript" src="{% static 'main/js/bs-stepper.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'main/js/bootstrap-datetimepicker.js' %}"></script>
+<script type="text/javascript" src="{% static 'main/js/cleave.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'main/js/oscr.js' %}"></script>
+{% endblock otherScripts %}

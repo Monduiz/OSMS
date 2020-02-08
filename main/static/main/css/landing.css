@@ -1,0 +1,14 @@
+
+@media (min-width: 1200px) {
+  .container-landing {
+    max-width: 75%;
+  }
+}
+
+.container-landing {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}

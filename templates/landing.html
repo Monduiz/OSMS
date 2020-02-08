@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block otherStyles %}
+  <link rel="stylesheet" type="text/css" href="{% static 'main/css/landing.css' %}">
+{% endblock %}
+{% block content %}
+<!-- Intro -->
+<div class="container-landing">
+
+<section class="view">
+  <div class="row">
+    <div class="col-6">
+      <div class="justify-content-center align-items-center h-100">
+        <h2 class="h2-fluid heading display-3">Officer Safety Management System</h2>
+        <h4 class="subheading font-weight-bold"> OSMS, a light and open source data system</h4>
+      </div>
+    </div>
+    <div class="col-6">
+    </div>
+  </div>
+</section>
+</div>
+<!-- Intro -->
+{% endblock content %}
+{% block otherScripts %}
+{% endblock otherScripts %}

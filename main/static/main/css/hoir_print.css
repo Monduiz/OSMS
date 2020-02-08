@@ -1,0 +1,67 @@
+@media (min-height: 945px) {
+  .form-check-label {
+      margin-bottom: 1rem;
+  }
+}
+
+@media (max-height: 728px) {
+  .form-check-label {
+    /*  margin-bottom: 0.3rem; */
+  }
+}
+
+.col-shaded {
+  background-color: #e0e0e0;
+}
+
+.row.print {
+  display: block;
+}
+
+#hoirIncidentHelpBlock {
+  margin-left: 55px;
+}
+
+.form-check-label {
+    margin-bottom: .5rem;
+}
+
+
+.modal-body .p {
+  font-size:100%
+}
+
+
+/* Add space for labels and select fields*/
+.select-wrapper input.select-dropdown {
+    height: 40px;
+}
+
+
+html {
+  scrollbar-color: #e91e63 #DADADA;
+  scrollbar-width: thin;
+}
+
+
+.btn-pink {
+color: #fff;
+background-color: #e91e63!important;
+}
+
+#loss_consc_label {
+    margin-bottom: 0.1rem;
+}
+
+#hoirLossConscHelpBlock {
+  margin-left: 35px;
+}
+
+#hoirTypeInjuryHelpBlock {
+  margin-left: 25px;
+  margin-top: 0.1rem;
+}
+
+#DaysLostHelpBlock {
+    margin-top: 0.1rem;
+}

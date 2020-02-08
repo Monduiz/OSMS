@@ -1,0 +1,116 @@
+@media (min-height: 945px) {
+  .form-check-label {
+      margin-bottom: 1rem;
+  }
+}
+
+@media (max-height: 728px) {
+  .form-check-label {
+    /*  margin-bottom: 0.3rem; */
+  }
+}
+
+.row.print {
+  display: block;
+}
+
+#hoirIncidentHelpBlock {
+  margin-left: 55px;
+}
+
+.form-check-label {
+    margin-bottom: .5rem;
+}
+
+.md-form textarea.md-textarea:focus:not([read_only]) {
+  border-bottom: 1px solid #e91e63;
+  box-shadow: 0 1px 0 0 #e91e63;
+}
+
+.md-form label.active {
+  color: #e91e63;
+}
+
+.md-form textarea.md-textarea:focus:not([readonly]) + label {
+color:#e91e63; }
+
+.dropdown-default .dropdown-content li.active, .dropdown-default .dropdown-content li a, .dropdown-default .dropdown-content li span:hover {
+    background-color:
+    #e91e63 !important;
+}
+
+.form-control:focus {
+  border-color: #e91e63 !important;
+  color: #e91e63 !important;
+}
+
+input:focus {
+  border-bottom: 1px solid #e91e63 !important;
+  box-shadow: 0 1px 0 0 #e91e63 !important;
+}
+
+input:focus + label {
+  color: #e91e63 !important;
+}
+
+.md-form label:focus {
+    color: #e91e63 !important;
+}
+.select-wrapper span.caret {
+  color: #e91e63 !important;
+}
+
+.modal-body .p {
+  font-size:100%
+}
+
+
+/* Stepper */
+.active .bs-stepper-circle {
+background-color: #e91e63
+}
+
+/* Add space for labels and select fields*/
+.select-wrapper input.select-dropdown {
+    height: 40px;
+}
+
+/* Scroll bar style for select field in Firefox only*/
+
+.select-wrapper .select-dropdown {
+  scrollbar-color: #e91e63 #DADADA;
+  scrollbar-width: thin;
+}
+
+.modal-body {
+  scrollbar-color: #e91e63 #DADADA;
+  scrollbar-width: thin;
+}
+
+html {
+  scrollbar-color: #e91e63 #DADADA;
+  scrollbar-width: thin;
+}
+
+
+.btn-pink {
+color: #fff;
+background-color: #e91e63!important;
+}
+
+#loss_consc_label {
+    margin-bottom: 0.1rem;
+}
+
+#hoirLossConscHelpBlock {
+  margin-left: 35px;
+}
+
+#hoirTypeInjuryHelpBlock {
+  margin-left: 25px;
+  margin-top: 0.1rem;
+}
+
+#DaysLostHelpBlock {
+    margin-top: 0.1rem;
+}

@@ -1,0 +1,578 @@
+{% extends "layout.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% block otherStyles %}
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/bs-stepper.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/datetimepicker_trip.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/pretrip_print.css' %}">
+{% endblock otherStyles %}
+{% block content %}
+
+<div class="row print">
+  <div class="col-10 mx-auto">
+    <br>
+    <!-- <button type="button" id="printForm" class="btn btn-trip btn-rounded mt-4">PDF</button> -->
+    <button type="button" onclick="window.print();" class="btn btn-trip btn-rounded mt-4">PDF</button>
+    <legend class="mb-4 text-center">Enforcement plan</legend>
+    <div id="stepper" class="bs-stepper">
+      <form action="#!" id="planTrip" style="color: #757575;" method="post">
+          {% csrf_token %}
+
+            <h3 class="text-center">Lead officer</h3>
+
+
+            <!-- First and Last name -->
+            <div class="form-row">
+              <div class="col">
+                <!-- First name -->
+                <div class="md-form">
+                  <label for="id_firstname">First name</label>
+                  {% render_field form.firstname class="form-control" %}
+                  {{ form.firstname.errors }}
+                </div>
+              </div>
+              <div class="col">
+                <!-- Last name -->
+                <div class="md-form">
+                  <label for="id_lastname">Last name</label>
+                  {% render_field form.lastname class="form-control" %}
+                  {{ form.lastname.errors }}
+                </div>
+              </div>
+            </div>
+
+            <!-- Gavia number-->
+            <div class="md-form">
+              <label for="id_gavia_num">Gavia number</label>
+              {% render_field form.gavia_num class="form-control" %}
+              {{ form.gavia_num.errors }}
+            </div>
+
+            {% for field in form %}
+              {% for error in field.errors %}
+                <p style="color: red">{{field.label}}: {{ error }}</p>
+              {% endfor %}
+            {% endfor %}
+            {% if form.non_field_errors %}
+              <div style="color: red">
+                <p>{{form.non_field_errors}}</p>
+              </div>
+            {% endif %}
+
+
+
+
+            <h3 class="text-center">Enforcement record</h3>
+
+            <!-- Purpose -->
+            <div class="form-group">
+              <label for="id_purpose">Purpose</label>
+              {% render_field form.purpose class="mdb-select md-form colorful-select dropdown-default" data-visible-options="5" %}
+              {{ form.purpose.errors }}
+            </div>
+
+            <!-- Purpose other -->
+            <div class="md-form">
+              <label for="id_purpose_other">If other, please specify:</label>
+              {% render_field form.purpose_other class="form-control" %}
+            </div>
+
+            <!-- Date -->
+            <!-- input with datetimepicker -->
+            <div class="form-row">
+              <div class="col">
+                <div class="md-form">
+                    <label class="label-control" for=id_start_date_planned>Start date</label>
+                    {% render_field form.start_date_planned class="form-control datetimepicker" %}
+                </div>
+              </div>
+
+                <div class="col">
+                  <div class="md-form">
+                      <label class="label-control" for=id_end_date_planned>End date</label>
+                      {% render_field form.end_date_planned class="form-control datetimepicker" %}
+                  </div>
+                </div>
+            </div>
+
+            <!-- Legislation -->
+            <div class="form-group">
+              <label for="id_legislation">Legislation</label>
+              {% render_field form.legislation class="mdb-select md-form colorful-select dropdown-default" data-visible-options="-1" %}
+              {{ form.legislation.errors }}
+            </div>
+
+            <!-- Regulations -->
+            <div class="form-row">
+              <div class="col">
+                <!-- regulation 1 -->
+                <div class="form-group">
+                  <label for="id_reg1">Reg. 1</label>
+                  {% render_field form.reg1 class="mdb-select md-form colorful-select dropdown-default" %}
+                  {{ form.reg1.errors }}
+                </div>
+              </div>
+              <div class="col">
+                <!-- regulation 2 -->
+                <div class="form-group">
+                  <label for="id_reg2">Reg. 2</label>
+                  {% render_field form.reg2 class="mdb-select md-form colorful-select dropdown-default" %}
+                  {{ form.reg2.errors }}
+                </div>
+              </div>
+              <div class="col">
+                <!-- regulation 2 -->
+                <div class="form-group">
+                  <label for="id_reg3">Reg. 3</label>
+                  {% render_field form.reg3 class="mdb-select md-form colorful-select dropdown-default" %}
+                  {{ form.reg3.errors }}
+                </div>
+              </div>
+            </div>
+
+            <!-- Partners -->
+            <div class="form-row">
+              <div class="col">
+                <!-- Partner 1 -->
+                <div class="form-group">
+                  <label for="id_partner1">Partners</label>
+                  {% render_field form.partner1 class="mdb-select md-form colorful-select dropdown-default" data-visible-options="-1" %}
+                  {{ form.partner1.errors }}
+                </div>
+              </div>
+              <div class="col">
+                <!-- Partner 2 -->
+                <div class="form-group">
+                  <label for="id_partner2">Partners</label>
+                  {% render_field form.partner2 class="mdb-select md-form colorful-select dropdown-default" data-visible-options="-1" %}
+                  {{ form.partner2.errors }}
+                </div>
+              </div>
+            </div>
+
+            <!-- Intelligence report -->
+            <div class="form-group">
+              <label for="id_intelreport">Intelligence report:</label>
+              {% render_field form.intelreport class="mdb-select md-form colorful-select dropdown-default" %}
+              {{ form.intelreport.errors }}
+            </div>
+
+            <div class="md-form">
+              <label id="id_intelreport_name_label" for="id_intelreport_name">Report name:</label>
+              {% render_field form.intelreport_name class="md-textarea form-control", id="id_intelreport_name", rows="3" %}
+              {{ form.intelreport_name.errors }}
+            </div>
+
+            <br>
+
+
+
+            <h3 class="text-center">Destination</h3>
+
+            <!-- Destination 1 -->
+            <div class="md-form">
+              <label for="form-name">Name</label>
+              {% render_field form.dest_name class="form-control" %}
+              {{ form.dest_name.errors }}
+            </div>
+
+            <div class="md-form">
+              <input type="search" class="form-control" id="form-address" placeholder="Search address" />
+            </div>
+
+            <div class="md-form">
+              <label for="form-address2">Address</label>
+              {% render_field form.dest_address class="form-control" id="id_dest_address" placeholder=" " %}
+              {{ form.dest_address.errors }}
+            </div>
+
+            <div class="form-row">
+              <div class="col">
+                <div class="md-form">
+                 <label for="form-province">Province</label>
+                 {% render_field form.dest_province class="form-control" id="id_dest_province" placeholder=" " %}
+                 {{ form.dest_province.errors }}
+                </div>
+              </div>
+
+              <div class="col">
+                <div class="md-form">
+                 <label for="form-city">City</label>
+                 {% render_field form.dest_city class="form-control" id="id_dest_city" placeholder=" " %}
+                 {{ form.dest_city.errors }}
+                </div>
+              </div>
+
+              <div class="col">
+                <div class="md-form">
+                 <label for="form-pc">Postal Code</label>
+                 {% render_field form.dest_postal_code class="form-control" id="id_dest_postal_code" placeholder=" " %}
+                 {{ form.dest_postal_code.errors }}
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="col">
+                <div class="md-form">
+                 <label for="form-lat">lat</label>
+                 {% render_field form.dest_lat class="form-control" id="id_dest_lat" placeholder=" " %}
+                 {{ form.dest_lat.errors }}
+                </div>
+              </div>
+
+              <div class="col">
+                <div class="md-form">
+                 <label for="form-lng">lng</label>
+                 {% render_field form.dest_lng class="form-control" id="id_dest_lng" placeholder=" " %}
+                 {{ form.dest_lng.errors }}
+                </div>
+              </div>
+            </div>
+            <br>
+
+
+            <!-- Start section 4 -->
+            <h3 class="text-center">Risk considerations</h3>
+
+            <!-- Risk considerations-->
+
+            <!-- Risk: Location -->
+            <div class="form-row">
+              <div class="col-xs-6 col-md-3">
+                <div class="form-group">
+                  <label for="id_risk_loc">Location</label>
+                  {% render_field form.risk_loc class="mdb-select md-form" data-visible-options="-1" %}
+                  {{ form.risk_loc.errors }}
+                </div>
+              </div>
+
+            <div class="col-xs-6 col-md-3">
+              <div class="md-form">
+                <input type="text" name="risk_loc_val" id="id_risk_loc_val" class="form-control risk_score" placeholder=" ">
+                <label for="id_risk_loc_val"> Score</label>
+              </div>
+            </div>
+
+            <!-- Risk: Location familiarity -->
+
+              <div class="col-xs-6 col-md-3">
+                <div class="form-group">
+                  <label for="id_risk_loc_fam">Location familiarity</label>
+                  {% render_field form.risk_loc_fam class="mdb-select md-form" %}
+                  {{ form.risk_loc_fam.errors }}
+                </div>
+              </div>
+
+              <div class="col-xs-6 col-md-3">
+                <div class="md-form">
+                  <input type="text" name="risk_loc_fam_val" id="id_risk_loc_fam_val" class="form-control risk_score" placeholder=" ">
+                  <label for="id_risk_loc_fam_val"> Score</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Risk: Time of day  and Weather-->
+
+            <!-- Start form row -->
+            <div class="form-row">
+
+              <!-- Risk: Time of day -->
+              <div class="col-xs-6 col-md-3">
+                <div class="form-group">
+                  <label for="id_risk_time">Time of day</label>
+                  {% render_field form.risk_time class="mdb-select md-form" %}
+                  {{ form.risk_time.errors }}
+                </div>
+              </div>
+
+              <div class="col-xs-6 col-md-3">
+                <div class="md-form">
+                  <input type="text" name="risk_time_val" id="id_risk_time_val" class="form-control risk_score" placeholder=" ">
+                  <label for="id_risk_time_val"> Score</label>
+                </div>
+              </div>
+
+              <!-- Risk: Weather -->
+              <div class="col-xs-6 col-md-3">
+                <div class="form-group">
+                  <label for="id_risk_weather">Weather</label>
+                  {% render_field form.risk_weather class="mdb-select md-form" %}
+                  {{ form.risk_weather.errors }}
+                </div>
+              </div>
+
+              <div class="col-xs-6 col-md-3">
+                <div class="md-form">
+                  <input type="text" name="risk_weather_val" id="id_risk_weather_val" class="form-control risk_score" placeholder=" ">
+                  <label for="id_risk_weather_val"> Score</label>
+                </div>
+              </div>
+            </div>
+            <!-- End form row -->
+
+            <!-- Risk: Terrain and communication -->
+
+            <!-- Start form row -->
+            <div class="form-row">
+
+              <!-- Risk: Terrain -->
+              <div class="col-xs-6 col-md-3">
+                <div class="form-group">
+                  <label for="id_risk_terrain">Terrain</label>
+                  {% render_field form.risk_terrain class="mdb-select md-form" data-visible-options="-1" %}
+                  {{ form.risk_terrain.errors }}
+                </div>
+              </div>
+
+              <div class="col-xs-6 col-md-3">
+                <div class="md-form">
+                  <input type="text" name="risk_terrain_val" id="id_risk_terrain_val" class="form-control risk_score" placeholder=" ">
+                  <label for="id_risk_terrain_val"> Score</label>
+                </div>
+              </div>
+
+              <!-- Risk: Communication -->
+              <div class="col-xs-6 col-md-3">
+                <div class="form-group">
+                  <label for="id_risk_comm">Communication</label>
+                  {% render_field form.risk_comm class="mdb-select md-form" %}
+                  {{ form.risk_comm.errors }}
+                </div>
+              </div>
+
+              <div class="col-xs-6 col-md-3">
+                <div class="md-form">
+                  <input type="text" name="risk_comm_val" id="id_risk_comm_val" class="form-control risk_score" placeholder=" ">
+                  <label for="id_risk_comm_val"> Score</label>
+                </div>
+              </div>
+            </div>
+            <!-- End form row -->
+
+            <!-- Risk: Emergency and Distance -->
+
+            <!-- Start form row -->
+            <div class="form-row">
+
+              <!-- Risk: Emergency -->
+              <div class="col-xs-6 col-md-3">
+                <div class="form-group">
+                  <label for="id_risk_emergency">Emergency response</label>
+                  {% render_field form.risk_emergency class="mdb-select md-form" %}
+                  {{ form.risk_emergency.errors }}
+                </div>
+              </div>
+
+              <div class="col-xs-6 col-md-3">
+                <div class="md-form">
+                  <input type="text" name="risk_emergency_val" id="id_risk_emergency_val" class="form-control risk_score" placeholder=" ">
+                  <label for="id_risk_emergency_val"> Score</label>
+                </div>
+              </div>
+
+              <!-- Risk: Distance -->
+              <div class="col-xs-6 col-md-3">
+                <div class="form-group">
+                  <label for="id_risk_distance">Travel distance</label>
+                  {% render_field form.risk_distance class="mdb-select md-form" %}
+                  {{ form.risk_distance.errors }}
+                </div>
+              </div>
+
+              <div class="col-xs-6 col-md-3">
+                <div class="md-form">
+                  <input type="text" name="risk_distance_val" id="id_risk_distance_val" class="form-control risk_score" placeholder=" ">
+                  <label for="id_risk_distance_val"> Score</label>
+                </div>
+              </div>
+            </div>
+            <!-- End form row -->
+
+            <!-- Risk: Transport and Criminal history -->
+
+            <!-- Start form row -->
+            <div class="form-row">
+
+              <!-- Risk: Transport -->
+              <div class="col-xs-6 col-md-3">
+                <div class="form-group">
+                  <label for="id_risk_transport">Transport method</label>
+                  {% render_field form.risk_transport class="mdb-select md-form" %}
+                  {{ form.risk_transport.errors }}
+                </div>
+              </div>
+
+              <div class="col-xs-6 col-md-3">
+                <div class="md-form">
+                  <input type="text" name="risk_transport_val" id="id_risk_transport_val" class="form-control risk_score" placeholder=" ">
+                  <label for="id_risk_transport_val"> Score</label>
+                </div>
+              </div>
+
+              <!-- Risk: Criminal -->
+              <div class="col-xs-6 col-md-3">
+                <div class="form-group">
+                  <label for="id_risk_criminal">Criminal history</label>
+                  {% render_field form.risk_criminal class="mdb-select md-form" %}
+                  {{ form.risk_criminal.errors }}
+                </div>
+              </div>
+
+              <div class="col-xs-6 col-md-3">
+                <div class="md-form">
+                  <input type="text" name="risk_criminal_val" id="id_risk_criminal_val" class="form-control risk_score" placeholder=" ">
+                  <label for="id_risk_criminal_val"> Score</label>
+                </div>
+              </div>
+            </div>
+            <!-- End form row -->
+
+            <!-- Risk: Compliance and Subjects numbers -->
+
+            <!-- Start form row -->
+            <div class="form-row">
+
+              <!-- Risk: Compliance -->
+              <div class="col-xs-6 col-md-3">
+                <div class="form-group">
+                  <label for="id_risk_compliance">Compliance history</label>
+                  {% render_field form.risk_compliance class="mdb-select md-form" %}
+                  {{ form.risk_compliance.errors }}
+                </div>
+              </div>
+
+              <div class="col-xs-6 col-md-3">
+                <div class="md-form">
+                  <input type="text" name="risk_compliance_val" id="id_risk_compliance_val" class="form-control risk_score" placeholder=" ">
+                  <label for="id_risk_compliance_val"> Score</label>
+                </div>
+              </div>
+
+              <!-- Risk: Subjects numbers -->
+              <div class="col-xs-6 col-md-3">
+                <div class="form-group">
+                  <label for="id_risk_numsub">Number of subjects</label>
+                  {% render_field form.risk_numsub class="mdb-select md-form" %}
+                  {{ form.risk_numsub.errors }}
+                </div>
+              </div>
+
+              <div class="col-xs-6 col-md-3">
+                <div class="md-form">
+                  <input type="text" name="risk_numsub_val" id="id_risk_numsub_val" class="form-control risk_score" placeholder=" ">
+                  <label for="id_risk_numsub_val"> Score</label>
+                </div>
+              </div>
+            </div>
+            <!-- End form row -->
+
+            <!-- Risk: Penalty severity and Weapons severity -->
+
+            <!-- Start form row -->
+            <div class="form-row">
+
+              <!-- Risk: Penalty -->
+              <div class="col-xs-6 col-md-3">
+                <div class="form-group">
+                  <label for="id_risk_penalty">Penalty severity</label>
+                  {% render_field form.risk_penalty class="mdb-select md-form" %}
+                  {{ form.risk_penalty.errors }}
+                </div>
+              </div>
+
+              <div class="col-xs-6 col-md-3">
+                <div class="md-form">
+                  <input type="text" name="risk_penalty_val" id="id_risk_penalty_val" class="form-control risk_score" placeholder=" ">
+                  <label for="id_risk_penalty_val"> Score</label>
+                </div>
+              </div>
+
+              <!-- Risk: Weapons expected -->
+              <div class="col-xs-6 col-md-3">
+                <div class="form-group">
+                  <label for="id_risk_weapons">Weapons</label>
+                  {% render_field form.risk_weapons class="mdb-select md-form" %}
+                  {{ form.risk_weapons.errors }}
+                </div>
+              </div>
+
+              <div class="col-xs-6 col-md-3">
+                <div class="md-form">
+                  <input type="text" name="risk_weapons_val" id="id_risk_weapons_val" class="form-control risk_score" placeholder=" ">
+                  <label for="id_risk_weapons_val"> Score</label>
+                </div>
+              </div>
+            </div>
+            <!-- End form row -->
+
+            <!-- Risk: Language barrier and History of law Enforcement aversion -->
+
+            <!-- Start form row -->
+            <div class="form-row">
+
+              <!-- Risk: Language -->
+              <div class="col-xs-6 col-md-3">
+                <div class="form-group">
+                  <label for="id_risk_language">Language barrier</label>
+                  {% render_field form.risk_language class="mdb-select md-form" %}
+                  {{ form.render_field.errors }}
+                </div>
+              </div>
+
+              <div class="col-xs-6 col-md-3">
+                <div class="md-form">
+                  <input type="text" name="risk_language_val" id="id_risk_language_val" class="form-control risk_score" placeholder=" ">
+                  <label for="id_risk_language_val"> Score</label>
+                </div>
+              </div>
+
+              <!-- Risk: Enforcement aversion -->
+              <div class="col-xs-6 col-md-3">
+                <div class="form-group">
+                  <label for="id_risk_histlawaver">Enforcement aversion</label>
+                  {% render_field form.risk_histlawaver class="mdb-select md-form" %}
+                  {{ form.risk_histlawaver.errors }}
+                </div>
+              </div>
+
+              <div class="col-xs-6 col-md-3">
+                <div class="md-form">
+                  <input type="text" name="risk_histlawaver_val" id="id_risk_histlawaver_val" class="form-control risk_score" placeholder=" ">
+                  <label for="id_risk_histlawaver_val"> Score</label>
+                </div>
+              </div>
+            </div>
+            <!-- End form row -->
+
+            <br>
+
+            <div class="row d-flex justify-content-end">
+              <div class="col-sm-2">
+                <div class="md-form">
+                    <input type="text" id="risk_sum" name="risk_sum" class="form-control" placeholder=" ">
+                    <label for="id_risk_sum"> Risk score</label>
+                </div>
+              </div>
+              <div class="col-sm-2">
+                <div class="md-form">
+                    <input type="text" id="risk_score_label" name="risk_score_label" class="form-control" placeholder=" ">
+                    <label for="id_risk_score_label"> Risk level</label>
+                </div>
+              </div>
+            </div>
+
+
+      </form>
+    </div>
+  </div>
+</div>
+
+
+{% endblock content %}
+{% block otherScripts %}
+<script type="text/javascript" src="{% static 'main/js/places/dist/cdn/places.js' %}"></script>
+<script type="text/javascript" src="{% static 'main/js/bs-stepper.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'main/js/bootstrap-datetimepicker.js' %}"></script>
+<script type="text/javascript" src="{% static 'main/js/pretrip_print.js' %}"></script>
+{% endblock otherScripts %}

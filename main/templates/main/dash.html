@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block otherStyles %}
+<link href='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css' rel='stylesheet' />
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/pretrip.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/dash.css' %}">
+{% endblock otherStyles %}
+{% block content %}
+
+<div class="row mb-2 mt-5">
+  <div class="col">
+    <!-- Card -->
+    <div class="card map-card">
+      <!-- Card content -->
+      <div id='map' class='map pad2' style='width: 100%; height: 35vh;'></div>
+    </div>
+<!-- Card -->
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-4 pr-1">
+    <!-- Card -->
+    <div class="card">
+      <!-- Card content -->
+      <div class="card-body">
+        <!-- Title -->
+        <h4 class="card-title text-center"><a>Activities by risk level</a></h4>
+        <div class="chart-container" style="width: 100%;">
+          <canvas id="myChart"></canvas>
+        </div>
+      </div>
+    </div>
+    <!-- Card -->
+  </div>
+  <div class="col-4 pl-1">
+    <!-- Card -->
+    <div class="card">
+      <!-- Card content -->
+      <div class="card-body">
+        <!-- Title -->
+        <h4 class="card-title text-center"><a>Activities by legislation</a></h4>
+        <div class="chart-container" style="width: 100%;">
+          <canvas id="myChart2"></canvas>
+        </div>
+      </div>
+    </div>
+    <!-- Card -->
+  </div>
+  <div class="col-4 pl-1">
+    <!-- Card -->
+    <div class="card">
+      <!-- Card content -->
+      <div class="card-body">
+        <!-- Title -->
+        <h4 class="card-title text-center"><a>Presence of weapons</a></h4>
+        <div class="chart-container" style="width: 100%;">
+          <canvas id="myChart3"></canvas>
+        </div>
+      </div>
+    </div>
+    <!-- Card -->
+  </div>
+</div>
+
+{% endblock %}
+{% block otherScripts %}
+<script type="text/javascript">
+  var data = {{df2|safe}};
+  var data_legislation = {{df3|safe}};
+  var data_criminal = {{df4|safe}};
+  var trip_loc = {{trip_loc|safe}};
+</script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+<!-- Others -->
+<script src='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js'></script>
+<script src="https://npmcdn.com/csv2geojson@latest/csv2geojson.js"></script>
+<script type="text/javascript" src="{% static 'main/js/dash.js' %}"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+{% endblock otherScripts %}

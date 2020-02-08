@@ -1,0 +1,100 @@
+{% extends "layout.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% block otherStyles %}
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/login.css' %}">
+{% endblock otherStyles %}
+{% block content %}
+
+<div class="col-sm-6 mx-auto">
+  <div class="card">
+    <h5 class="card-header default-color white-text text-center py-4">
+    <strong>Register</strong>
+    </h5>
+      <div class="card-body px-lg-5 pt-0">
+        <form action="#!" style="color: #757575;" method="post">
+          {% csrf_token %}
+
+          <!-- Username -->
+          <div class="md-form">
+            <label for="id_username">Username</label>
+            {% render_field form.username class="form-control" %}
+            {{ form.username.errors }}
+          </div>
+
+          <!-- First and Last name -->
+          <div class="form-row">
+            <div class="col">
+              <!-- First name -->
+              <div class="md-form">
+                <label for="id_firstname">First name</label>
+                {% render_field form.firstname class="form-control" %}
+                <div class="help-block">{{ form.firstname.errors }}</div>
+              </div>
+            </div>
+            <div class="col">
+              <!-- Last name -->
+              <div class="md-form">
+                <label for="id_lastname">Last name</label>
+                {% render_field form.lastname class="form-control" %}
+                <div class="help-block">{{ form.lastname.errors }}</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phone number -->
+          <div class="md-form">
+            <label for="id_phone">Phone number</label>
+            {% render_field form.phone class="form-control" %}
+            <div class="help-block">{{ form.phone.errors }}</div>
+          </div>
+
+          <!-- E-mail -->
+          <div class="md-form">
+            <label for="id_email">Email</label>
+            {% render_field form.email class="form-control" %}
+            <div class="help-block">{{ form.email.errors }}</div>
+          </div>
+
+
+          <!-- Password -->
+          <div class="md-form">
+            <label for="id_password1">Password</label>
+            {% render_field form.password1 class="form-control" %}
+            <div class="help-block">{{ form.password1.errors }}</div>
+            <small id="materialRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
+                At least 8 characters and 1 digit
+            </small>
+          </div>
+
+          <!-- Confirm password -->
+          <div class="md-form">
+            <label for="id_password2">Confirm password</label>
+            {% render_field form.password2 class="form-control" %}
+            <div class="help-block">{{ form.password2.errors }}</div>
+          </div>
+
+          <!-- Directorate -->
+          <div class="form-group">
+            <label for="id_directorate">Directorate</label>
+            {% render_field form.directorate class="mdb-select md-form" %}
+            {{ form.directorate.errors }}
+          </div>
+
+          <!-- Sign up and Sign in -->
+
+          <div class="md-form">
+            <button class="btn btn-outline-default btn-rounded btn-block" type="submit">Register</button>
+          </div>
+          <hr>
+            <p class="text-center">Already have an account? <a href="{% url 'login' %}">Sign in</a></p>
+
+        </form>
+      </div>
+  </div>
+</div>
+{% endblock content %}
+{% block otherScripts %}
+<script type="text/javascript" src="{% static 'main/js/cleave.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'main/js/register.js' %}"></script>
+{% endblock otherScripts %}

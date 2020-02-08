@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% block otherStyles %}
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/closeout.css' %}">
+{% endblock otherStyles %}
+{% block content %}
+<div class="row">
+  <div class="col-10 mx-auto">
+    <legend class="mb-4 text-center">Close-out</legend>
+    <form action="#!" id="closeout" style="color: #757575;" method="post">
+      {% csrf_token %}
+
+      <!-- Close-out remarks  -->
+      <div class="md-form">
+        <label for="id_close_remarks">Close-out remarks</label>
+        {% render_field form.close_remarks class="md-textarea form-control", rows="10" %}
+      </div>
+      <small id="OccurenceDescriptionHelpBlock" class="form-text text-muted mb-4 closeout-text">
+        You can write-up a report to close the activity.
+      </small>
+      <!-- Trip / Activity  -->
+      <div class="form-group">
+        <label for="id_trip_id"></label>
+        {% render_field form.trip_id class="mdb-select md-form", searchable=" Search here.." %}
+        {{ form.trip_id.errors }}
+      </div>
+      <small id="TripIdHelpBlock" class="form-text text-muted mb-4 closeout-text">
+        * Link this report to an enforcement activity.
+      </small>
+      <button class="btn btn-cyan btn-rounded" type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+{% endblock content %}
+{% block otherScripts %}
+<script type="text/javascript" src="{% static 'main/js/closeout.js' %}"></script>
+{% endblock otherScripts %}
