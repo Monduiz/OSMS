@@ -64,8 +64,6 @@
                     <li>Training 1</li>
                     <li>Training 2</li>
                     <li>Training 3</li>
-                    <li>Training 4</li>
-                    <li>Training 5</li>
                   </ul>
                 </div>
               </div>
@@ -105,8 +103,8 @@
 {% endblock %}
 {% block otherScripts %}
 <script type="text/javascript">
-  var lat = {{object.dest_lat|safe}};
-  var long = {{object.dest_lng|safe}};
+  var lat = {{object.dest_point.1|safe}};
+  var long = {{object.dest_point.0|safe}};
 </script>
 <script src='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js'></script>
 <script src="https://npmcdn.com/csv2geojson@latest/csv2geojson.js"></script>

@@ -1,4 +1,5 @@
 from django.contrib.gis.db import models
+from django.contrib.gis.geos import Point
 from django.utils import timezone
 from users.models import User
 from django.conf import settings
@@ -59,7 +60,7 @@ class Trip(models.Model):
     dest_postal_code = models.CharField(max_length=100, blank=True, default='')
     dest_lat = models.FloatField(null=True, blank=True)
     dest_lng = models.FloatField(null=True, blank=True)
-    
+    dest_point = models.PointField(null=True, blank=True, srid=4326)
     # Risks considerations
     risk_loc = models.CharField(max_length=50, choices=[(d, d) for d in RISK_LOCATIONS])
     risk_loc_val = models.IntegerField()
@@ -97,6 +98,10 @@ class Trip(models.Model):
     risk_score_label = models.CharField(max_length=50)
     date_created = models.DateTimeField(auto_now_add=True)
     # date_updated = models.DateTimeField(auto_now=True, verbose_name="date updated")
+
+    def save(self, *args, **kwargs):
+        self.dest_point = Point(self.dest_lng, self.dest_lat)
+        super(Trip, self).save(*args, **kwargs)
 
     class Meta:
         db_table = 'trips'
@@ -247,7 +252,7 @@ class Office(models.Model):
     postal_code = models.CharField(max_length=75)
     lat = models.FloatField(null=True, blank=True)
     long = models.FloatField(null=True, blank=True)
-    point = models.PointField(null=True, blank=True)
+    point = models.PointField(null=True, blank=True, srid=4326)
 
     class Meta:
         db_table = 'offices'

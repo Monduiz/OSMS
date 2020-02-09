@@ -9,7 +9,8 @@ from .models import Trip, Hoir, Oscr, Closeout, Office
 from users.models import User
 from main.utils import create_loc, create_trip_loc
 from .forms import HoirForm, OscrForm, CloseoutForm
-from geojson import Feature, Point, FeatureCollection, dump
+from geojson import Feature, FeatureCollection, dump
+from django.contrib.gis.geos import Point
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 
@@ -69,7 +70,6 @@ class TripCreateView(LoginRequiredMixin, CreateView):
         algolia_token_json = json.dumps(algolia_token)
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
-        # Add in a QuerySet of all the books
         context['algolia_ID_json'] = algolia_ID_json
         context['algolia_token_json'] = algolia_token_json
         return context
