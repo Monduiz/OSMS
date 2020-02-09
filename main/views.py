@@ -184,9 +184,7 @@ class OfficeView(LoginRequiredMixin, View):
 
         context = {
             'offices': feature_collection,
-            'mapbox_token': mapbox_token,
-            'algolia_ID': algolia_ID,
-            'algolia_token': algolia_token
+            'mapbox_token': mapbox_token
         }
         return render(request, 'main/offices.html', context)
 
