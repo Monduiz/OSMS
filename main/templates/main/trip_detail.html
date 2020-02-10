@@ -47,23 +47,23 @@
               <hr id="title_hr_trip">
               <p>by <a class="font-weight-bold">{{ object.officer.username }}</a>, {{ object.date_created|date:'F d, Y' }}</p>
               <p><a class="dark-grey-text">Legislation: <strong>{{ object.legislation }}</strong>; Regulations: <strong>{{ object.reg1 }} {{ object.reg2 }} {{ object.reg3 }}</strong></a></p>
+              <br>
               <div class="row">
                 <div class="col">
-                  <h5 class="font-weight-bold mb-3">Potential tasks:</h5>
+                  <h5 class="font-weight-bold mb-3">Information:</h5>
                   <ul>
-                    <li>Task 1</li>
-                    <li>Task 2</li>
-                    <li>Task 3</li>
-                    <li>Task 4</li>
-                    <li>Task 5</li>
+                    <li>Info 1</li>
+                    <li>Info 2</li>
+                    <li>Info 3</li>
+                    <li>Info 4</li>
                   </ul>
                 </div>
                 <div class="col">
-                  <h5 class="font-weight-bold mb-3">Recommended training:</h5>
+                  <h5 class="font-weight-bold mb-3">Treaties:</h5>
                   <ul>
-                    <li>Training 1</li>
-                    <li>Training 2</li>
-                    <li>Training 3</li>
+                    <li>Example 1</li>
+                    <li>Example 2</li>
+                    <li>Example 3</li>
                   </ul>
                 </div>
               </div>
@@ -84,8 +84,14 @@
           <!-- Back Side -->
           <div class="face back">
             <div class="card-body">
+              <h5 class="font-weight-bold mt-3">Proximity search:</h5>
               <div class="alert alert-warning mt-4" role="alert">
                 No proximity matches found
+              </div>
+              <br>
+              <h5 class="font-weight-bold mt-3">Historical record:</h5>
+              <div class="alert alert-info mt-4" role="alert">
+                No record found
               </div>
 
               <div class="text-center">

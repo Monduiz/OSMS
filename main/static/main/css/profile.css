@@ -43,6 +43,11 @@ max-width:100%;
   width: 90%;
 }
 
+.form-row {
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
 a {
   color: #333;
 }
@@ -124,6 +129,11 @@ a {
   top: 0;
   left: 0;
   overflow: auto;
+}
+
+a:hover {
+
+    color: #bdbdbd;
 }
 
 .nav-fill .nav-item {
