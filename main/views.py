@@ -88,7 +88,7 @@ class TripCreateView(LoginRequiredMixin, CreateView):
 class TripUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     # Retrieves field names from model and removes ForeignKey and auto generated fields
     trip_fields = [f.get_attname() for f in Trip._meta.fields]
-    trip_fields = [e for e in trip_fields if e not in ('id', 'officer', 'date_created')]
+    trip_fields = [e for e in trip_fields if e not in ('id', 'officer_id', 'date_created')]
 
     model = Trip
     fields = trip_fields

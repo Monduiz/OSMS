@@ -204,7 +204,6 @@
                     <p>by <a class="font-weight-bold">{{ hoir.officer.username }}</a>, {{ hoir.date_created|date:'F d, Y' }}</p>
                     {% if hoir.officer == user %}
                       <a href="{% url 'hoir-detail' hoir.id %}" class="btn btn-pink btn-rounded btn-sm">Read</a>
-                      <a href="#" class="btn btn-pink btn-rounded btn-sm">Update</a>
                       <a href="{% url 'hoir-print' hoir.id %}" class="btn btn-pink btn-rounded btn-sm">PDF</a>
                     {% endif %}
                   </div>
@@ -255,7 +254,6 @@
                     <p>by <a class="font-weight-bold">{{ oscr.officer.username }}</a>, {{ oscr.date_created|date:'F d, Y' }}</p>
                     {% if oscr.officer == user %}
                       <a href="{% url 'oscr-detail' oscr.id %}" class="btn btn-deep-orange btn-rounded btn-sm">Read</a>
-                      <a href="#" class="btn btn-deep-orange btn-rounded btn-sm">Update</a>
                       <a href="#" class="btn btn-deep-orange btn-rounded btn-sm">PDF</a>
                     {% endif %}
                   </div>
