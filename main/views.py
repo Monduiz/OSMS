@@ -35,6 +35,10 @@ def get_secret(setting, secrets=secrets):
 def landing(request):
     return render(request, 'landing.html')
 
+class TestView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'main/test.html')
+
 class HomeView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         trip_u = Trip.objects.filter(officer=request.user.id).last()

@@ -2,12 +2,13 @@ from django.urls import path
 from .views import (TripDetailView, TripCreateView, TripUpdateView,
                     HoirDetailView, HoirCreateView, OscrCreateView,
                     OscrDetailView, CloseoutCreateView, CloseoutDetailView,
-                    OfficeView, HoirUpdateView, HomeView, DashView)
+                    OfficeView, HoirUpdateView, HomeView, DashView, TestView)
 from . import views
 
 urlpatterns = [
     path('', views.landing, name='osms-landing'), # landing goes here
     path('home/', HomeView.as_view(), name='osms-home'),
+    path('test/', TestView.as_view(), name='test'),
     path('dash/', DashView.as_view(), name='dash'),
     path('trip/<int:pk>/', TripDetailView.as_view(), name='trip-detail'),
     path('trip/new/', TripCreateView.as_view(), name='trip-create'),
