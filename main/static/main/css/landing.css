@@ -8,7 +8,21 @@
 .container-landing {
     width: 100%;
     padding-right: 15px;
-    padding-left: 15px;
+    padding-left: 0px;
     margin-right: auto;
-    margin-left: auto;
+    margin-left: 30px;
+}
+
+.col-6.title-OSMS {
+  /* margin-left: 7rem; */
+  /* padding-left: 15px; */
+}
+
+img.logo-title {
+  width: 75%;
+  height: auto;
+}
+
+.col-4.image-logo {
+
 }

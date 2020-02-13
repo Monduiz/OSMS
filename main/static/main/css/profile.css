@@ -39,6 +39,7 @@ max-width:100%;
 }
 
 #profile-head-hr {
+  margin-top: .5rem;
   margin-bottom: .5rem;
   width: 90%;
 }
@@ -121,7 +122,12 @@ a {
 .profilepad {
 }
 
-.sidebarpad {
+.tab-content {
+  padding-top: 1rem;
+}
+
+.col-lg-4.sidebarpad {
+  max-width: 300px;
 }
 
 .profile-card {

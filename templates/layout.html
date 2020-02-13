@@ -31,7 +31,11 @@
     <!--Navbar -->
     <header class="site-header">
       <nav class="mb-1 navbar navbar-expand-lg navbar-light white">
-        <a class="navbar-brand" href="{% url 'osms-home' %}">OSMS</a>
+        <a class="navbar-brand" href="{% url 'osms-home' %}">
+          <a class="navbar-brand" href="#">
+            <img src="{% static 'main/img/logo.png' %}" height="30" alt="osms">
+              
+          </a>
         <!-- Collapse button -->
         <button class="navbar-toggler nav-button" type="button" data-toggle="collapse" data-target="#navbarSupportedContent23"
           aria-controls="navbarSupportedContent23" aria-expanded="false" aria-label="Toggle navigation">
