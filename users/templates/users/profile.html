@@ -21,13 +21,13 @@
         <h5>{{ user.directorate }}</h5>
       </div>
       <hr id="profile-head-hr">
-      <ul class="nav flex-column nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
+      <ul class="nav flex-column nav-pills nav-fill mb-3" id="pills-tab" role="tablist" aria-orientation="vertical">
         <li class="nav-item pill-1">
-          <a class="nav-link active" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
+          <a class="nav-link active" id="pills-profile-tab" href="{% url 'profile' %}"
             aria-controls="pills-profile" aria-selected="true">Profile</a>
         </li>
         <li class="nav-item pill-2">
-          <a class="nav-link" id="pills-trips-tab" data-toggle="pill" href="#pills-trips" role="tab"
+          <a class="nav-link" id="pills-trips-tab" href="{% url 'profile-trips' %}"
             aria-controls="pills-trips" aria-selected="false">Activities</a>
         </li>
         <li class="nav-item pill-3">
@@ -164,7 +164,7 @@
                   <ul class="pagination pg-trip">
                     {% if trips_list.has_previous %}
                     <li class="page-item">
-                      <a class="page-link" href="?page1={{ trips_list.previous_page_number }}" aria-label="Previous">
+                      <a class="page-link" href="?trips={{ trips_list.previous_page_number }}#pills-trips" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                         <span class="sr-only">Previous</span>
                       </a>
@@ -172,14 +172,14 @@
                     {% endif %}
                     {% for num in trips_list.paginator.page_range %}
                       {% if trips_list.number == num %}
-                        <li class="page-item active"><a class="page-link" href="?page1={{ num }}">{{ num }}</a></li>
+                        <li class="page-item active"><a class="page-link" href="?trips={{ num }}#pills-trips">{{ num }}</a></li>
                       {% else %}
-                        <li class="page-item"><a class="page-link" href="?page1={{ num }}">{{ num }}</a></li>
+                        <li class="page-item"><a class="page-link" href="?trips={{ num }}#pills-trips">{{ num }}</a></li>
                       {% endif %}
                     {% endfor %}
                     {% if trips_list.has_next %}
                       <li class="page-item">
-                        <a class="page-link" href="?page1={{ trips_list.next_page_number }}"aria-label="Next">
+                        <a class="page-link" href="?trips={{ trips_list.next_page_number }}#pills-trips"aria-label="Next">
                           <span aria-hidden="true">&raquo;</span>
                           <span class="sr-only">Next</span>
                         </a>
@@ -215,7 +215,7 @@
                 <ul class="pagination pg-hoir">
                   {% if hoir_list.has_previous %}
                   <li class="page-item">
-                    <a class="page-link" href="?page2={{ hoir_list.previous_page_number }}" aria-label="Previous">
+                    <a class="page-link" href="?hoir={{ hoir_list.previous_page_number }}#pills-hoir" aria-label="Previous">
                       <span aria-hidden="true">&laquo;</span>
                       <span class="sr-only">Previous</span>
                     </a>
@@ -223,14 +223,14 @@
                   {% endif %}
                   {% for num in hoir_list.paginator.page_range %}
                     {% if hoir_list.number == num %}
-                      <li class="page-item active"><a class="page-link" href="?page2={{ num }}">{{ num }}</a></li>
+                      <li class="page-item active"><a class="page-link" href="?hoir={{ num }}#pills-hoir">{{ num }}</a></li>
                     {% elif num > hoir_list.number|add:'-3' and num < hoir_list.number|add:'3' %}
-                      <li class="page-item"><a class="page-link" href="?page2={{ num }}">{{ num }}</a></li>
+                      <li class="page-item"><a class="page-link" href="?hoir={{ num }}#pills-hoir">{{ num }}</a></li>
                     {% endif %}
                   {% endfor %}
                   {% if hoir_list.has_next %}
                     <li class="page-item">
-                      <a class="page-link" href="?page2={{ hoir_list.next_page_number }}"aria-label="Next">
+                      <a class="page-link" href="?hoir={{ hoir_list.next_page_number }}#pills-hoir"aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                         <span class="sr-only">Next</span>
                       </a>
@@ -265,7 +265,7 @@
                   <ul class="pagination pg-oscr">
                     {% if oscr_list.has_previous %}
                     <li class="page-item">
-                      <a class="page-link" href="?page3={{ oscr_list.previous_page_number }}" aria-label="Previous">
+                      <a class="page-link" href="?oscr={{ oscr_list.previous_page_number }}#pills-oscr" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                         <span class="sr-only">Previous</span>
                       </a>
@@ -273,14 +273,14 @@
                     {% endif %}
                     {% for num in oscr_list.paginator.page_range %}
                       {% if oscr_list.number == num %}
-                        <li class="page-item active"><a class="page-link" href="?page3={{ num }}">{{ num }}</a></li>
+                        <li class="page-item active"><a class="page-link" href="?oscr={{ num }}#pills-oscr">{{ num }}</a></li>
                       {% elif num > oscr_list.number|add:'-3' and num < oscr_list.number|add:'3' %}
-                        <li class="page-item"><a class="page3-link" href="?page={{ num }}">{{ num }}</a></li>
+                        <li class="page-item"><a class="oscr-link" href="?page={{ num }}#pills-oscr">{{ num }}</a></li>
                       {% endif %}
                     {% endfor %}
                     {% if oscr_list.has_next %}
                       <li class="page-item">
-                        <a class="page-link" href="?page3={{ oscr_list.next_page_number }}"aria-label="Next">
+                        <a class="page-link" href="?oscr={{ oscr_list.next_page_number }}#pills-oscr"aria-label="Next">
                           <span aria-hidden="true">&raquo;</span>
                           <span class="sr-only">Next</span>
                         </a>
@@ -316,7 +316,7 @@
                   <ul class="pagination pg-closeout">
                     {% if closeout_list.has_previous %}
                     <li class="page-item">
-                      <a class="page-link" href="?page4={{ closeout_list.previous_page_number }}" aria-label="Previous">
+                      <a class="page-link" href="?closeout={{ closeout_list.previous_page_number }}#pills-closeout" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                         <span class="sr-only">Previous</span>
                       </a>
@@ -324,14 +324,14 @@
                     {% endif %}
                     {% for num in closeout_list.paginator.page_range %}
                       {% if closeout_list.number == num %}
-                        <li class="page-item active"><a class="page-link" href="?page4={{ num }}">{{ num }}</a></li>
+                        <li class="page-item active"><a class="page-link" href="?closeout={{ num }}#pills-closeout">{{ num }}</a></li>
                       {% elif num > closeout_list.number|add:'-3' and num < closeout_list.number|add:'3' %}
-                        <li class="page-item"><a class="page-link" href="?page4={{ num }}">{{ num }}</a></li>
+                        <li class="page-item"><a class="page-link" href="?closeout={{ num }}#pills-closeout">{{ num }}</a></li>
                       {% endif %}
                     {% endfor %}
                     {% if closeout_list.has_next %}
                       <li class="page-item">
-                        <a class="page-link" href="?page4={{ closeout_list.next_page_number }}"aria-label="Next">
+                        <a class="page-link" href="?closeout={{ closeout_list.next_page_number }}#pills-closeout"aria-label="Next">
                           <span aria-hidden="true">&raquo;</span>
                           <span class="sr-only">Next</span>
                         </a>

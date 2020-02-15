@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.views.generic import (DetailView, CreateView, UpdateView)
+from django.views.generic import (DetailView, CreateView, UpdateView, ListView)
 from django.views import View
 from .models import Trip, Hoir, Oscr, Closeout, Office
 from users.models import User
@@ -13,6 +13,7 @@ from geojson import Feature, FeatureCollection, dump
 from django.contrib.gis.geos import Point
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 import json
 import os
@@ -106,6 +107,20 @@ class TripUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         if self.request.user == trip.officer:
             return True
         return False
+
+class TripListView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        trip_list = Trip.objects.filter(officer=request.user).order_by('-date_created')
+
+        # Pagination
+        trips_paginator = Paginator(trip_list, 5)
+        page_number = request.GET.get('trips', 1)
+        trips_list = trips_paginator.page(page_number)
+
+        context = {
+            'trips_list': trips_list
+        }
+        return render(request, 'main/trip_list.html', context)
 
 
 class HoirDetailView(LoginRequiredMixin, DetailView):

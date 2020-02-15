@@ -1,11 +1,15 @@
-{% extends "layout.html" %}
 {% load static %}
 {% load widget_tweaks %}
 {% block otherStyles %}
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/profile.css' %}">
 {% endblock otherStyles %}
 
 {% block content %}
-  {% for trip in trips %}
+<section class="m-1">
+  <h2>Activities</h2>
+  <hr id="title_hr_trip">
+  <br>
+  {% for trip in trips_list %}
     <section class="my-1">
       <!-- Section heading -->
       <div class="row">
@@ -15,43 +19,45 @@
           <p class="dark-grey-text"">{{ trip.dest_city }}, {{ trip.dest_province }}</p>
           <p><a class="dark-grey-text">Risk score: <strong>{{ trip.risk_sum }}</strong></a></p>
           <p>by <a class="font-weight-bold">{{ trip.officer.username }}</a>, {{ trip.date_created|date:'F d, Y' }}</p>
-          <a href="{% url 'trip-detail' trip.id %}" class="btn btn-default btn-rounded">Read</a>
-          <a href="{% url 'trip-update' trip.id %}" class="btn btn-default btn-rounded">Update</a>
-          <a href="#" class="btn btn-default btn-rounded">PDF</a>
+          <a href="{% url 'trip-detail' trip.id %}" class="btn btn-trip btn-rounded btn-sm">Read</a>
+          <a href="{% url 'trip-update' trip.id %}" class="btn btn-trip btn-rounded btn-sm">Update</a>
+          <a href="#" class="btn btn-trip btn-rounded btn-sm">PDF</a>
         </div>
       </div>
     </section>
     <hr class="my-5">
   {% endfor %}
-  {% if is_paginated %}
+  <!-- pagination start -->
     <nav>
-      <ul class="pagination pg-teal">
-        {% if page_obj.has_previous %}
+      <ul class="pagination pg-trip">
+        {% if trips_list.has_previous %}
         <li class="page-item">
-          <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+          <a class="page-link" href="?trips={{ trips_list.previous_page_number }}" aria-label="Previous">
             <span aria-hidden="true">&laquo;</span>
             <span class="sr-only">Previous</span>
           </a>
         </li>
         {% endif %}
-        {% for num in page_obj.paginator.page_range %}
-          {% if page_obj.number == num %}
-            <li class="page-item active"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
-          {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-            <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+        {% for num in trips_list.paginator.page_range %}
+          {% if trips_list.number == num %}
+            <li class="page-item active"><a class="page-link" href="?trips={{ num }}">{{ num }}</a></li>
+          {% else %}
+            <li class="page-item"><a class="page-link" href="?trips={{ num }}">{{ num }}</a></li>
           {% endif %}
         {% endfor %}
-        {% if page_obj.has_next %}
+        {% if trips_list.has_next %}
           <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.next_page_number }}"aria-label="Next">
+            <a class="page-link" href="?trips={{ trips_list.next_page_number }}"aria-label="Next">
               <span aria-hidden="true">&raquo;</span>
               <span class="sr-only">Next</span>
             </a>
           </li>
-        {% endif %}
+          {% endif %}
       </ul>
     </nav>
-  {% endif %}
+    <!-- pagination end -->
+
+</section>
 {% endblock content %}
 {% block otherScripts %}
 {% endblock otherScripts %}

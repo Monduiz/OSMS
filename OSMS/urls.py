@@ -20,11 +20,16 @@ from django.conf import settings
 from django.conf.urls.static import static
 from users.views import registration_view, logout_view, login_view
 from main.views import HomeView
-from users.views import ProfileView
+from users.views import (ProfileView, ProfileTripView, ProfileHoirView,
+                            ProfileOscrView, ProfileCloseoutView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('profile/', ProfileView.as_view(), name='profile'),
+    path('profile/trips/', ProfileTripView.as_view(), name='profile-trips'),
+    path('profile/hoirs/', ProfileHoirView.as_view(), name='profile-hoirs'),
+    path('profile/oscrs/', ProfileOscrView.as_view(), name='profile-oscrs'),
+    path('profile/closeouts/', ProfileCloseoutView.as_view(), name='profile-closeouts'),
     path('register/', registration_view, name='register'),
     path('logout/', logout_view, name='logout'),
     path('login/', login_view, name='login'),

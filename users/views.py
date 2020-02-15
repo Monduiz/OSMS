@@ -68,19 +68,19 @@ class ProfileView(LoginRequiredMixin, View):
 
         # Pagination
         trips_paginator = Paginator(trip_list, 5)
-        page_number = request.GET.get('page1', 1)
+        page_number = request.GET.get('trips', 1)
         trips_list = trips_paginator.page(page_number)
 
         hoir_paginator = Paginator(hoir_list, 5)
-        page_number = request.GET.get('page2', 1)
+        page_number = request.GET.get('hoir', 1)
         hoir_list = hoir_paginator.page(page_number)
 
         oscr_paginator = Paginator(oscr_list, 5)
-        page_number = request.GET.get('page3', 1)
+        page_number = request.GET.get('oscr', 1)
         oscr_list = oscr_paginator.page(page_number)
 
         closeout_paginator = Paginator(closeout_list, 5)
-        page_number = request.GET.get('page4', 1)
+        page_number = request.GET.get('closout', 1)
         closeout_list = closeout_paginator.page(page_number)
 
         context = {
@@ -104,6 +104,67 @@ class ProfileView(LoginRequiredMixin, View):
             messages.success(request, f'Your account was updated.')
             return redirect('profile')
 
+class ProfileTripView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+
+        trip_list = Trip.objects.filter(officer=request.user).order_by('-date_created')
+
+        # Pagination
+        trips_paginator = Paginator(trip_list, 5)
+        page_number = request.GET.get('page', 1)
+        trips_list = trips_paginator.page(page_number)
+
+        context = {
+            'trip_list': trip_list,
+            'trips_list': trips_list,
+        }
+        return render(request, 'users/profile_trips.html', context)
+
+class ProfileHoirView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+
+        hoir_list = Hoir.objects.filter(officer=request.user).order_by('-date_created')
+
+        # Pagination
+        hoir_paginator = Paginator(hoir_list, 5)
+        page_number = request.GET.get('page', 1)
+        hoir_list = hoir_paginator.page(page_number)
+
+        context = {
+            'hoir_list': hoir_list,
+        }
+        return render(request, 'users/profile_hoirs.html', context)
+
+class ProfileOscrView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+
+        oscr_list = Oscr.objects.filter(officer=request.user).order_by('-date_created')
+
+        # Pagination
+        oscr_paginator = Paginator(oscr_list, 5)
+        page_number = request.GET.get('page', 1)
+        oscr_list = oscr_paginator.page(page_number)
+
+        context = {
+            'oscr_list': oscr_list
+        }
+
+        return render(request, 'users/profile_oscrs.html', context)
+
+class ProfileCloseoutView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+
+        closeout_list = Closeout.objects.filter(officer=request.user).order_by('-date_created')
+
+        # Pagination
+        closeout_paginator = Paginator(closeout_list, 5)
+        page_number = request.GET.get('page', 1)
+        closeout_list = closeout_paginator.page(page_number)
+
+        context = {
+            'closeout_list': closeout_list
+        }
+        return render(request, 'users/profile_closeouts.html', context)
 
 #FBV for profile
 # @login_required

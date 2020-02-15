@@ -2,7 +2,7 @@ from django.urls import path
 from .views import (TripDetailView, TripCreateView, TripUpdateView,
                     HoirDetailView, HoirCreateView, OscrCreateView,
                     OscrDetailView, CloseoutCreateView, CloseoutDetailView,
-                    OfficeView, HoirUpdateView, HomeView, DashView, TestView)
+                    OfficeView, HoirUpdateView, HomeView, DashView, TestView, TripListView)
 from . import views
 
 urlpatterns = [
@@ -12,6 +12,7 @@ urlpatterns = [
     path('dash/', DashView.as_view(), name='dash'),
     path('trip/<int:pk>/', TripDetailView.as_view(), name='trip-detail'),
     path('trip/new/', TripCreateView.as_view(), name='trip-create'),
+    path('trip/trip_list/', TripListView.as_view(), name='trip-list'),
     path('trip/<int:pk>/update/', TripUpdateView.as_view(), name='trip-update'),
     path('trip/<int:pk>/print/', TripUpdateView.as_view(template_name='main/trip_print.html'), name='trip-print'),
     path('hoir/<int:pk>/', HoirDetailView.as_view(), name='hoir-detail'),
