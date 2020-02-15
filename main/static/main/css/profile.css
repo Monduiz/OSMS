@@ -166,6 +166,10 @@ a:hover {
     background-color: #30d158;
 }
 
+.nav-pills .pill-6 .nav-link.active {
+    background-color: #FF9500;
+}
+
 
 .sidebar {
   height: 85vh;
