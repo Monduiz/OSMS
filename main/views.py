@@ -65,9 +65,7 @@ class TripCreateView(LoginRequiredMixin, CreateView):
 
     model = Trip
     fields = trip_fields
-
-
-
+    
     def get_context_data(self, **kwargs):
         algolia_ID = get_secret('ALGOLIA_PLACES_ID')
         algolia_token = get_secret('ALGOLIA_PLACES_KEY')

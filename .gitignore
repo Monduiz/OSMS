@@ -4,6 +4,7 @@
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
+data/
 
 # Ignore development config
 dev_secrets.json

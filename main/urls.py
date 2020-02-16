@@ -8,9 +8,9 @@ from . import views
 urlpatterns = [
     path('', views.landing, name='osms-landing'), # landing goes here
     path('home/', HomeView.as_view(), name='osms-home'),
-    path('test/', TestView.as_view(), name='test'),
     path('dash/', DashView.as_view(), name='dash'),
     path('trip/<int:pk>/', TripDetailView.as_view(), name='trip-detail'),
+    path('test/<int:pk>/', TripDetailView.as_view(template_name='main/test.html'), name='test'),
     path('trip/new/', TripCreateView.as_view(), name='trip-create'),
     path('trip/trip_list/', TripListView.as_view(), name='trip-list'),
     path('trip/<int:pk>/update/', TripUpdateView.as_view(), name='trip-update'),

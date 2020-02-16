@@ -1,46 +1,19 @@
 {% extends "layout.html" %}
 {% load static %}
 {% load widget_tweaks %}
-
 {% block otherStyles %}
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/trip_detail.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/pretrip.css' %}">
 {% endblock otherStyles %}
 {% block content %}
 
+<div class="card">
+  <div class="card-body">
+    <h2>{{ object.purpose }}</h2>
+    <p class="dark-grey-text"">{{ object.start_date_planned|date:'F d, Y'}} to {{ object.end_date_planned|date:'F d, Y' }}</p>
+    <hr id="title_hr_trip">
+  </div>
 
-<div class="row">
-  <div class="col-3">
-    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-      <a class="nav-link active" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
-        aria-controls="v-pills-profile" aria-selected="true">Profile</a>
-      <a class="nav-link" id="v-pills-trips-tab" data-toggle="pill" href="#v-pills-trips" role="tab"
-        aria-controls="v-pills-trips" aria-selected="false">Activities</a>
-      <a class="nav-link" id="v-pills-hoirs-tab" data-toggle="pill" href="#v-pills-hoirs" role="tab"
-        aria-controls="v-pills-hoirs" aria-selected="false">HOIRs</a>
-      <a class="nav-link" id="v-pills-oscrs-tab" data-toggle="pill" href="#v-pills-oscrs" role="tab"
-        aria-controls="v-pills-oscrs" aria-selected="false">OSCRs</a>
-        <a class="nav-link" id="v-pills-closeout-tab" data-toggle="pill" href="#v-pills-closeout" role="tab"
-          aria-controls="v-pills-closeout" aria-selected="false">Close-out</a>
-    </div>
-  </div>
-  <div class="col-9">
-    <div class="tab-content" id="v-pills-tabContent">
-      <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-        One
-      </div>
-      <div class="tab-pane fade" id="v-pills-trips" role="tabpanel" aria-labelledby="v-pills-trips-tab">
-        Two
-      </div>
-      <div class="tab-pane fade" id="v-pills-hoirs" role="tabpanel" aria-labelledby="v-pills-hoirs-tab">
-        Three
-      </div>
-      <div class="tab-pane fade" id="v-pills-oscrs" role="tabpanel" aria-labelledby="v-pills-oscrs-tab">
-        Four
-      </div>
-      <div class="tab-pane fade" id="v-pills-closeout" role="tabpanel" aria-labelledby="v-pills-closeout-tab">
-        Five
-      </div>
-    </div>
-  </div>
 </div>
 
 
