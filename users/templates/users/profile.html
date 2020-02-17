@@ -8,7 +8,7 @@
 
 <!-- Grid row -->
 <div class="row">
-  <div class="col-lg-4 col-sm-12 sidebarpad pr-1">
+  <div class="col-lg-4 col-sm-12 sidebarpad pr-1 ml-5">
     <div class="card">
       <div class='sidebar'>
         <div class="img-fluid">
@@ -63,13 +63,14 @@
                 {% csrf_token %}
                 <!-- First and Last name -->
                 <div class="form-row">
-                  <!-- Username -->
-                  <div class="md-form md-modal">
-                    <label for="id_username">Username</label>
-                    {% render_field u_form.username class="form-control md-modal" %}
-                    {{ u_form.username.errors }}
+                  <div class="col-lg-4 col-sm-12">                    <!-- Username -->
+                    <div class="md-form md-modal">
+                      <label for="id_username">Username</label>
+                      {% render_field u_form.username class="form-control md-modal" %}
+                      {{ u_form.username.errors }}
+                    </div>
                   </div>
-                  <div class="col">
+                  <div class="col-lg-4 col-sm-12">
                     <!-- First name -->
                     <div class="md-form md-modal">
                       <label for="id_firstname">First name</label>
@@ -77,7 +78,7 @@
                       <div class="help-block">{{ u_form.firstname.errors }}</div>
                     </div>
                   </div>
-                  <div class="col">
+                  <div class="col-lg-4 col-sm-12">
                     <!-- Last name -->
                     <div class="md-form md-modal">
                       <label for="id_lastname">Last name</label>
@@ -87,7 +88,7 @@
                   </div>
                 </div>
                 <div class="form-row">
-                  <div class="col">
+                  <div class="col-lg-6 col-sm-12">
                     <!-- Phone number -->
                     <div class="md-form md-modal">
                       <label for="id_phone">Phone number</label>
@@ -95,7 +96,7 @@
                       <div class="help-block">{{ u_form.phone.errors }}</div>
                     </div>
                   </div>
-                  <div class="col">
+                  <div class="col-lg-6 col-sm-12">
                     <!-- E-mail -->
                     <div class="md-form md-modal">
                       <label for="id_email">Email</label>

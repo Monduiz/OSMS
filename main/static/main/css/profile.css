@@ -1,3 +1,21 @@
+@media screen and (min-device-width: 375px) {
+  .sidebarpad {
+    /* padding-left: 15px !important; */
+    margin-top: .5rem !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+@media screen and (min-device-width: 375px) {
+  .profilepad {
+    /* padding-left: 15px !important; */
+    margin-top: 1rem !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
 #title_hr {
 color:#2BBBAD;
 background-color:#2BBBAD;

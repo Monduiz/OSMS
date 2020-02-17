@@ -56,6 +56,15 @@ map.addLayer({
     }
 });
 buildLocationList(data);
+var bounds = new mapboxgl.LngLatBounds();
+
+data.features.forEach(function(feature) {
+    bounds.extend(feature.geometry.coordinates);
+});
+
+map.fitBounds(bounds, {
+padding: 10
+});
 });
 
 // Add an event listener for when a user clicks on the map

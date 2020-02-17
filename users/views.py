@@ -61,36 +61,9 @@ class ProfileView(LoginRequiredMixin, View):
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)
 
-        trip_list = Trip.objects.filter(officer=request.user).order_by('-date_created')
-        hoir_list = Hoir.objects.filter(officer=request.user).order_by('-date_created')
-        oscr_list = Oscr.objects.filter(officer=request.user).order_by('-date_created')
-        closeout_list = Closeout.objects.filter(officer=request.user).order_by('-date_created')
-
-        # Pagination
-        trips_paginator = Paginator(trip_list, 5)
-        page_number = request.GET.get('trips', 1)
-        trips_list = trips_paginator.page(page_number)
-
-        hoir_paginator = Paginator(hoir_list, 5)
-        page_number = request.GET.get('hoir', 1)
-        hoir_list = hoir_paginator.page(page_number)
-
-        oscr_paginator = Paginator(oscr_list, 5)
-        page_number = request.GET.get('oscr', 1)
-        oscr_list = oscr_paginator.page(page_number)
-
-        closeout_paginator = Paginator(closeout_list, 5)
-        page_number = request.GET.get('closout', 1)
-        closeout_list = closeout_paginator.page(page_number)
-
         context = {
             'u_form': u_form,
-            'p_form': p_form,
-            'trip_list': trip_list,
-            'trips_list': trips_list,
-            'hoir_list': hoir_list,
-            'oscr_list': oscr_list,
-            'closeout_list': closeout_list
+            'p_form': p_form
         }
         return render(request, 'users/profile.html', context)
 
