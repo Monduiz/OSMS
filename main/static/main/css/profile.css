@@ -1,18 +1,29 @@
-@media screen and (min-device-width: 375px) {
+@media screen and (max-device-width: 375px) {
   .sidebarpad {
-    /* padding-left: 15px !important; */
     margin-top: .5rem !important;
     margin-left: auto !important;
     margin-right: auto !important;
   }
 }
 
-@media screen and (min-device-width: 375px) {
+@media screen and (max-device-width: 375px) {
   .profilepad {
-    /* padding-left: 15px !important; */
     margin-top: 1rem !important;
     margin-left: auto !important;
     margin-right: auto !important;
+  }
+}
+
+@media screen and (min-device-width: 725px) {
+  .sidebarpad {
+    margin-left: 3rem !important;
+    padding-right: .25rem !important;
+  }
+}
+
+@media screen and (min-device-width: 725px) {
+  .profilepad {
+    padding-left: .25rem !important;
   }
 }
 
