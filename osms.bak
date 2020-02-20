@@ -1,0 +1,1505 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 12.1
+-- Dumped by pg_dump version 12.1
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: postgis; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS postgis WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION postgis; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION postgis IS 'PostGIS geometry, geography, and raster spatial types and functions';
+
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: auth_group; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_group (
+    id integer NOT NULL,
+    name character varying(150) NOT NULL
+);
+
+
+ALTER TABLE public.auth_group OWNER TO postgres;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_group_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_group_id_seq OWNED BY public.auth_group.id;
+
+
+--
+-- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_group_permissions (
+    id integer NOT NULL,
+    group_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_group_permissions OWNER TO postgres;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_group_permissions_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_permissions_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_group_permissions_id_seq OWNED BY public.auth_group_permissions.id;
+
+
+--
+-- Name: auth_permission; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_permission (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    content_type_id integer NOT NULL,
+    codename character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.auth_permission OWNER TO postgres;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_permission_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_permission_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_permission_id_seq OWNED BY public.auth_permission.id;
+
+
+--
+-- Name: closeouts; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.closeouts (
+    id integer NOT NULL,
+    trip_id character varying(200) NOT NULL,
+    close_remarks text NOT NULL,
+    date_created timestamp with time zone NOT NULL,
+    officer_id integer
+);
+
+
+ALTER TABLE public.closeouts OWNER TO postgres;
+
+--
+-- Name: closeouts_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.closeouts_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.closeouts_id_seq OWNER TO postgres;
+
+--
+-- Name: closeouts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.closeouts_id_seq OWNED BY public.closeouts.id;
+
+
+--
+-- Name: django_admin_log; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_admin_log (
+    id integer NOT NULL,
+    action_time timestamp with time zone NOT NULL,
+    object_id text,
+    object_repr character varying(200) NOT NULL,
+    action_flag smallint NOT NULL,
+    change_message text NOT NULL,
+    content_type_id integer,
+    user_id integer NOT NULL,
+    CONSTRAINT django_admin_log_action_flag_check CHECK ((action_flag >= 0))
+);
+
+
+ALTER TABLE public.django_admin_log OWNER TO postgres;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_admin_log_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_admin_log_id_seq OWNER TO postgres;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_admin_log_id_seq OWNED BY public.django_admin_log.id;
+
+
+--
+-- Name: django_content_type; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_content_type (
+    id integer NOT NULL,
+    app_label character varying(100) NOT NULL,
+    model character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.django_content_type OWNER TO postgres;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_content_type_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_content_type_id_seq OWNER TO postgres;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_content_type_id_seq OWNED BY public.django_content_type.id;
+
+
+--
+-- Name: django_migrations; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_migrations (
+    id integer NOT NULL,
+    app character varying(255) NOT NULL,
+    name character varying(255) NOT NULL,
+    applied timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_migrations OWNER TO postgres;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_migrations_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_migrations_id_seq OWNER TO postgres;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_migrations_id_seq OWNED BY public.django_migrations.id;
+
+
+--
+-- Name: django_session; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_session (
+    session_key character varying(40) NOT NULL,
+    session_data text NOT NULL,
+    expire_date timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_session OWNER TO postgres;
+
+--
+-- Name: hoirs; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.hoirs (
+    id integer NOT NULL,
+    trip_id character varying(200) NOT NULL,
+    date_created timestamp with time zone NOT NULL,
+    injury boolean NOT NULL,
+    no_injury boolean NOT NULL,
+    incident boolean NOT NULL,
+    motor_vehicle boolean NOT NULL,
+    serious_accident boolean NOT NULL,
+    emerg_procedure boolean NOT NULL,
+    loss_consc boolean NOT NULL,
+    explosion boolean NOT NULL,
+    other_inj character varying(255) NOT NULL,
+    first_aid boolean NOT NULL,
+    minor_injury boolean NOT NULL,
+    disabling_injury boolean NOT NULL,
+    firstname character varying(30) NOT NULL,
+    lastname character varying(30) NOT NULL,
+    age integer NOT NULL,
+    occupation character varying(30) NOT NULL,
+    years_experience integer NOT NULL,
+    work_address character varying(255) NOT NULL,
+    region character varying(100) NOT NULL,
+    branch character varying(50) NOT NULL,
+    status character varying(100) NOT NULL,
+    duties character varying(10) NOT NULL,
+    shift_hours character varying(10) NOT NULL,
+    date_reported date NOT NULL,
+    days_lost character varying(10) NOT NULL,
+    training_given character varying(10) NOT NULL,
+    training_given_specify character varying(200) NOT NULL,
+    tha_swp character varying(10) NOT NULL,
+    tha_swp_specify character varying(200) NOT NULL,
+    injury_description text NOT NULL,
+    injury_causes text NOT NULL,
+    mail_address character varying(255) NOT NULL,
+    supervisor character varying(50) NOT NULL,
+    supervisor_phone character varying(20) NOT NULL,
+    witnesses text NOT NULL,
+    location character varying(150) NOT NULL,
+    weather character varying(100) NOT NULL,
+    occurence_date_hazard timestamp with time zone NOT NULL,
+    occurence_description text NOT NULL,
+    occurence_causes text NOT NULL,
+    property_damage text NOT NULL,
+    officer_id integer
+);
+
+
+ALTER TABLE public.hoirs OWNER TO postgres;
+
+--
+-- Name: hoirs_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.hoirs_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.hoirs_id_seq OWNER TO postgres;
+
+--
+-- Name: hoirs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.hoirs_id_seq OWNED BY public.hoirs.id;
+
+
+--
+-- Name: offices; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.offices (
+    id integer NOT NULL,
+    region character varying(200) NOT NULL,
+    city character varying(75) NOT NULL,
+    address character varying(255) NOT NULL,
+    province character varying(75) NOT NULL,
+    postal_code character varying(75) NOT NULL,
+    lat double precision,
+    long double precision,
+    point public.geometry(Point,4326)
+);
+
+
+ALTER TABLE public.offices OWNER TO postgres;
+
+--
+-- Name: offices_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.offices_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.offices_id_seq OWNER TO postgres;
+
+--
+-- Name: offices_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.offices_id_seq OWNED BY public.offices.id;
+
+
+--
+-- Name: oscrs; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.oscrs (
+    id integer NOT NULL,
+    trip_id character varying(200) NOT NULL,
+    date_created timestamp with time zone NOT NULL,
+    verbal_threat boolean NOT NULL,
+    weapons_nearby boolean NOT NULL,
+    physical_contact boolean NOT NULL,
+    assault boolean NOT NULL,
+    damage_equipment boolean NOT NULL,
+    other_risk_specify text NOT NULL,
+    industrial_facility boolean NOT NULL,
+    commercial_facility boolean NOT NULL,
+    remote_location boolean NOT NULL,
+    agriculture boolean NOT NULL,
+    marine boolean NOT NULL,
+    first_nations boolean NOT NULL,
+    isolated boolean NOT NULL,
+    other_riskloc_specify text NOT NULL,
+    inspections boolean NOT NULL,
+    witness_statements boolean NOT NULL,
+    court_docs boolean NOT NULL,
+    warrant boolean NOT NULL,
+    surveillance boolean NOT NULL,
+    other_duty_specify text NOT NULL,
+    fisheries_act boolean NOT NULL,
+    name_reg1 text NOT NULL,
+    cepa_1999 boolean NOT NULL,
+    name_reg2 text NOT NULL,
+    firstname character varying(30) NOT NULL,
+    lastname character varying(30) NOT NULL,
+    age integer NOT NULL,
+    years_experience integer NOT NULL,
+    region character varying(100) NOT NULL,
+    branch character varying(50) NOT NULL,
+    gavia_num integer,
+    location character varying(150) NOT NULL,
+    occurence_date_hazard timestamp with time zone NOT NULL,
+    occurence_description text NOT NULL,
+    officer_id integer,
+    CONSTRAINT oscrs_gavia_num_check CHECK ((gavia_num >= 0))
+);
+
+
+ALTER TABLE public.oscrs OWNER TO postgres;
+
+--
+-- Name: oscrs_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.oscrs_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.oscrs_id_seq OWNER TO postgres;
+
+--
+-- Name: oscrs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.oscrs_id_seq OWNED BY public.oscrs.id;
+
+
+--
+-- Name: trips; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.trips (
+    id integer NOT NULL,
+    firstname character varying(30) NOT NULL,
+    lastname character varying(30) NOT NULL,
+    gavia_num integer,
+    purpose character varying(120) NOT NULL,
+    purpose_other character varying(255) NOT NULL,
+    start_date_planned timestamp with time zone NOT NULL,
+    end_date_planned timestamp with time zone NOT NULL,
+    legislation character varying(20) NOT NULL,
+    reg1 character varying(60) NOT NULL,
+    reg2 character varying(60) NOT NULL,
+    reg3 character varying(60) NOT NULL,
+    partner1 character varying(20) NOT NULL,
+    partner2 character varying(20) NOT NULL,
+    intelreport character varying(10) NOT NULL,
+    intelreport_name character varying(200) NOT NULL,
+    dest_name character varying(200) NOT NULL,
+    dest_address character varying(255) NOT NULL,
+    dest_province character varying(100) NOT NULL,
+    dest_city character varying(100) NOT NULL,
+    dest_postal_code character varying(100) NOT NULL,
+    dest_lat double precision,
+    dest_lng double precision,
+    risk_loc character varying(50) NOT NULL,
+    risk_loc_val integer NOT NULL,
+    risk_loc_fam character varying(50) NOT NULL,
+    risk_loc_fam_val integer NOT NULL,
+    risk_time character varying(50) NOT NULL,
+    risk_time_val integer NOT NULL,
+    risk_weather character varying(50) NOT NULL,
+    risk_weather_val integer NOT NULL,
+    risk_terrain character varying(50) NOT NULL,
+    risk_terrain_val integer NOT NULL,
+    risk_comm character varying(50) NOT NULL,
+    risk_comm_val integer NOT NULL,
+    risk_emergency character varying(50) NOT NULL,
+    risk_emergency_val integer NOT NULL,
+    risk_distance character varying(50) NOT NULL,
+    risk_distance_val integer NOT NULL,
+    risk_transport character varying(50) NOT NULL,
+    risk_transport_val integer NOT NULL,
+    risk_criminal character varying(50) NOT NULL,
+    risk_criminal_val integer NOT NULL,
+    risk_compliance character varying(50) NOT NULL,
+    risk_compliance_val integer NOT NULL,
+    risk_numsub character varying(50) NOT NULL,
+    risk_numsub_val integer NOT NULL,
+    risk_penalty character varying(50) NOT NULL,
+    risk_penalty_val integer NOT NULL,
+    risk_weapons character varying(50) NOT NULL,
+    risk_weapons_val integer NOT NULL,
+    risk_language character varying(50) NOT NULL,
+    risk_language_val integer NOT NULL,
+    risk_histlawaver character varying(50) NOT NULL,
+    risk_histlawaver_val integer NOT NULL,
+    risk_sum integer NOT NULL,
+    risk_score_label character varying(50) NOT NULL,
+    date_created timestamp with time zone NOT NULL,
+    officer_id integer,
+    dest_point public.geometry(Point,4326),
+    CONSTRAINT trips_gavia_num_check CHECK ((gavia_num >= 0))
+);
+
+
+ALTER TABLE public.trips OWNER TO postgres;
+
+--
+-- Name: trips_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.trips_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.trips_id_seq OWNER TO postgres;
+
+--
+-- Name: trips_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.trips_id_seq OWNED BY public.trips.id;
+
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.users (
+    id integer NOT NULL,
+    password character varying(128) NOT NULL,
+    email character varying(60) NOT NULL,
+    username character varying(30) NOT NULL,
+    firstname character varying(30) NOT NULL,
+    lastname character varying(30) NOT NULL,
+    phone character varying(20) NOT NULL,
+    directorate character varying(20) NOT NULL,
+    date_joined timestamp with time zone NOT NULL,
+    last_login timestamp with time zone NOT NULL,
+    is_admin boolean NOT NULL,
+    is_active boolean NOT NULL,
+    is_staff boolean NOT NULL,
+    is_superuser boolean NOT NULL
+);
+
+
+ALTER TABLE public.users OWNER TO postgres;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.users_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_id_seq OWNER TO postgres;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
+
+
+--
+-- Name: users_profile; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.users_profile (
+    id integer NOT NULL,
+    image character varying(100) NOT NULL,
+    user_id integer NOT NULL
+);
+
+
+ALTER TABLE public.users_profile OWNER TO postgres;
+
+--
+-- Name: users_profile_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.users_profile_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_profile_id_seq OWNER TO postgres;
+
+--
+-- Name: users_profile_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.users_profile_id_seq OWNED BY public.users_profile.id;
+
+
+--
+-- Name: auth_group id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group ALTER COLUMN id SET DEFAULT nextval('public.auth_group_id_seq'::regclass);
+
+
+--
+-- Name: auth_group_permissions id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('public.auth_group_permissions_id_seq'::regclass);
+
+
+--
+-- Name: auth_permission id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission ALTER COLUMN id SET DEFAULT nextval('public.auth_permission_id_seq'::regclass);
+
+
+--
+-- Name: closeouts id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.closeouts ALTER COLUMN id SET DEFAULT nextval('public.closeouts_id_seq'::regclass);
+
+
+--
+-- Name: django_admin_log id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log ALTER COLUMN id SET DEFAULT nextval('public.django_admin_log_id_seq'::regclass);
+
+
+--
+-- Name: django_content_type id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_content_type ALTER COLUMN id SET DEFAULT nextval('public.django_content_type_id_seq'::regclass);
+
+
+--
+-- Name: django_migrations id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_migrations ALTER COLUMN id SET DEFAULT nextval('public.django_migrations_id_seq'::regclass);
+
+
+--
+-- Name: hoirs id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.hoirs ALTER COLUMN id SET DEFAULT nextval('public.hoirs_id_seq'::regclass);
+
+
+--
+-- Name: offices id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.offices ALTER COLUMN id SET DEFAULT nextval('public.offices_id_seq'::regclass);
+
+
+--
+-- Name: oscrs id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.oscrs ALTER COLUMN id SET DEFAULT nextval('public.oscrs_id_seq'::regclass);
+
+
+--
+-- Name: trips id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.trips ALTER COLUMN id SET DEFAULT nextval('public.trips_id_seq'::regclass);
+
+
+--
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
+
+
+--
+-- Name: users_profile id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users_profile ALTER COLUMN id SET DEFAULT nextval('public.users_profile_id_seq'::regclass);
+
+
+--
+-- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_group (id, name) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_group_permissions (id, group_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
+97	Can add office	26	add_office
+98	Can change office	26	change_office
+99	Can delete office	26	delete_office
+100	Can view office	26	view_office
+101	Can add trip	27	add_trip
+102	Can change trip	27	change_trip
+103	Can delete trip	27	delete_trip
+104	Can view trip	27	view_trip
+105	Can add hoir	28	add_hoir
+106	Can change hoir	28	change_hoir
+107	Can delete hoir	28	delete_hoir
+108	Can view hoir	28	view_hoir
+109	Can add oscr	29	add_oscr
+110	Can change oscr	29	change_oscr
+111	Can delete oscr	29	delete_oscr
+112	Can view oscr	29	view_oscr
+113	Can add closeout	30	add_closeout
+114	Can change closeout	30	change_closeout
+115	Can delete closeout	30	delete_closeout
+116	Can view closeout	30	view_closeout
+117	Can add user	31	add_user
+118	Can change user	31	change_user
+119	Can delete user	31	delete_user
+120	Can view user	31	view_user
+121	Can add profile	25	add_profile
+122	Can change profile	25	change_profile
+123	Can delete profile	25	delete_profile
+124	Can view profile	25	view_profile
+125	Can add log entry	32	add_logentry
+126	Can change log entry	32	change_logentry
+127	Can delete log entry	32	delete_logentry
+128	Can view log entry	32	view_logentry
+129	Can add permission	33	add_permission
+130	Can change permission	33	change_permission
+131	Can delete permission	33	delete_permission
+132	Can view permission	33	view_permission
+133	Can add group	34	add_group
+134	Can change group	34	change_group
+135	Can delete group	34	delete_group
+136	Can view group	34	view_group
+137	Can add content type	35	add_contenttype
+138	Can change content type	35	change_contenttype
+139	Can delete content type	35	delete_contenttype
+140	Can view content type	35	view_contenttype
+141	Can add session	36	add_session
+142	Can change session	36	change_session
+143	Can delete session	36	delete_session
+144	Can view session	36	view_session
+145	Can add ring of fire	37	add_ringoffire
+146	Can change ring of fire	37	change_ringoffire
+147	Can delete ring of fire	37	delete_ringoffire
+148	Can view ring of fire	37	view_ringoffire
+\.
+
+
+--
+-- Data for Name: closeouts; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.closeouts (id, trip_id, close_remarks, date_created, officer_id) FROM stdin;
+1		Test	2020-01-25 20:08:43.044-05	3
+2	3	Testing remarks	2020-01-25 20:24:30.905-05	3
+\.
+
+
+--
+-- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
+2	2020-01-24 15:25:34.477-05	2	test@admin.com	3		\N	3
+3	2020-01-24 21:46:09.051-05	1	Bjenk Ellefsen, 2020-01-25	1	[{"added": {}}]	\N	3
+4	2020-01-25 12:55:29.675-05	2	Bjenk Ellefsen, 2020-01-25	1	[{"added": {}}]	\N	3
+5	2020-01-25 12:57:00.849-05	2	Bjenk Ellefsen, 2020-01-25	2	[{"changed": {"fields": ["Occurence date hazard"]}}]	\N	3
+6	2020-01-25 13:00:05.308-05	2	Bjenk Ellefsen, 2020-01-25	2	[{"changed": {"fields": ["Trip id"]}}]	\N	3
+7	2020-01-25 13:00:11.456-05	2	Bjenk Ellefsen, 2020-01-25	2	[]	\N	3
+8	2020-01-25 13:00:16.313-05	1	Bjenk Ellefsen, 2020-01-25	2	[{"changed": {"fields": ["Trip id"]}}]	\N	3
+9	2020-01-25 17:13:37.027-05	1	Bjenk Ellefsen, 2020-01-25	1	[{"added": {}}]	\N	3
+10	2020-01-25 20:08:43.046-05	1	Closeout object (1)	1	[{"added": {}}]	\N	3
+11	2020-01-31 18:04:53.746-05	2	Monduiz Profile	3		\N	3
+12	2020-01-31 18:05:01.123-05	3	Monduiz Profile	1	[{"added": {}}]	\N	3
+13	2020-02-06 05:58:12.593329-05	11	Bjenk Ellefsen, Warrant, Windsor, High, 2020-02-06	3		27	3
+14	2020-02-06 05:58:19.332453-05	10	Bjenk Ellefsen, Warrant, Windsor, High, 2020-02-06	3		27	3
+15	2020-02-06 18:59:49.432511-05	9	Bjenk Ellefsen, Warrant, Windsor, High, 2020-02-06	2	[{"changed": {"fields": ["Dest lat"]}}]	27	3
+\.
+
+
+--
+-- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_content_type (id, app_label, model) FROM stdin;
+25	users	profile
+26	main	office
+27	main	trip
+28	main	hoir
+29	main	oscr
+30	main	closeout
+31	users	user
+32	admin	logentry
+33	auth	permission
+34	auth	group
+35	contenttypes	contenttype
+36	sessions	session
+37	main	ringoffire
+\.
+
+
+--
+-- Data for Name: django_migrations; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_migrations (id, app, name, applied) FROM stdin;
+1	users	0001_initial	2020-01-31 17:47:16.926519-05
+2	contenttypes	0001_initial	2020-01-31 17:47:16.957272-05
+3	admin	0001_initial	2020-01-31 17:47:16.968995-05
+4	admin	0002_logentry_remove_auto_add	2020-01-31 17:47:16.983826-05
+5	admin	0003_logentry_add_action_flag_choices	2020-01-31 17:47:16.990662-05
+6	contenttypes	0002_remove_content_type_name	2020-01-31 17:47:17.026012-05
+7	auth	0001_initial	2020-01-31 17:47:17.071675-05
+8	auth	0002_alter_permission_name_max_length	2020-01-31 17:47:17.098767-05
+9	auth	0003_alter_user_email_max_length	2020-01-31 17:47:17.110306-05
+10	auth	0004_alter_user_username_opts	2020-01-31 17:47:17.116649-05
+11	auth	0005_alter_user_last_login_null	2020-01-31 17:47:17.123459-05
+12	auth	0006_require_contenttypes_0002	2020-01-31 17:47:17.125526-05
+13	auth	0007_alter_validators_add_error_messages	2020-01-31 17:47:17.134698-05
+14	auth	0008_alter_user_username_max_length	2020-01-31 17:47:17.140704-05
+15	auth	0009_alter_user_last_name_max_length	2020-01-31 17:47:17.152536-05
+16	auth	0010_alter_group_name_max_length	2020-01-31 17:47:17.159459-05
+17	auth	0011_update_proxy_permissions	2020-01-31 17:47:17.170638-05
+18	main	0001_initial	2020-01-31 17:47:17.218165-05
+19	main	0002_auto_20200125_0243	2020-01-31 17:47:17.264073-05
+20	main	0003_auto_20200125_0244	2020-01-31 17:47:17.28462-05
+21	main	0004_auto_20200125_0246	2020-01-31 17:47:17.296506-05
+22	main	0005_auto_20200125_1259	2020-01-31 17:47:17.311463-05
+23	main	0006_auto_20200125_1259	2020-01-31 17:47:17.337439-05
+24	main	0007_auto_20200125_1514	2020-01-31 17:47:17.373543-05
+25	main	0008_closeout	2020-01-31 17:47:17.402546-05
+26	sessions	0001_initial	2020-01-31 17:47:17.412706-05
+27	main	0009_auto_20200131_1758	2020-01-31 17:58:39.680277-05
+28	main	0010_auto_20200131_1759	2020-01-31 18:00:01.237581-05
+29	main	0011_office_point	2020-02-01 09:09:22.222134-05
+30	main	0012_ringoffire	2020-02-01 10:57:15.836597-05
+31	main	0012_auto_20200206_0552	2020-02-06 05:52:20.013318-05
+32	main	0013_auto_20200207_0631	2020-02-07 06:31:10.944926-05
+33	main	0014_auto_20200207_0704	2020-02-07 07:04:34.722411-05
+34	main	0015_trip_dest_point	2020-02-09 06:40:21.920027-05
+\.
+
+
+--
+-- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
+74e69ttn0xkw6l3odh5sz3omypyjlpy5	ODAzYWQ3NTQyMDEyYTBkNmE4NWM2M2YzM2JmMzJkZGIxNmU3YTAxNTp7fQ==	2020-02-07 14:41:42.346-05
+uh4brux8wcop8i9qk2h5ykj98s89u37f	ZmJhYTNiZTExZWRlNDJlMzgzYTMwZGI5ODllZmMyZTE4Y2NiOTMyMDp7Il9hdXRoX3VzZXJfaWQiOiIzIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI1NmZhZDEyM2ZhODZiYTY5ZmM4ZGU1YTg4ZDJhYmFkZDc4NGQzNmViIn0=	2020-02-12 12:42:27.866-05
+w5dhazzie5dhfrbglj2hywwg90zz12ba	OTk4OTViNmMxNTg5MmQ4YTJmMjc4MzYwNDU0YTA3MTMwNjI2MmM0YTp7Il9hdXRoX3VzZXJfaWQiOiI0IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIzOGU0Mjk0NWU2NThmOGM5MjMxYmQ2OTI3ZjY5ZDhiNGFiZGQ4ZjZmIn0=	2020-02-15 07:01:19.902027-05
+ao4lx9v7kjw8731hje2b645xcoax8a2k	ZTkyODVjZGRjYmY4NzZhYmEwYjNiYzEzZmJmNDg0N2U4MzJlMGFjNDp7Il9hdXRoX3VzZXJfaWQiOiIzIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIwM2ZiOGNkNjhjNDUwZWJmNGNhN2RjMGQxMTFmZTVkYjZlYzIyMjkxIn0=	2020-02-17 06:26:59.828726-05
+vbtpktf30t2rpoj0v1u0frkt3nfnm6eg	ZTkyODVjZGRjYmY4NzZhYmEwYjNiYzEzZmJmNDg0N2U4MzJlMGFjNDp7Il9hdXRoX3VzZXJfaWQiOiIzIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIwM2ZiOGNkNjhjNDUwZWJmNGNhN2RjMGQxMTFmZTVkYjZlYzIyMjkxIn0=	2020-02-17 06:48:57.137705-05
+vwam6ujf6vpjg1nna45cunfcfyhg2nwe	ZTkyODVjZGRjYmY4NzZhYmEwYjNiYzEzZmJmNDg0N2U4MzJlMGFjNDp7Il9hdXRoX3VzZXJfaWQiOiIzIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIwM2ZiOGNkNjhjNDUwZWJmNGNhN2RjMGQxMTFmZTVkYjZlYzIyMjkxIn0=	2020-02-24 12:45:24.771966-05
+h6ug3ucr32rsweyrwbt4juqwsy2sntpn	ZTkyODVjZGRjYmY4NzZhYmEwYjNiYzEzZmJmNDg0N2U4MzJlMGFjNDp7Il9hdXRoX3VzZXJfaWQiOiIzIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIwM2ZiOGNkNjhjNDUwZWJmNGNhN2RjMGQxMTFmZTVkYjZlYzIyMjkxIn0=	2020-03-03 11:58:32.295885-05
+\.
+
+
+--
+-- Data for Name: hoirs; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.hoirs (id, trip_id, date_created, injury, no_injury, incident, motor_vehicle, serious_accident, emerg_procedure, loss_consc, explosion, other_inj, first_aid, minor_injury, disabling_injury, firstname, lastname, age, occupation, years_experience, work_address, region, branch, status, duties, shift_hours, date_reported, days_lost, training_given, training_given_specify, tha_swp, tha_swp_specify, injury_description, injury_causes, mail_address, supervisor, supervisor_phone, witnesses, location, weather, occurence_date_hazard, occurence_description, occurence_causes, property_damage, officer_id) FROM stdin;
+1		2020-01-24 21:46:09.04-05	t	f	t	f	f	f	f	f		t	f	f	Bjenk	Ellefsen	46	Data scientist	10	NCR	NCR	Enforcement	Indeterminate	None	No	2020-01-25	None	No	None	No		Knee	Fell	NCR	Kaveh	(888) 888-8877	None	There		2020-01-24 21:45:58-05	Fell	Ice	None	3
+2		2020-01-25 12:55:29.668-05	f	t	t	f	f	f	f	f		f	f	f	Bjenk	Ellefsen	46	Data scientist	10	NCR	NCR	Enforcement	Indeterminate	No	None	2020-01-25	None	No		No		Knee	Ice	NCR	Kaveh	(888) 888-8877	None	There		2020-01-25 12:56:00-05	Fell	Icy	None	3
+3		2020-01-25 13:24:09.845-05	t	f	t	f	f	f	f	f		t	f	f	Bjenk	Ellefsen	46	Data scientist	10	Ontario: 867 Lakeshore Drive, Burlington, Ontario, M8V 1H5	NCR	Enforcement	Indeterminate	No	No	2020-01-25	None	No		No		Knee	Ice	Ontario: 867 Lakeshore Drive, Burlington, Ontario, M8V 1H5	Kaveh	(888) 888-8877	None	There		2020-01-25 13:15:00-05	Fell	Ice	None	3
+4		2020-02-08 15:07:28.442433-05	t	f	f	f	f	f	f	f		t	f	f	Bjenk	Ellefsen	46	Data scientist	10	NCR: 351 Boulevard Saint-Joseph, Gatineau, Quebec, J8Y 3V3	Quebec	Enforcement branch	Indeterminate	No	No	2020-02-08	None	No		No		Forearm	Door	NCR: 351 Boulevard Saint-Joseph, Gatineau, Quebec, J8Y 3V3	Kaveh	(888) 888-8877	None	NCR 351 St-Joseph		2020-02-08 09:30:00-05	I was returning from getting a coffee and when I opened the door to the lab, it sprung back on it's own. The handle grabbed my shirt and I was thrown back as if kicked by a horse. As I flew back towards the wall, followed closely by the door, my arm got caught between the wall and the door. Basically, the door smashed my arm.	A door smashed my arm against a wall. It's like the spring worked in reverse.	None	3
+\.
+
+
+--
+-- Data for Name: offices; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.offices (id, region, city, address, province, postal_code, lat, long, point) FROM stdin;
+1	NCR	Gatineau	351 Boulevard Saint-Joseph	Quebec	J8Y 3V3	45.4273	-75.7335	0101000020E61000006DE7FBA9F1EE52C058CA32C4B1B64640
+2	Atlantic	Cornerbrook	4 Herald Street	British Columbia	V8W 3K3	48.4302	-123.367	0101000020E6100000736891ED7CD75EC09E5E29CB10374840
+3	Atlantic	Dartmouth	45 Alderney Drive	Nova Scotia	B2Y 2T7	44.6643	-63.5681	0101000020E6100000C66D3480B7C84FC0CC5D4BC807554640
+4	Atlantic	Fredericton	77 Westmorland Street	New Brunswick	E3B 3L7	45.9602	-66.6487	0101000020E6100000933A014D84A950C042CF66D5E7FA4640
+5	Atlantic	Moncton	33 Weldon Street	New Brunswick	E1C 2Z3	46.0908	-64.7883	0101000020E6100000F5DBD781733250C0083D9B559F0B4740
+6	Atlantic	Sackville	17 Waterfowl Lane	New Brunswick	E4L 1G6	45.9061	-64.3721	0101000020E6100000DDB5847CD01750C0EB73B515FBF34640
+7	Atlantic	Sidney 	500 Kings Road	Nova Scotia	B1L 1C6	46.0749	-60.2689	0101000020E61000007CF2B0506B224EC0363CBD5296094740
+8	Atlantic	St.John's	6 Bruce Street	Newfoundland and Labrador	A1L 3W1	47.5242	-52.8403	0101000020E6100000166A4DF38E6B4AC0174850FC18C34740
+9	Quebec	Montreal	105 McGill Street	Québec	H2Y 2H4	45.4999	-73.5562	0101000020E61000004182E2C7986352C09CA223B9FCBF4640
+10	Quebec	Ste-Foy	801-1550 d'Estimauville Avenue	Québec	G1J 0C3	46.8431	-71.2112	0101000020E6100000933A014D84CD51C0F9A067B3EA6B4740
+11	Ontario	Burlington	867 Lakeshore Drive	Ontario	M8V 1H5	43.6003	-79.4986	0101000020E61000004772F90FE9DF53C0F7E461A1D6CC4540
+12	Ontario	Downsview 	4905 Dufferin Street	Ontario	M3H 5S8	43.709	-79.4536	0101000020E6100000CC5D4BC807DD53C0986E1283C0DA4540
+13	Ontario	North Bay	187 Booth Road	Ontario	P1A 2C7	46.2698	-79.4238	0101000020E6100000DE02098A1FDB53C0FB3A70CE88224740
+14	Ontario	Ottawa	335 River Rd.	Ontario	K1V 1H2	45.3158	-75.6925	0101000020E6100000B81E85EB51EC52C0D50968226CA84640
+15	Ontario	Sault-Ste-Marie	740 Great Northern Rd	Ontario	P6A 6Z1	46.5213	-84.2752	0101000020E6100000FDF675E09C1155C0D0B359F5B9424740
+16	Ontario	Windsor	441 University Avenue	Ontario	N9A 5P8	42.3138	-83.0526	0101000020E610000041F163CC5DC354C00EBE30992A284540
+17	PNR	Calgary	220 4 Avenue SE	Alberta	T2G 4X3	51.0494	-113.972	0101000020E610000091ED7C3F357E5CC011363CBD52864940
+18	PNR	Edmonton	9250 49 Street NW	Alberta	T6B 1K5	53.5327	-113.415	0101000020E6100000C3F5285C8F5A5CC0234A7B832FC44A40
+19	PNR	Iqaluit/Qilaut Building 3rd Floor	933 Mivvik Road	Nunavut	X0A 0H0	63.7508979	-68.5234097	0101000020E610000030FA658B7F2151C04A91216C1DE04F40
+20	PNR	Regina	1783 Hamilton Street	Saskatoon	S4P 2B6	50.4507628	-104.6097937	0101000020E6100000A3B327DC06275AC06F206E98B2394940
+21	PNR	Saskatoon	115 Perimeter Road	Saskatoon	S7N 3R3	52.1388	-106.626	0101000020E6100000F2D24D6210A85AC0A857CA32C4114A40
+22	PNR	Winnipeg/Via Rail Building	150-123 Main St	Winnipeg	R3C 1A3	49.888863	-97.1348762	0101000020E61000008F00C9CFA14858C0EECF4543C6F14840
+23	PNR	Yellowknife - Nova Plaza	5019 52 Street	Northwest Territories	X1A 1T5	62.4520638	-114.3722464	0101000020E6100000708390E2D2975CC04D5A023ADD394F40
+24	PYR	Cranbrook	905-B Industrial Rd #2	British Columbia	V1C 4P8	49.5238146	-115.7656522	0101000020E610000012C7157200F15CC06B15585B0CC34840
+25	PYR	Nanaimo	225-2080 Labieux Rd	British Columbia	V9T 6J9	49.2006881	-123.993862	0101000020E61000002DAF5C6F9BFF5EC02319CD25B0994840
+26	PYR	Prince George	2400 Ospika Blvd	British Columbia	V2N 3N5	53.8994896	-122.7937407	0101000020E61000004400CBA5CCB25EC0CB8BA77922F34A40
+27	PYR	Smithers	3167 Tatlow Road	British Columbia	V0J 2N5	54.7701244	-127.1409579	0101000020E610000039A7487405C95FC002EDB36F93624B40
+28	PYR	Vancouver	201-401 Burrard	British Columbia	V6J 1M3	49.268251	-123.1476149	0101000020E6100000BFF9C38572C95EC0450F7C0C56A24840
+29	PYR	Whitehorse	91782 Alaska Highway	Yellowknife	Y1A 5B7	60.6185	-134.97	0101000020E6100000D7A3703D0ADF60C0BA490C022B4F4E40
+\.
+
+
+--
+-- Data for Name: oscrs; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.oscrs (id, trip_id, date_created, verbal_threat, weapons_nearby, physical_contact, assault, damage_equipment, other_risk_specify, industrial_facility, commercial_facility, remote_location, agriculture, marine, first_nations, isolated, other_riskloc_specify, inspections, witness_statements, court_docs, warrant, surveillance, other_duty_specify, fisheries_act, name_reg1, cepa_1999, name_reg2, firstname, lastname, age, years_experience, region, branch, gavia_num, location, occurence_date_hazard, occurence_description, officer_id) FROM stdin;
+1		2020-01-25 17:13:37.017-05	t	t	f	f	f		t	f	f	f	f	f	f		t	f	f	f	f		t		f		Bjenk	Ellefsen	46	10	NCR	Enforcement branch	\N	There	2020-01-25 17:13:00-05	Test	3
+2	2	2020-01-25 17:16:56.641-05	t	t	f	f	f		t	f	f	f	f	f	f		f	f	f	f	f		f	Regulation test	f		Bjenk	Ellefsen	46	10	NCR	Enforcement branch	\N	There	2020-01-25 17:15:00-05	Test	3
+\.
+
+
+--
+-- Data for Name: spatial_ref_sys; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.spatial_ref_sys (srid, auth_name, auth_srid, srtext, proj4text) FROM stdin;
+\.
+
+
+--
+-- Data for Name: trips; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.trips (id, firstname, lastname, gavia_num, purpose, purpose_other, start_date_planned, end_date_planned, legislation, reg1, reg2, reg3, partner1, partner2, intelreport, intelreport_name, dest_name, dest_address, dest_province, dest_city, dest_postal_code, dest_lat, dest_lng, risk_loc, risk_loc_val, risk_loc_fam, risk_loc_fam_val, risk_time, risk_time_val, risk_weather, risk_weather_val, risk_terrain, risk_terrain_val, risk_comm, risk_comm_val, risk_emergency, risk_emergency_val, risk_distance, risk_distance_val, risk_transport, risk_transport_val, risk_criminal, risk_criminal_val, risk_compliance, risk_compliance_val, risk_numsub, risk_numsub_val, risk_penalty, risk_penalty_val, risk_weapons, risk_weapons_val, risk_language, risk_language_val, risk_histlawaver, risk_histlawaver_val, risk_sum, risk_score_label, date_created, officer_id, dest_point) FROM stdin;
+4	Bjenk	Ellefsen	\N	Surveillance		2020-01-28 19:00:00-05	2020-01-30 19:00:00-05	CEPA	AMMRR			RCMP		Yes	Report one	Betelgeuse	34 Galaxie Avenue	Ontario	Ontario	K4B 1N6	45.4193	-75.4375	Rural	1	Unfamiliar	3	Dusk or Dawn	3	Mildly inclement	1	Rivers / Lakes	5	Satelite	3	Medium (15-30 mins)	3	Medium	3	High	5	Corporate	3	Unknown	3	Two or more	5	High	5	Unknown	3	Unknown	3	No	1	50	Medium	2020-01-22 08:47:23.303-05	3	0101000020E61000000000000000DC52C03D9B559FABB54640
+5	Bjenk	Ellefsen	\N	Production order		2020-02-10 19:00:00-05	2020-02-13 19:00:00-05	CEPA	2BER			RCMP		No		Eta Carina	89 Milky Way	Prince Edward Island	Charlottetown	C1E 1L3	46.2592	-63.1801	Rural	1	Unfamiliar	3	Daytime (30 min after sunrise)	1	Mildly inclement	1	Dry land	1	Cell / PTT/ Radio	1	Slow (>30 mins)	5	Medium	3	Medium	3	No	1	Unknown	3	One	3	Medium	3	Unknown	3	Unknown	3	Unknown	3	38	Medium	2020-01-22 09:04:53.492-05	3	0101000020E61000003B014D840D974FC0C58F31772D214740
+9	Bjenk	Ellefsen	\N	Warrant		2020-02-18 00:00:00-05	2020-02-19 00:00:00-05	FA and CEPA	BIGR			Parks Canada		Yes	Report title	Alpha Centauri	88 Star Way	Ontario	Windsor	N8W 3S1	42.2851	-82.9777	Remote	5	Unfamiliar	3	Dusk or Dawn	3	Mildly inclement	1	Rivers / Lakes	5	Satelite	3	Medium (15-30 mins)	3	Medium	3	Medium	3	Corporate	3	Unknown	3	Two or more	5	Medium	3	Unknown	3	Unknown	3	Unknown	3	52	High	2020-02-06 05:56:12.432295-05	3	0101000020E6100000265305A392BE54C0780B24287E244540
+13	Bjenk	Ellefsen	\N	Unplanned inspection		2020-03-17 00:00:00-04	2020-02-20 00:00:00-05	FA	CAMRR			Provincial		No		Saturn	45 Sask Forks Road	Saskatchewan			53.1895	-105.172	Rural	1	Unfamiliar	3	Daytime (30 min after sunrise)	1	Mildly inclement	1	Dry land	1	Cell / PTT/ Radio	1	Slow (>30 mins)	5	Far	5	Medium	3	Corporate	3	Unknown	3	Two or more	5	Medium	3	Unknown	3	No	1	Yes	5	44	Medium	2020-02-08 14:50:42.547704-05	3	0101000020E61000005EBA490C024B5AC0C74B378941984A40
+14	Bjenk	Ellefsen	\N	Unplanned inspection		2020-02-09 00:00:00-05	2020-02-20 00:00:00-05	FA and CEPA	AMMRR	BIGR		Territorial	Parks Canada	Yes	Investigation into illegal hunting on Mars	Mars Hella Basin	Regina Beach Airport	Saskatchewan	Regina Beach	S0G 4C0	50.7528	-104.979	Urban	1	Known	1	Daytime (30 min after sunrise)	1	Clear	1	Dry land	1	Cell / PTT/ Radio	1	Fast (<15 mins)	1	Close	1	Low	1	No	1	No	1	One	3	Low	1	No	1	No	1	No	1	18	Low	2020-02-09 06:53:49.506681-05	3	0101000020E61000002DB29DEFA73E5AC0E3361AC05B604940
+15	Bjenk	Ellefsen	\N	Unplanned inspection		2020-02-10 00:00:00-05	2020-02-13 00:00:00-05	FA and CEPA	AMMRR	BIGR		Parks Canada		No		Jupiter 4	564	Alberta	Alberta	T0J 1B0	51.2853	-112.466	Rural	1	Unknown	5	Daytime (30 min after sunrise)	1	Mildly inclement	1	Rivers / Lakes	5	Satelite	3	Slow (>30 mins)	5	Medium	3	Low	1	Corporate	3	Unknown	3	Two or more	5	High	5	Yes	5	Unknown	3	Yes	5	54	High	2020-02-09 14:41:06.144696-05	3	0101000020E6100000E7FBA9F1D21D5CC03FC6DCB584A44940
+2	Bjenk	Ellefsen	\N	Undercover operation		2020-01-19 19:00:00-05	2020-01-19 19:00:00-05	FA and CEPA	AMMRR			Territorial		No		FarPoint	378e Avenue	Québec	Saint-Hippolyte	J8A 2J4	45.9525	-73.9802	Isolated	5	Public area	1	Dusk or Dawn	3	Unknown	3	Mountains	5	No comms	5	Slow (>30 mins)	5	Far	5	High	5	Violent	5	Yes	5	Two or more	5	High	5	Yes	5	Yes	5	Yes	5	72	Very High	2020-01-20 14:44:33.102-05	3	0101000020E610000082E2C798BB7E52C052B81E85EBF94640
+3	Bjenk	Ellefsen	\N	Unplanned inspection		2020-01-20 19:00:00-05	2020-01-22 19:00:00-05	CEPA	AMMRR			Provincial		No		TestPlace	345	New Brunswick	Pokemouche	E8P 1E1	47.7038	-64.8715	Rural	1	Unfamiliar	3	Daytime (30 min after sunrise)	1	Mildly inclement	1	Mud / Wet lands	1	Cell / PTT/ Radio	1	Medium (15-30 mins)	3	Medium	3	Low	1	Violent	5	Yes	5	Two or more	5	Medium	3	Unknown	3	Unknown	3	Unknown	3	42	Medium	2020-01-21 06:59:58.131-05	3	0101000020E6100000B29DEFA7C63750C060764F1E16DA4740
+6	Bjenk	Ellefsen	\N	Unplanned inspection		2020-01-30 19:00:00-05	2020-02-27 19:00:00-05	CEPA	BIGR			Parks Canada		No		Planet B-12	34 Messier Avenue	British Columbia	Coquitlam	V3K 1E7	49.2393	-122.865	Rural	1	Unfamiliar	3	Dusk or Dawn	3	Mildly inclement	1	Mud / Wet lands	1	Satelite	3	Medium (15-30 mins)	3	Medium	3	Medium	3	Corporate	3	Yes	5	Two or more	5	Medium	3	Unknown	3	Unknown	3	Yes	5	48	Medium	2020-01-22 11:10:40.865-05	3	0101000020E61000008FC2F5285CB75EC066F7E461A19E4840
+7	Bjenk	Ellefsen	\N	Planned inspection		2020-03-09 20:00:00-04	2020-03-18 20:00:00-04	FA and CEPA	AMMRR			RCMP		No		Andromeda	67 Boucle Andromède	Québec	La Patrie	J0B 1Y0	45.4309	-71.1692	Rural	1	Unfamiliar	3	Dusk or Dawn	3	Mildly inclement	1	Mud / Wet lands	1	No comms	5	Medium (15-30 mins)	3	Close	1	Low	1	No	1	Unknown	3	One	3	Medium	3	Unknown	3	Unknown	3	Yes	5	40	Medium	2020-01-22 11:37:59.655-05	3	0101000020E6100000ED9E3C2CD4CA51C057EC2FBB27B74640
+8	Bjenk	Ellefsen	\N	Surveillance		2020-01-31 00:00:00-05	2020-02-04 00:00:00-05	CEPA	2BER			Provincial		Yes	Report two	TRAPPIST-1e	24 Nebula Starway	Ontario	Toronto	M2J 1M4	43.7699	-79.3407	Marine	5	Public area	1	Night (30 min after sunset)	5	Unknown	3	Mountains	5	No comms	5	Slow (>30 mins)	5	Far	5	High	5	Violent	5	Yes	5	Two or more	5	High	5	Yes	5	Yes	5	Yes	5	74	Very High	2020-01-22 11:40:06.369-05	3	0101000020E6100000D26F5F07CED553C05F984C158CE24540
+12	Bjenk	Ellefsen	\N	Interview		2020-02-06 00:00:00-05	2020-02-12 00:00:00-05	CEPA	AMMRR			RCMP		No		Proxima Centauri B	22 Galaxy Place	British Columbia	Saanich	V8N 3X2	48.4726	-123.313	Urban	1	Known	1	Daytime (30 min after sunrise)	1	Clear	1	Dry land	1	Cell / PTT/ Radio	1	Fast (<15 mins)	1	Close	1	Low	1	No	1	No	1	One	3	Low	1	No	1	No	1	No	1	18	Low	2020-02-06 06:02:09.765312-05	3	0101000020E610000079E9263108D45EC0780B24287E3C4840
+\.
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.users (id, password, email, username, firstname, lastname, phone, directorate, date_joined, last_login, is_admin, is_active, is_staff, is_superuser) FROM stdin;
+4	pbkdf2_sha256$180000$n16R4mw4FWtM$6DA09InzWg6HCzNL4hElCsdFS3hmsn+yWU/w+/CvxpY=	test@test.com	TestUser	Test	Tester	(999) 999-9999	EED	2020-02-01 07:01:19.746121-05	2020-02-02 09:51:11.195087-05	f	t	f	f
+3	pbkdf2_sha256$180000$071YKOE4Hw4K$FDRwAfL0OwV9gfEKPsCI7zCLEjajN/9fAA4x6fRB4LM=	bjenk.ellefsen@gmail.com	Monduiz	Bjenk	Ellefsen	(888) 888-8888	Other	2020-01-24 14:52:38.865-05	2020-02-18 11:58:32.280282-05	t	t	t	t
+\.
+
+
+--
+-- Data for Name: users_profile; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.users_profile (id, image, user_id) FROM stdin;
+15	default.jpg	4
+14	profile_pics/default_o0Jq7NH.jpg	3
+\.
+
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_group_id_seq', 1, false);
+
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_group_permissions_id_seq', 1, false);
+
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_permission_id_seq', 148, true);
+
+
+--
+-- Name: closeouts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.closeouts_id_seq', 2, true);
+
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 15, true);
+
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_content_type_id_seq', 37, true);
+
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 34, true);
+
+
+--
+-- Name: hoirs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.hoirs_id_seq', 4, true);
+
+
+--
+-- Name: offices_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.offices_id_seq', 29, true);
+
+
+--
+-- Name: oscrs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.oscrs_id_seq', 2, true);
+
+
+--
+-- Name: trips_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.trips_id_seq', 15, true);
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.users_id_seq', 4, true);
+
+
+--
+-- Name: users_profile_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.users_profile_id_seq', 15, true);
+
+
+--
+-- Name: auth_group auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_name_key UNIQUE (name);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_group_id_permission_id_0cd325b0_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_permission_id_0cd325b0_uniq UNIQUE (group_id, permission_id);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_permission auth_permission_content_type_id_codename_01ab375a_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_codename_01ab375a_uniq UNIQUE (content_type_id, codename);
+
+
+--
+-- Name: auth_permission auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: closeouts closeouts_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.closeouts
+    ADD CONSTRAINT closeouts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_admin_log django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_content_type django_content_type_app_label_model_76bd3d3b_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_app_label_model_76bd3d3b_uniq UNIQUE (app_label, model);
+
+
+--
+-- Name: django_content_type django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_migrations django_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_migrations
+    ADD CONSTRAINT django_migrations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_session django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_session
+    ADD CONSTRAINT django_session_pkey PRIMARY KEY (session_key);
+
+
+--
+-- Name: hoirs hoirs_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.hoirs
+    ADD CONSTRAINT hoirs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: offices offices_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.offices
+    ADD CONSTRAINT offices_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: oscrs oscrs_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.oscrs
+    ADD CONSTRAINT oscrs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: trips trips_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.trips
+    ADD CONSTRAINT trips_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users users_email_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_email_key UNIQUE (email);
+
+
+--
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users_profile users_profile_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users_profile
+    ADD CONSTRAINT users_profile_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users_profile users_profile_user_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users_profile
+    ADD CONSTRAINT users_profile_user_id_key UNIQUE (user_id);
+
+
+--
+-- Name: users users_username_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_username_key UNIQUE (username);
+
+
+--
+-- Name: auth_group_name_a6ea08ec_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_group_name_a6ea08ec_like ON public.auth_group USING btree (name varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_permissions_group_id_b120cbf9; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_group_permissions_group_id_b120cbf9 ON public.auth_group_permissions USING btree (group_id);
+
+
+--
+-- Name: auth_group_permissions_permission_id_84c5c92e; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_group_permissions_permission_id_84c5c92e ON public.auth_group_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_permission_content_type_id_2f476e4b; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_permission_content_type_id_2f476e4b ON public.auth_permission USING btree (content_type_id);
+
+
+--
+-- Name: closeouts_officer_id_fbf4d535; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX closeouts_officer_id_fbf4d535 ON public.closeouts USING btree (officer_id);
+
+
+--
+-- Name: django_admin_log_content_type_id_c4bce8eb; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_admin_log_content_type_id_c4bce8eb ON public.django_admin_log USING btree (content_type_id);
+
+
+--
+-- Name: django_admin_log_user_id_c564eba6; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_admin_log_user_id_c564eba6 ON public.django_admin_log USING btree (user_id);
+
+
+--
+-- Name: django_session_expire_date_a5c62663; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_session_expire_date_a5c62663 ON public.django_session USING btree (expire_date);
+
+
+--
+-- Name: django_session_session_key_c0390e0f_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_session_session_key_c0390e0f_like ON public.django_session USING btree (session_key varchar_pattern_ops);
+
+
+--
+-- Name: hoirs_officer_id_0b7d8574; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX hoirs_officer_id_0b7d8574 ON public.hoirs USING btree (officer_id);
+
+
+--
+-- Name: offices_point_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX offices_point_id ON public.offices USING gist (point);
+
+
+--
+-- Name: oscrs_officer_id_8d7d99a5; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX oscrs_officer_id_8d7d99a5 ON public.oscrs USING btree (officer_id);
+
+
+--
+-- Name: trips_dest_point_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX trips_dest_point_id ON public.trips USING gist (dest_point);
+
+
+--
+-- Name: trips_officer_id_fc991da0; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX trips_officer_id_fc991da0 ON public.trips USING btree (officer_id);
+
+
+--
+-- Name: users_email_0ea73cca_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX users_email_0ea73cca_like ON public.users USING btree (email varchar_pattern_ops);
+
+
+--
+-- Name: users_username_e8658fc8_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX users_username_e8658fc8_like ON public.users USING btree (username varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissio_permission_id_84c5c92e_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissio_permission_id_84c5c92e_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_group_id_b120cbf9_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_b120cbf9_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_permission auth_permission_content_type_id_2f476e4b_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_2f476e4b_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: closeouts closeouts_officer_id_fbf4d535_fk_users_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.closeouts
+    ADD CONSTRAINT closeouts_officer_id_fbf4d535_fk_users_id FOREIGN KEY (officer_id) REFERENCES public.users(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log django_admin_log_content_type_id_c4bce8eb_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_content_type_id_c4bce8eb_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log django_admin_log_user_id_c564eba6_fk_users_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_user_id_c564eba6_fk_users_id FOREIGN KEY (user_id) REFERENCES public.users(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: hoirs hoirs_officer_id_0b7d8574_fk_users_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.hoirs
+    ADD CONSTRAINT hoirs_officer_id_0b7d8574_fk_users_id FOREIGN KEY (officer_id) REFERENCES public.users(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: oscrs oscrs_officer_id_8d7d99a5_fk_users_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.oscrs
+    ADD CONSTRAINT oscrs_officer_id_8d7d99a5_fk_users_id FOREIGN KEY (officer_id) REFERENCES public.users(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: trips trips_officer_id_fc991da0_fk_users_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.trips
+    ADD CONSTRAINT trips_officer_id_fc991da0_fk_users_id FOREIGN KEY (officer_id) REFERENCES public.users(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: users_profile users_profile_user_id_2112e78d_fk_users_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users_profile
+    ADD CONSTRAINT users_profile_user_id_2112e78d_fk_users_id FOREIGN KEY (user_id) REFERENCES public.users(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
