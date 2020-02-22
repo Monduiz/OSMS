@@ -1,0 +1,14 @@
+name: django_env
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python
+  - django
+  - django-widget-tweaks
+  - gdal=2.4.4
+  - psycopg2
+  - pillow
+  - geojson
+  - pandas
+prefix: /Users/bjenkellefsen/anaconda3/envs/django_env
