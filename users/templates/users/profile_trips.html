@@ -74,7 +74,7 @@
                       <p class="dark-grey-text"">{{ trip.dest_city }}, {{ trip.dest_province }}</p>
                       <p><a class="dark-grey-text">Risk score: <strong>{{ trip.risk_sum }}</strong></a></p>
                       <p>by <a class="font-weight-bold">{{ trip.officer.username }}</a>, {{ trip.date_created|date:'F d, Y' }}</p>
-                      <a href="{% url 'trip-detail' trip.id %}" class="btn btn-trip btn-rounded btn-sm">Read</a>
+                      <a href="{% url 'trip-detail' trip.id %}" class="btn btn-trip btn-rounded btn-sm">Details</a>
                       <a href="{% url 'trip-update' trip.id %}" class="btn btn-trip btn-rounded btn-sm">Update</a>
                       <a href="#" class="btn btn-trip btn-rounded btn-sm">PDF</a>
                     </div>

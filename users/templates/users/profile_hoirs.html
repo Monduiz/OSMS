@@ -76,7 +76,7 @@
                     <h3 class="font-weight-bold mb-3"><strong>{{ hoir.injury_description }}</strong></h3>
                     <p>by <a class="font-weight-bold">{{ hoir.officer.username }}</a>, {{ hoir.date_created|date:'F d, Y' }}</p>
                     {% if hoir.officer == user %}
-                      <a href="{% url 'hoir-detail' hoir.id %}" class="btn btn-pink btn-rounded btn-sm">Read</a>
+                      <a href="{% url 'hoir-detail' hoir.id %}" class="btn btn-pink btn-rounded btn-sm">Details</a>
                       <a href="{% url 'hoir-print' hoir.id %}" class="btn btn-pink btn-rounded btn-sm">PDF</a>
                     {% endif %}
                   </div>
