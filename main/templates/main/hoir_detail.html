@@ -6,24 +6,22 @@
 <link rel="stylesheet" type="text/css" href="{% static 'main/css/hoir.css' %}">
 {% endblock otherStyles %}
 {% block content %}
-<div class="col-8 mx-auto">
-  <div class="card-wrapper h-100">
-    <div id= "card-1" class="card h-100">
-      <div class="card-body">
-        <h2>{{ object.injury_description }}</h2>
-        <p class="dark-grey-text"">{{ object.occurence_date_hazard|date:'F d, Y'}}</p>
-        <hr id="title_hr_HOIR">
-        <p>by <a class="font-weight-bold">{{ object.officer.username }}</a>, {{ object.date_created|date:'F d, Y' }}</p>
-        <h5>Occurence description:</h5>
-          <p>{{ object.occurence_description }}</p>
-        <h5>Occurence causes:</h5>
-        <p>{{ object.occurence_causes }}</p>
-        {% if object.officer == user %}
-          <a href="#" class="btn btn-pink btn-sm btn-rounded">Update</a>
-          <a href="{% url 'hoir-print' hoir.id %}" class="btn btn-pink btn-rounded btn-sm float-right">PDF</a>
-        {% endif %}
-        <br>
-      </div>
+<div class="col-lg-8 col-sm-12 mx-auto">
+  <div class="card h-100">
+    <div class="card-body">
+      <h2>{{ object.injury_description }}</h2>
+      <p class="dark-grey-text"">{{ object.occurence_date_hazard|date:'F d, Y'}}</p>
+      <hr id="title_hr_HOIR">
+      <p>by <a class="font-weight-bold">{{ object.officer.username }}</a>, {{ object.date_created|date:'F d, Y' }}</p>
+      <h5>Occurence description:</h5>
+        <p>{{ object.occurence_description }}</p>
+      <h5>Occurence causes:</h5>
+      <p>{{ object.occurence_causes }}</p>
+      {% if object.officer == user %}
+        <a href="#" class="btn btn-pink btn-sm btn-rounded">Update</a>
+        <a href="{% url 'hoir-print' hoir.id %}" class="btn btn-pink btn-rounded btn-sm float-right">PDF</a>
+      {% endif %}
+      <br>
     </div>
   </div>
 </div>

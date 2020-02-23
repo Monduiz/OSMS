@@ -7,8 +7,8 @@
 {% endblock otherStyles %}
 {% block content %}
 
-  <div class="row row-eq-height">
-    <div class="col-sm-12 col-lg-6 paddr-map">
+  <div class="row">
+    <div class="col-sm-12 col-lg-6 paddr-map mb-2">
       <!-- Card -->
       <div class="card map-card h-100">
 
@@ -36,72 +36,68 @@
       <!-- Card -->
     </div>
 
-    <div class="col-sm-12 col-lg-6 paddl-info">
-      <div class="card-wrapper h-100">
-        <div id= "card-1" class="card card-rotating h-100">
-          <!-- Front Side -->
-          <div class="face front">
-            <div class="card-body">
-              <h2>{{ object.purpose }}</h2>
-              <p class="dark-grey-text"">{{ object.start_date_planned|date:'F d, Y'}} to {{ object.end_date_planned|date:'F d, Y' }}</p>
-              <hr id="title_hr_trip">
-              <p>by <a class="font-weight-bold">{{ object.officer.username }}</a>, {{ object.date_created|date:'F d, Y' }}</p>
-              <p><a class="dark-grey-text">Legislation: <strong>{{ object.legislation }}</strong>; Regulations: <strong>{{ object.reg1 }} {{ object.reg2 }} {{ object.reg3 }}</strong></a></p>
-              <br>
-              <div class="row">
-                <div class="col">
-                  <h5 class="font-weight-bold mb-3">Information:</h5>
-                  <ul>
-                    <li>Info 1</li>
-                    <li>Info 2</li>
-                    <li>Info 3</li>
-                  </ul>
-                </div>
-                <div class="col">
-                  <h5 class="font-weight-bold mb-3">Treaties:</h5>
-                  <ul>
-                    <li>Example 1</li>
-                    <li>Example 2</li>
-                    <li>Example 3</li>
-                  </ul>
-                </div>
-              </div>
-              {% if object.officer == user %}
-                <a href="{% url 'trip-update' object.id %}" class="btn btn-trip btn-sm btn-rounded">Update</a>
-                <a href="#" class="btn btn-trip btn-rounded btn-sm float-right">PDF</a>
-              {% endif %}
-              <br>
-              <hr style="width=50%;">
-              <div class="text-center mt-4">
-                <!-- Triggering button -->
-                <a class="rotate-btn" data-card="card-1"><i class="fas fa-redo-alt"></i> Click here to rotate</a>
-              </div>
-
-            </div>
+  <div class="col-sm-12 col-lg-6 paddl-info mb-2">
+    <div class="card h-100">
+      <div class="card-body">
+        <h2>{{ object.purpose }}</h2>
+        <p class="dark-grey-text"">{{ object.start_date_planned|date:'F d, Y'}} to {{ object.end_date_planned|date:'F d, Y' }}</p>
+        <hr id="title_hr_trip">
+        <p>by <a class="font-weight-bold">{{ object.officer.username }}</a>, {{ object.date_created|date:'F d, Y' }}</p>
+        <p><a class="dark-grey-text">Legislation: <strong>{{ object.legislation }}</strong>; Regulations: <strong>{{ object.reg1 }} {{ object.reg2 }} {{ object.reg3 }}</strong></a></p>
+        <br>
+        <div class="row">
+          <div class="col">
+            <h5 class="font-weight-bold mb-3">Information:</h5>
+            <ul>
+              <li>Info 1</li>
+              <li>Info 2</li>
+              <li>Info 3</li>
+            </ul>
           </div>
-          <!-- Front Side -->
-          <!-- Back Side -->
-          <div class="face back">
-            <div class="card-body">
-              <h5 class="font-weight-bold mt-3">Proximity search:</h5>
-              <div class="alert alert-warning mt-4" role="alert">
-                Feature not activated.
-              </div>
-              <br>
-              <h5 class="font-weight-bold mt-3">Historical record:</h5>
-              <div class="alert alert-info mt-4" role="alert">
-                Feature not activated.
-              </div>
-
-              <div class="text-center">
-                <!-- Triggering button -->
-                <a class="rotate-btn mt-5" data-card="card-1"><i class="fas fa-redo-alt"></i> Click here to rotate</a>
-              </div>
-            </div>
+          <div class="col">
+            <h5 class="font-weight-bold mb-3">Treaties:</h5>
+            <ul>
+              <li>Example 1</li>
+              <li>Example 2</li>
+              <li>Example 3</li>
+            </ul>
           </div>
-          <!-- Back Side -->
+        </div>
+        {% if object.officer == user %}
+          <a href="{% url 'trip-update' object.id %}" class="btn btn-trip btn-sm btn-rounded">Update</a>
+          <a href="#" class="btn btn-trip btn-rounded btn-sm float-right">PDF</a>
+        {% endif %}
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12 col-lg-6 paddr-map mb-2">
+      <!-- Card -->
+      <div class="card h-100">
+
+        <!-- Card content -->
+        <div class="card-body">
+          <h5 class="font-weight-bold mt-3">Proximity search:</h5>
+            <div class="alert alert-warning mt-4" role="alert">
+              Feature not activated.
+            </div>
+
         </div>
       </div>
+      <!-- Card -->
+    </div>
+
+  <div class="col-sm-12 col-lg-6 paddl-info mb-2">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="font-weight-bold mt-3">Historical record:</h5>
+        <div class="alert alert-info mt-4" role="alert">
+          Feature not activated.
+        </div>
+      </div>
+    </div>
     </div>
   </div>
 

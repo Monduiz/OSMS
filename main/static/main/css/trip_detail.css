@@ -1,6 +1,6 @@
 @media screen and (min-device-width: 375px) {
   .paddl-info {
-    padding-left: 15px !important;
+    /* padding-left: 15px !important; */
     margin-top: .5rem !important;
 }
 
