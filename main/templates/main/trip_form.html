@@ -2,7 +2,7 @@
 {% load widget_tweaks %}
 {% load static %}
 {% block otherStyles %}
-<link rel="stylesheet" type="text/css" href="{% static 'main/css/bs-stepper.min.css' %}">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bs-stepper/dist/css/bs-stepper.min.css">
 <link rel="stylesheet" type="text/css" href="{% static 'main/css/datetimepicker_trip.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'main/css/pretrip.css' %}">
 {% endblock otherStyles %}
@@ -42,7 +42,7 @@
               </div>
             </div>
             <div class="bs-stepper-content">
-              <form action="#!" id="planTrip" style="color: #757575;" method="post">
+              <form novalidate action="#!" id="planTrip" style="color: #757575;" method="post">
                 {% csrf_token %}
                 <div id="test-nl-1" class="content">
                   <h3 class="text-center">Lead officer</h3>
@@ -611,7 +611,16 @@
                       </div>
                     </div>
                   </div>
-
+                  {% for field in form %}
+                    {% for error in field.errors %}
+                      <p style="color: red">{{field.label}}: {{ error }}</p>
+                    {% endfor %}
+                  {% endfor %}
+                  {% if form.non_field_errors %}
+                    <div style="color: red">
+                      <p>{{form.non_field_errors}}</p>
+                    </div>
+                  {% endif %}
                   <div class="md-form">
                     <div class="row">
                       <div class="col-6 text-left">
@@ -637,7 +646,7 @@
   var algolia_token_json = {{algolia_token_json|safe}};
 </script>
 <script type="text/javascript" src="{% static 'main/js/places/dist/cdn/places.js' %}"></script>
-<script type="text/javascript" src="{% static 'main/js/bs-stepper.min.js' %}"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bs-stepper/dist/js/bs-stepper.min.js"></script>
 <script type="text/javascript" src="{% static 'main/js/bootstrap-datetimepicker.js' %}"></script>
 <script type="text/javascript" src="{% static 'main/js/pretrip.js' %}"></script>
 {% endblock otherScripts %}

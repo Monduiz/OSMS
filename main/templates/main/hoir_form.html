@@ -2,7 +2,7 @@
 {% load widget_tweaks %}
 {% load static %}
 {% block otherStyles %}
-<link rel="stylesheet" type="text/css" href="{% static 'main/css/bs-stepper.min.css' %}">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bs-stepper/dist/css/bs-stepper.min.css">
 <link rel="stylesheet" type="text/css" href="{% static 'main/css/datetimepicker_hoir.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'main/css/hoir.css' %}">
 {% endblock otherStyles %}
@@ -473,6 +473,17 @@
                   * You can link this report to an enforcement activity or trip if relevant (optional)
                 </small>
 
+                {% for field in form %}
+                  {% for error in field.errors %}
+                    <p style="color: red">{{field.label}}: {{ error }}</p>
+                  {% endfor %}
+                {% endfor %}
+                {% if form.non_field_errors %}
+                  <div style="color: red">
+                    <p>{{form.non_field_errors}}</p>
+                  </div>
+                {% endif %}
+
                 <div class="md-form">
                   <div class="row">
                     <div class="col-6 text-left">
@@ -587,7 +598,7 @@
 
 {% endblock content %}
 {% block otherScripts %}
-<script type="text/javascript" src="{% static 'main/js/bs-stepper.min.js' %}"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bs-stepper/dist/js/bs-stepper.min.js"></script>
 <script type="text/javascript" src="{% static 'main/js/bootstrap-datetimepicker.js' %}"></script>
 <script type="text/javascript" src="{% static 'main/js/cleave.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'main/js/hoir.js' %}"></script>

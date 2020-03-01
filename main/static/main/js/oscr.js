@@ -4,6 +4,26 @@ var stepper = new Stepper(document.querySelector('#stepper'), {
   animation: true
 });
 
+var form = document.querySelector('form');
+var validFormFeedback = document.querySelector('#test-nl-4 .valid-feedback');
+var invalidFormFeedback = document.querySelector('#test-nl-4 .invalid-feedback')
+
+form.addEventListener('submit', function(event) {
+  form.classList.remove('was-validated');
+  inValidFormFeedback.classList.remove('d-block');
+  validFormFeedback.classList.remove('d-block');
+
+  if (!form.checkValidity()) {
+    event.preventDefault();
+    event.stopPropagation();
+    inValidFormFeedback.classList.add('d-block');
+  } else {
+    validFormFeedback.classList.add('d-block');
+  }
+
+  form.classList.add('was-validated');
+}, false);
+
 // Material Select Initialization
 $(document).ready(function() {
 $('.mdb-select').materialSelect();
