@@ -3,12 +3,16 @@ Data system for operational risk and safety information.
 
 Project currently under development at Environment and Climate Change Canada under the Chief Data Office with the Enforcement Branch.
 
+# Demo
+
+![Osms demo](media/OSMS.gif)
+
 ## Installation
 
 This application is using the Django framework. A conda environment was used.
 Suggested setup:
 
-1. Create a conda environment using the requirements.txt file
+1. Create a conda environment using the django_emv.yml file
 2. Git clone the project and go to its folder.
 3. Install postgresql and postgis.
 4. Create a database and add the postgis extension.
@@ -32,4 +36,4 @@ Suggested setup:
 
 ```
 3. Run `python manage.py makemigrations` and then `python manage.py migrate` to create the tables.
-4. You can create a superuser with `pyhton manage.py createsuperuser` (when asked for a branch, enter "Other").
+4. You can create a superuser with `python manage.py createsuperuser` (when asked for a branch, enter "Other").
