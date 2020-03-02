@@ -5,7 +5,7 @@ Project currently under development at Environment and Climate Change Canada und
 
 # Demo
 
-![Osms demo](media/OSMS.gif)
+![Osms demo](OSMS.gif)
 
 ## Installation
 
