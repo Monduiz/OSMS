@@ -4,24 +4,190 @@
   <link rel="stylesheet" type="text/css" href="{% static 'main/css/landing.css' %}">
 {% endblock %}
 {% block content %}
-<!-- Intro -->
-<div class="container-landing">
 
-  <div class="row">
-    <div class="col-lg-6 col-sm-4 image-logo pr-1 pt-5">
-      <img src="{% static 'main/img/logo3.png' %}" class="img-fluid logo-title" alt="logo" style="display:block; margin-left: auto; margin-right: auto;">
-    </div>
-    <div class="col-lg-6 col-sm-8 title-OSMS pt-5">
+
+<section class="view intro mt-3 mb-5 py-3 wow fadeIn" data-wow-delay="0.2s">
+  <div class="mask">
+<!-- Intro -->
+<div class="container-landing d-flex h-100 justify-content-center align-items-center">
+
+  <div class="row flex-center">
+
+    <div class="col-lg-6 col-sm-12 title-OSMS">
       <div class="justify-content-center align-items-center h-100">
-        <h3 class="h2-fluid heading display-3">Officer Safety Management System</h3>
-        <h4 class="subheading font-weight-bold"> Light and open source data system</h4>
+        <h3 class="h2-fluid heading display-3 wow fadeIn animated" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeIn; animation-delay: 0.3s;">Officer Safety Management System</h3>
+        <h4 class="subheading font-weight-bold wow fadeIn animated" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeIn; animation-delay: 0.3s;"> Light and open source data system</h4>
+      </div>
+      <br>
+      <a class="btn btn-outline-pink btn-rounded pink-text font-weight-bold ml-lg-0 wow fadeIn animated" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeIn; animation-delay: 0.3s;" href="{% url 'register' %}">Register</a>
+      <a class="btn btn-pink white-text btn-rounded font-weight-bold wow fadeIn animated" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeIn; animation-delay: 0.3s;" href="{% url 'login' %}">Sign in
+      </a>
+
+      </div>
+    <div class="col-lg-6 col-sm-12 wow fadeIn animated pt-3" delay="0.3s" style="visibility: visible; animation-name: fadeIn; animation-delay: 0.3s;">
+
+
+    </div>
+  </div>
+</div>
+</div
+<!-- Intro -->
+</section>
+  <hr>
+<!-- Section: Features v.4 -->
+<section id="features" class="mb-5 pb-4">
+
+  <!-- Section heading -->
+  <h3 class="text-center title my-5 dark-grey-text font-weight-bold wow fadeIn" data-wow-delay="0.2s">
+    <strong>Awesome features</strong>
+  </h3>
+
+  <!-- Section sescription -->
+  <p class="w-responsive mx-auto my-5 grey-text wow fadeIn" data-wow-delay="0.2s">
+    The Officer Safety Management System (OSMS) is a response to the objectives of the Officer Safety Initiative in
+  implementing a data strategy in order to become a data-driven organization. As such, Health and safety incidents, aspects of
+operations can be captured to build a better understanding of risks and empower the officers and the branch with knowelegde
+to enhance preparedness and safety. OSMS is a microservices and open source project that can grow with the organization.</p>
+
+  <!-- Grid row -->
+  <div class="row features-small wow fadeIn" data-wow-delay="0.4s">
+
+    <!-- Grid column -->
+    <div class="col-lg-4 col-md-12">
+      <!-- Grid row -->
+      <div class="row mb-3 mt-5">
+        <div class="col-2">
+          <i class="fas fa-edit deep-orange-text fa-2x"></i>
+        </div>
+        <div class="col-10 mb-2">
+          <h5 class="font-weight-bold title">Open source</h5>
+          <p class="grey-text">OSMS is built using open source technologies and powered by Django, Mapbox, PostgreSQL and PostGIS.
+          </p>
+        </div>
+      </div>
+      <!-- Grid row -->
+
+      <!-- Grid row -->
+      <div class="row mb-3 mt-5">
+        <div class="col-2">
+          <i class="fas fa-cogs deep-orange-text fa-2x"></i>
+        </div>
+        <div class="col-10 mb-2">
+          <h5 class="font-weight-bold title">Microservices</h5>
+          <p class="grey-text">Instead of onerous enterprise solutions, business needs are cut into smaller parts that work together. Responsive, adaptive and grows as needed. Low risks and costs.</p>
+        </div>
+      </div>
+      <!-- Grid row -->
+
+      <!-- Grid row -->
+      <div class="row mt-5">
+        <div class="col-2">
+          <i class="fas fa-tablet-alt deep-orange-text fa-2x"></i>
+        </div>
+        <div class="col-10 mb-2">
+          <h5 class="font-weight-bold title">Responsive layouts</h5>
+          <p class="grey-text">Built with an interoperable design, it works on all screen sizes and devices.
+            Provides an equivalent experience on desktops, phones and tablets.</p>
+        </div>
+      </div>
+      <!-- Grid row -->
+    </div>
+    <!-- Grid column -->
+
+    <!-- Grid column -->
+    <div class="col-lg-4 col-md-12 mb-1 mt-5 text-center">
+      <img src="{% static 'main/img/UI_portrait2.png' %}" alt=""
+        class="z-depth-0 img-fluid app-mobile">
+    </div>
+    <!-- Grid column -->
+
+    <!-- Third column -->
+    <div class="col-lg-4 col-md-12">
+      <!-- Grid row -->
+      <div class="row mb-3 mt-5">
+        <div class="col-2">
+          <i class="fas fa-chart-line deep-orange-text fa-2x"></i>
+        </div>
+        <div class="col-10 mb-2">
+          <h5 class="font-weight-bold title">Analytics</h5>
+          <p class="grey-text">Dashboards, customized information for officers and managers.
+            Databases: safety issues, incidents, activities, locations, places. Reporting and analysis.</p>
+        </div>
+      </div>
+      <!-- Grid row -->
+
+      <!-- Grid row -->
+      <div class="row mb-3 mt-5">
+        <div class="col-2">
+          <i class="fas fa-users deep-orange-text fa-2x"></i>
+        </div>
+        <div class="col-10 mb-2">
+          <h5 class="font-weight-bold title">Stewardship</h5>
+          <p class="grey-text">A product from the Enforcement Branch, built by the Enforcement Branch.
+            Investing in people, not in software empowers.</p>
+        </div>
+      </div>
+      <!-- Grid row -->
+
+      <!-- Grid row -->
+      <div class="row mt-5">
+        <div class="col-2">
+          <i class="far fa-gem deep-orange-text fa-2x"></i>
+        </div>
+        <div class="col-10 mb-2">
+          <h5 class="font-weight-bold title">APIs</h5>
+          <p class="grey-text">
+            APIs make data accessible to other systems and to people. This promotes the sharing and reuse
+            of data to empower the branch and work in the open as default.
+          </p>
+        </div>
+      </div>
+      <!-- Grid row -->
+    </div>
+    <!-- Third column -->
+  </div>
+  <!-- Grid row -->
+
+</section>
+<!-- Section: Features v.4 -->
+
+
+{% endblock content %}
+{% block otherScripts %}
+{% endblock otherScripts %}
+{% block footer %}
+<!-- Footer -->
+<footer class="page-footer font-small white lighten-3 py-4 dark-grey-text">
+
+  <!-- Footer Elements -->
+  <div class="container mt-0">
+
+    <div class="row">
+      <div class="col-md-5 col-lg-5 text-center align-middle">
+        <table style="height:100%">
+          <td style="vertical-align: middle;">
+            <img src="{% static 'main/img/Badge-EB.jpg' %}" alt=""
+              class="z-depth-0 img-fluid app-mobile">
+          </td>
+        </table>
+      </div>
+      <div class="col-md-4 col-lg-4">
+
+      </div>
+
+      <div class="col-xs-6 col-md-3 col-lg-3 text-center align-middle">
+        <table style="height:100%">
+          <td style="vertical-align: middle;">
+            <img src="{% static 'main/img/T130-Canada.png' %}" alt=""
+              class="z-depth-0 img-fluid app-mobile">
+          </td>
+        </table>
       </div>
     </div>
 
   </div>
+  <!-- Footer Elements -->
 
-</div>
-<!-- Intro -->
-{% endblock content %}
-{% block otherScripts %}
-{% endblock otherScripts %}
+</footer>
+<!-- Footer -->
+{% endblock footer %}

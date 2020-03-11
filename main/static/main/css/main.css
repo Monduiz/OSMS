@@ -4,6 +4,19 @@
   }
 }
 
+/* @media (max-width: 767px) {
+  .navbar-brand {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+} */
+
+.page-footer .top-footer-color {
+    background-color: #ffff;
+}
+
 .errorlist {
   color: red;
   list-style-type: none;
@@ -108,15 +121,6 @@ margin-bottom: 1.5rem;
   color: #2BBBAD;
 }
 
-.fill-width.dropdown {
-    position: static;
-}
-.fill-width.dropdown > .dropdown-menu {
-    left: auto;
-}
-.fill-width.dropdown > .dropdown-menu > li > a {
-   white-space: normal;
-}
 
 .navbar.navbar-light .navbar-brand,
 .navbar.navbar-light .navbar-brand:hover {

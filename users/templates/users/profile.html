@@ -8,11 +8,12 @@
 
 <!-- Grid row -->
 <div class="row">
-  <div class="col-lg-4 col-sm-12 sidebarpad pr-1 ml-5">
-    <div class="card">
-      <div class='sidebar'>
-        <div class="img-fluid">
-            <img src="{{ user.profile.image.url }}" class="img-fluid z-depth-1" alt="Card image cap">
+  <div class="col-lg-4 col-sm-12 sidebarpad pr-1">
+    <div class="card testimonial-card profile-card">
+      <div class="card-up teal lighten-1"></div>
+        <div class="avatar mx-auto white">
+          <img src="{{ user.profile.image.url }}" class="rounded-circle circle-img"
+            alt="avatar">
         </div>
         <br>
       <div class="profile-head">
@@ -47,7 +48,7 @@
             aria-controls="pills-dash" aria-selected="false">Dashboard</a>
         </li>
       </ul>
-      </div>
+
     </div>
   </div>
   <div class="col-lg-8 col-sm-12 profilepad pl-1">

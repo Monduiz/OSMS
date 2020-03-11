@@ -3,6 +3,7 @@
     margin-top: 8px !important;
     margin-left: auto !important;
     margin-right: auto !important;
+    padding-right: 15px !important;
   }
 }
 
@@ -17,7 +18,6 @@
 
 @media screen and (min-device-width: 725px) {
   .sidebarpad {
-    margin-left: 48px !important;
     padding-right: 4px !important;
   }
 }
@@ -26,6 +26,15 @@
   .profilepad {
     padding-left: 4px !important;
   }
+}
+.circle-img {
+  width: 120px;
+  height: 120px;
+}
+
+.teal-trips.lighten-1 {
+    background-color:
+    #ff5722 !important;
 }
 
 #title_hr {
@@ -148,16 +157,10 @@ a {
   padding-left: 15px;
 }
 
-.profilepad {
-}
-
 .tab-content {
   padding-top: 16px;
 }
 
-.col-lg-4.sidebarpad {
-  max-width: 300px;
-}
 
 .profile-card {
   height: 85vh;
