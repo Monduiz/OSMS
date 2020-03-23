@@ -1,4 +1,4 @@
-@media screen and (max-device-width: 375px) {
+@media screen and (max-device-width: 734px) {
   .sidebarpad {
     margin-top: 8px !important;
     margin-left: auto !important;
@@ -7,7 +7,7 @@
   }
 }
 
-@media screen and (max-device-width: 375px) {
+@media screen and (max-device-width: 734px) {
   .profilepad {
     margin-top: 16px !important;
     margin-left: auto !important;
@@ -16,15 +16,28 @@
   }
 }
 
-@media screen and (min-device-width: 725px) {
+@media screen and (min-device-width: 1024px) {
   .sidebarpad {
-    padding-right: 4px !important;
+    padding-left: 4px !important;
+    padding-right: .25rem !important;
   }
 }
 
-@media screen and (min-device-width: 725px) {
+@media screen and (min-device-width: 1024px) {
   .profilepad {
     padding-left: 4px !important;
+  }
+}
+
+@media screen and (max-device-height: 500px) {
+  .profilepad {
+    padding-top: .50rem !important;
+  }
+}
+
+@media screen and (min-device-width: 1024px) {
+  .profile-card {
+      height: 85vh;
   }
 }
 
@@ -164,7 +177,6 @@ a {
 }
 
 .profile-card {
-  height: 85vh;
   top: 0;
   left: 0;
   overflow: auto;

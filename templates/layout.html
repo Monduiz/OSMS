@@ -93,6 +93,9 @@
     <script type="text/javascript" src="{% static 'main/js/mdb.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'main/js/moment.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'main/js/app.js' %}"></script>
+    <script type="text/javascript">
+      navigator.appName === 'Microsoft Internet Explorer' ||  !!(navigator.userAgent.match(/Trident/) || navigator.userAgent.match(/rv:11/)) || (typeof $.browser !== "undefined" && $.browser.msie === 1) ? alert("IE is not supported and the application will not display correctly on an obsolete browser. Please use another browser such as Firefox, Safari or Chrome.") : console.log("No IE detected! All good!")
+    </script>
     {% block otherScripts %}
     {% endblock otherScripts %}
   </body>

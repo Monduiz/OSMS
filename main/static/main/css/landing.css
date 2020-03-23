@@ -1,3 +1,22 @@
+@media screen and (max-device-width: 734px) {
+  .ml-5 {
+    margin-left: 0rem !important;
+  }
+}
+
+
+@media only screen and (min-device-height: 900px) {
+  .mt-5 {
+    padding-top: 3rem !important;
+  }
+}
+
+@media only screen and (max-device-height: 870px) {
+  .image-features {
+    padding-top: 3rem !important;
+  }
+}
+
 .title {
     margin-top: 0rem;
     margin-bottom: 0em;
@@ -7,6 +26,7 @@
 .intro {
   height: 90vh;
 }
+
 
 .img-fluid {
     max-width: 80%;

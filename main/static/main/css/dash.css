@@ -1,7 +1,7 @@
 @media screen and (min-device-width: 375px) {
   .card {
     /* padding-left: 15px !important; */
-    margin-bottom: 8px; !important;
+    margin-bottom: 8px !important;
     margin-left: auto !important;
     margin-right: auto !important;
   }
@@ -9,11 +9,28 @@
 
 @media screen and (min-device-width: 375px) {
   .map-row {
-    margin-top: 8px; !important;
-    margin-bottom: 8px; !important;
+    margin-bottom: 8px !important;
+  }
+}
+
+@media screen and (min-device-width: 375px) {
+  .mt-5 {
+    margin-top: 0rem !important;
   }
 }
 
 .card-body {
-  padding: 16px; !important;
+  padding: 16px !important;
+}
+
+@media screen and (max-device-height: 500px) {
+  .mapboxgl-map {
+    height: 75vh !important;
+  }
+}
+
+@media screen and (min-device-width: 1024px) {
+  .mapboxgl-map {
+    height: 45vh !important;
+  }
 }

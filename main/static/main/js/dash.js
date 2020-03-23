@@ -106,7 +106,7 @@ var map = new mapboxgl.Map({
 container: 'map',
 center: [-95, 58],
 zoom: 2,
-style: 'mapbox://styles/mapbox/light-v10'
+style: 'mapbox://styles/mapbox/outdoors-v11'
 });
 
 map.addControl(new mapboxgl.NavigationControl());

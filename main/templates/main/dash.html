@@ -3,67 +3,69 @@
 {% load widget_tweaks %}
 
 {% block otherStyles %}
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/dash.css' %}">
 <link href='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css' rel='stylesheet' />
 <link rel="stylesheet" type="text/css" href="{% static 'main/css/pretrip.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'main/css/dash.css' %}">
 {% endblock otherStyles %}
 {% block content %}
 
-<div class="row map-row mb-2 mt-5">
-  <div class="col pl-1 pr-1">
-    <!-- Card -->
-    <div class="card map-card">
-      <!-- Card content -->
-      <div id='map' class='map pad2' style='width: 100%; height: 35vh;'></div>
+<section class="first-section">
+  <div class="row map-row mb-2 mt-5">
+    <div class="col pl-1 pr-1">
+      <!-- Card -->
+      <div class="card map-card">
+        <!-- Card content -->
+        <div id='map' class='map pad2' style='width: 100%; height: 55vh;'></div>
+      </div>
+  <!-- Card -->
     </div>
-<!-- Card -->
   </div>
-</div>
 
-<div class="row">
-  <div class="col-lg-4 col-sm-12 pl-1 pr-1">
-    <!-- Card -->
-    <div class="card">
-      <!-- Card content -->
-      <div class="card-body">
-        <!-- Title -->
-        <h4 class="card-title text-center"><a>Activities by risk level</a></h4>
-        <div class="chart-container" style="width: 100%;">
-          <canvas id="myChart"></canvas>
+  <div class="row">
+    <div class="col-lg-4 col-sm-12 pl-1 pr-1">
+      <!-- Card -->
+      <div class="card">
+        <!-- Card content -->
+        <div class="card-body">
+          <!-- Title -->
+          <h4 class="card-title text-center"><a>Activities by risk level</a></h4>
+          <div class="chart-container" style="width: 100%;">
+            <canvas id="myChart"></canvas>
+          </div>
         </div>
       </div>
+      <!-- Card -->
     </div>
-    <!-- Card -->
-  </div>
-  <div class="col-lg-4 col-sm-12 pl-1 pr-1">
-    <!-- Card -->
-    <div class="card">
-      <!-- Card content -->
-      <div class="card-body">
-        <!-- Title -->
-        <h4 class="card-title text-center"><a>Activities by legislation</a></h4>
-        <div class="chart-container" style="width: 100%;">
-          <canvas id="myChart2"></canvas>
+    <div class="col-lg-4 col-sm-12 pl-1 pr-1">
+      <!-- Card -->
+      <div class="card">
+        <!-- Card content -->
+        <div class="card-body">
+          <!-- Title -->
+          <h4 class="card-title text-center"><a>Activities by legislation</a></h4>
+          <div class="chart-container" style="width: 100%;">
+            <canvas id="myChart2"></canvas>
+          </div>
         </div>
       </div>
+      <!-- Card -->
     </div>
-    <!-- Card -->
-  </div>
-  <div class="col-lg-4 col-sm-12 pl-1 pr-1">
-    <!-- Card -->
-    <div class="card">
-      <!-- Card content -->
-      <div class="card-body">
-        <!-- Title -->
-        <h4 class="card-title text-center"><a>Presence of weapons</a></h4>
-        <div class="chart-container" style="width: 100%;">
-          <canvas id="myChart3"></canvas>
+    <div class="col-lg-4 col-sm-12 pl-1 pr-1">
+      <!-- Card -->
+      <div class="card">
+        <!-- Card content -->
+        <div class="card-body">
+          <!-- Title -->
+          <h4 class="card-title text-center"><a>Presence of weapons</a></h4>
+          <div class="chart-container" style="width: 100%;">
+            <canvas id="myChart3"></canvas>
+          </div>
         </div>
       </div>
+      <!-- Card -->
     </div>
-    <!-- Card -->
   </div>
-</div>
+</section>
 
 {% endblock %}
 {% block otherScripts %}
