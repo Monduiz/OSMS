@@ -3,7 +3,7 @@ Data system for operational risk and safety information.
 
 Project currently under development at Environment and Climate Change Canada under the Chief Data Office with the Enforcement Branch.
 
-![Osms demo](OSMS.gif)
+![Osms demo](demo_osms.gif)
 
 ## Installation
 
